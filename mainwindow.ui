@@ -6,21 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>772</width>
-    <height>402</height>
+    <width>658</width>
+    <height>346</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Takeoff</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="aeroplane.png"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QStackedWidget" name="pages">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>30</y>
-      <width>711</width>
-      <height>341</height>
+      <x>20</x>
+      <y>10</y>
+      <width>611</width>
+      <height>321</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -30,7 +33,7 @@
      <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>630</x>
+        <x>530</x>
         <y>0</y>
         <width>77</width>
         <height>54</height>
@@ -53,81 +56,44 @@
        </item>
       </layout>
      </widget>
-     <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="returnBox">
       <property name="geometry">
        <rect>
-        <x>390</x>
+        <x>410</x>
         <y>0</y>
-        <width>211</width>
-        <height>91</height>
+        <width>101</width>
+        <height>101</height>
        </rect>
       </property>
       <property name="title">
-       <string>Return Airport</string>
+       <string>Return</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QDateEdit" name="toDataEdit">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>30</y>
-         <width>179</width>
-         <height>22</height>
+         <width>81</width>
+         <height>21</height>
         </rect>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>To:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateEdit" name="toDataEdit">
-          <property name="dateTime">
-           <datetime>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-            <year>2017</year>
-            <month>1</month>
-            <day>1</day>
-           </datetime>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="fromAirportList">
-          <item>
-           <property name="text">
-            <string>Airport 1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Airport 2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Airport 3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Airport 4</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
+       <property name="dateTime">
+        <datetime>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+         <year>2017</year>
+         <month>1</month>
+         <day>1</day>
+        </datetime>
+       </property>
       </widget>
      </widget>
      <widget class="QPushButton" name="exitButton">
       <property name="geometry">
        <rect>
-        <x>610</x>
-        <y>270</y>
+        <x>520</x>
+        <y>280</y>
         <width>75</width>
         <height>23</height>
        </rect>
@@ -136,143 +102,204 @@
        <string>Exit</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>140</y>
-        <width>541</width>
-        <height>161</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Upcoming Flights</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QListView" name="listView"/>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="">
+     <widget class="QGroupBox" name="flightDetailsBox">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>383</width>
-        <height>58</height>
+        <width>401</width>
+        <height>101</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>From:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="toAirportList">
-           <item>
+      <property name="title">
+       <string>Flight Details</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>383</width>
+         <height>74</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLabel" name="fromLabel">
             <property name="text">
-             <string>Airport 1</string>
+             <string>From:</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="fromAirportList">
+            <item>
+             <property name="text">
+              <string>Airport 1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Airport 2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Airport 3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Airport 4</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="toLabel">
             <property name="text">
-             <string>Airport 2</string>
+             <string>To:</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="toAirportList_3">
+            <item>
+             <property name="text">
+              <string>Airport 1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Airport 2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Airport 3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Airport 4</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="flightDateEdit">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2017</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <widget class="QCheckBox" name="oneWayCheckbox">
             <property name="text">
-             <string>Airport 3</string>
+             <string>One way</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="returnCheckBox">
             <property name="text">
-             <string>Airport 4</string>
+             <string>Return</string>
             </property>
-           </item>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDateEdit" name="fromDateEdit">
-           <property name="dateTime">
-            <datetime>
-             <hour>0</hour>
-             <minute>0</minute>
-             <second>0</second>
-             <year>2017</year>
-             <month>1</month>
-             <day>1</day>
-            </datetime>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item>
-          <widget class="QCheckBox" name="checkBox">
-           <property name="text">
-            <string>One way</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBox_2">
-           <property name="text">
-            <string>Return</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="searchFlightButton">
-           <property name="text">
-            <string>Search</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="searchFlightButton_2">
+            <property name="text">
+             <string>Search</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
-     <zorder>exitButton</zorder>
-     <zorder>registerButton</zorder>
-     <zorder>loginButton</zorder>
-     <zorder>passwordField</zorder>
-     <zorder>usernameLabel</zorder>
-     <zorder>passwordLabel</zorder>
-     <zorder>passwordLabel</zorder>
-     <zorder>passwordLabel</zorder>
-     <zorder>lineEdit_3</zorder>
+     <widget class="QGroupBox" name="datesGroupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>501</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Dates</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="listWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>11</x>
+        <y>179</y>
+        <width>246</width>
+        <height>121</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>47</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Outbound flights</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="returnFlightLabel">
+      <property name="geometry">
+       <rect>
+        <x>261</x>
+        <y>161</y>
+        <width>33</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Return</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="returnFlightList">
+      <property name="geometry">
+       <rect>
+        <x>261</x>
+        <y>179</y>
+        <width>249</width>
+        <height>121</height>
+       </rect>
+      </property>
+     </widget>
+     <zorder>returnFlightLabel</zorder>
+     <zorder>returnFlightList</zorder>
+     <zorder>flightDetailsBox</zorder>
      <zorder>layoutWidget_2</zorder>
-     <zorder>label</zorder>
-     <zorder>listView</zorder>
-     <zorder>lineEdit</zorder>
-     <zorder>lineEdit_2</zorder>
-     <zorder>label_4</zorder>
-     <zorder>label_5</zorder>
-     <zorder>label_4</zorder>
-     <zorder>label_5</zorder>
-     <zorder>fromAirportList</zorder>
-     <zorder>toAirportList</zorder>
-     <zorder>searchFlightButton</zorder>
-     <zorder>checkBox</zorder>
-     <zorder>checkBox_2</zorder>
-     <zorder></zorder>
-     <zorder>toDataEdit</zorder>
-     <zorder>fromAirportList</zorder>
-     <zorder>label_4</zorder>
-     <zorder>groupBox</zorder>
+     <zorder>returnBox</zorder>
      <zorder>exitButton</zorder>
+     <zorder>datesGroupBox</zorder>
+     <zorder>listWidget_2</zorder>
+     <zorder>label</zorder>
     </widget>
     <widget class="QWidget" name="Login">
      <widget class="QWidget" name="layoutWidget">
@@ -329,7 +356,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="loginPageLabel">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -342,7 +369,7 @@
        <string>Login Page</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>230</x>
@@ -370,7 +397,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="Register">
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="registerPageLabel">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -386,7 +413,7 @@
      <widget class="QPushButton" name="registerBackButton">
       <property name="geometry">
        <rect>
-        <x>460</x>
+        <x>530</x>
         <y>10</y>
         <width>75</width>
         <height>23</height>
@@ -396,14 +423,122 @@
        <string>Back</string>
       </property>
      </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>251</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Details</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>30</y>
+         <width>131</width>
+         <height>126</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLineEdit" name="emailInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="firstNameInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lastNameInput"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="passwordInput">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="passwordInput_2">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>91</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QLabel" name="emailLabel">
+          <property name="text">
+           <string>Email</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="firstNameLabel">
+          <property name="text">
+           <string>First name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lastNameLabel">
+          <property name="text">
+           <string>Last name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="passwordList">
+          <property name="text">
+           <string>Password</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="passwordList_2">
+          <property name="text">
+           <string>Confirm Password</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="registerUserButton">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>220</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Register</string>
+      </property>
+     </widget>
+     <zorder>groupBox</zorder>
+     <zorder>registerPageLabel</zorder>
+     <zorder>registerBackButton</zorder>
+     <zorder>registerUserButton</zorder>
     </widget>
     <widget class="QWidget" name="bookFlight"/>
    </widget>
-   <zorder>pages</zorder>
-   <zorder>layoutWidget_2</zorder>
-   <zorder>listView</zorder>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
