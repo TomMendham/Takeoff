@@ -4,10 +4,12 @@
 #include "user.h"
 #include "airport.h"
 #include "XMLhandler.h"
+#include "system.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
+
 {
     ui->setupUi(this);
     ui->pages->setCurrentIndex(0);
@@ -15,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->returnFlightLabel->hide();
     ui->returnFlightList->hide();
     ui->popups->hide();
+
 
    std::vector<Airport*> Airports = readAirports();
    QStringList airportNames;
@@ -92,6 +95,12 @@ void MainWindow::on_searchFlightButton_2_clicked()
 
 void MainWindow::on_loginuserButton_2_clicked()
 {
+   QString loginName = ui->usernameField_2->text();
+   QString loginPassword = ui->passwordField_2->text();
+
+   int x = getX();
+   std::cout<<x<<std::endl;
+
    ui->popups->hide();
    ui->menuButtons->show();
 }
