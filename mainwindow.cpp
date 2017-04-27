@@ -80,6 +80,8 @@ void MainWindow::on_registerUserButton_clicked()
 
        }
        User* user = new User(email,firstName,lastName,password,false);
+       writeUsers(user);
+
 }
 
 void MainWindow::on_searchFlightButton_2_clicked()
@@ -130,11 +132,28 @@ void MainWindow::on_cancelAddFlightButton_clicked()
 
 void MainWindow::on_addFlightButton_clicked()
 {
+    std::vector<Airport*> Airports = readAirports();
     ui->popups->hide();
     ui->menuButtons->show();
-    QDate date = ui->addFlightDate->date();
-    QString addFlightTo = ui->addFlightTo->itemData(ui->addFlightTo->currentIndex()).toString();
-    QString addFlightFrom = ui->addFlightFrom->itemData(ui->addFlightFrom->currentIndex()).toString();
+    int ID = ui->IDInput->value();
+    QString date = ui->addFlightDate->date().toString("dd.MM.yyyy");
+    int capacity = ui->capacityNumber->value();
+    QString addFlightTo = ui->addFlightTo->currentText();
+    QString addFlightFrom = ui->addFlightFrom->currentText();
+    Airport* fromAirport;
+    Airport* toAirport;
+
+    for (int i = 0; i<Airports.size();i++){
+        if (addFlightTo == Airports[i]->getName()){
+            toAirport = Airports[i];
+        }
+        else if(addFlightFrom == Airports[i]->getName()){
+            fromAirport = Airports[i];
+        }
+    }
+
+    Flight* f = new Flight(ID,date,capacity,toAirport,fromAirport);
+    writeFlights(f);
 }
 
 void MainWindow::on_loginButton_2_clicked()
