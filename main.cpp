@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "airport.h"
-#include "xmlhandler.h"
 #include "flight.h"
 #include <iostream>
 

@@ -44,11 +44,6 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_loginBackButton_clicked()
-{
-    ui->pages->setCurrentIndex(0);
-}
-
 void MainWindow::on_returnCheckBox_stateChanged(int arg1)
 {
     if (arg1 == 2){
