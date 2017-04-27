@@ -11,6 +11,17 @@ Flight::Flight(int id, QString dat, Airport* a1, Airport* a2)
     departure = a1->getName();
     date = dat;
     distance = calculateDistance(a1, a2);
+    //duration = calculateDuration(distance);
+}
+
+Flight::Flight(int id, int capac, QString dest, QString dep, int dur, QString dat, float dist) {
+    ID = id;
+    capacity = capac;
+    destination = dest;
+    departure = dep;
+    duration = dur;
+    date = dat;
+    distance = dist;
 }
 
 float Flight::calculateDistance(Airport* a1, Airport* a2)
@@ -45,12 +56,47 @@ float Flight::calculateDistance(Airport* a1, Airport* a2)
 
 //}
 
-int Flight::calculateDuration()
-{
+//int Flight::calculateDuration()
+//{
 
+//}
+
+//int Flight::calculateConnectingFlight()
+//{
+
+//}
+
+
+//Accessor functions
+
+int Flight::getID() {
+    return ID;
 }
 
-int Flight::calculateConnectingFlight()
-{
-
+int Flight::getCapacity() {
+    return capacity;
 }
+
+QString Flight::getDestination() {
+    return destination;
+}
+
+QString Flight::getDeparture() {
+    return departure;
+}
+
+int Flight::getDuration() {
+    return duration;
+}
+
+QString Flight::getDate() {
+    return date;
+}
+
+float Flight::getDistance() {
+    return distance;
+}
+
+
+
+

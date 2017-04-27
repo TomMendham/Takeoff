@@ -3,6 +3,7 @@
 #include "airport.h"
 #include "xmlhandler.h"
 #include "flight.h"
+#include <iostream>
 
 
 int main(int argc, char *argv[])
@@ -13,7 +14,20 @@ int main(int argc, char *argv[])
 
     std::vector<Airport*> Airports = readAirports();
 
-    QString string = "02/05/1997";
-    Flight f = Flight(1,string,Airports[0],Airports[1]);
+    QString string = "04/07/1997";
+    Flight* f = new Flight(2,string,Airports[1],Airports[2]);
+
+
+
+    writeFlights(f);
+
+    std::vector<Flight*> Flights = readFlights();
+
+
+    std::cout << Flights[0]->getID() << std::endl;
+    std::cout << Flights[1]->getID() << std::endl;
+
+
+
     return a.exec();
 }

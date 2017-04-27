@@ -15,13 +15,25 @@ private:
     int duration;
     QString date;
     float distance;
-    bool isConnectingFlight;
+
 public:
     Flight(int id, QString dat, Airport *a1, Airport *a2);
-    //updateCapacity();
-    int calculateDuration();
-    int calculateConnectingFlight();
+    Flight(int id, int capac, QString dest, QString dep, int dur, QString dat, float dist);
+
     float calculateDistance(Airport* a1, Airport* a2);
+
+    //Accessor functions
+    int getID();
+    int getCapacity();
+    QString getDestination();
+    QString getDeparture();
+    int getDuration();
+    QString getDate();
+    float getDistance();
+
+    //    updateCapacity();
+    //    int calculateDuration();
+    //    int calculateConnectingFlight();
 };
 
 #endif // FLIGHT_H

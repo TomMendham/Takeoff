@@ -4,7 +4,6 @@
 #include <QTextStream>
 #include <QXmlStreamReader>
 #include <iostream>
-#include "airport.h"
 #include "XMLhandler.h"
 #include <QDir>
 
@@ -90,5 +89,184 @@ std::vector<Airport*> readAirports() {
     }
 
     return airportVec;
+
+}
+
+std::vector<Flight*> readFlights() {
+
+    QXmlStreamReader Rxml;
+
+    int ID, capacity, duration;
+    QString destination, departure, date;
+    float distance;
+
+    std::vector<Flight*> flightVec;
+
+    QDir dir;
+    QFile file(dir.absolutePath()+"/Flights.xml");
+
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+           std::cout << "ERROR OPENING FILE" << std::endl;
+    }
+
+
+    Rxml.setDevice(&file);
+    Rxml.readNext();
+
+    while (!Rxml.atEnd()) {
+        if (Rxml.isStartElement()) {
+            if (Rxml.name() == "FLIGHTS") {
+                Rxml.readNext();
+            } else if (Rxml.name() == "FLIGHT") {
+                while (!Rxml.atEnd()) {
+                    if (Rxml.isEndElement()) {
+                        Rxml.readNext();
+                        break;
+                    } else if (Rxml.isCharacters()) {
+                        Rxml.readNext();
+                    } else if (Rxml.isStartElement()) {
+                        if (Rxml.name() == "ID") {
+
+                            std::string temp = Rxml.readElementText().toStdString();
+                            ID = std::stoi(temp);
+
+                        } else if (Rxml.name() == "CAPACITY") {
+
+                            std::string temp = Rxml.readElementText().toStdString();
+                            capacity = std::stoi(temp);
+
+                        } else if (Rxml.name() == "DURATION") {
+
+                            std::string temp = Rxml.readElementText().toStdString();
+                            duration = std::stoi(temp);
+
+                        } else if (Rxml.name() == "DESTINATION") {
+
+                            destination = Rxml.readElementText();
+
+                        } else if (Rxml.name() == "DEPARTURE") {
+
+                            departure = Rxml.readElementText();
+
+                        } else if (Rxml.name() == "DATE") {
+
+                            date = Rxml.readElementText();
+
+                        } else if (Rxml.name() == "DISTANCE") {
+
+                            std::string temp = Rxml.readElementText().toStdString();
+                            distance = std::stof(temp);
+
+                        }
+
+                        Rxml.readNext();
+                    }
+                    else {
+                        Rxml.readNext();
+                    }
+                }
+            }
+
+            if (destination != "") {
+                Flight* flight = new Flight(ID, capacity, destination, departure, duration, date, distance);
+                flightVec.push_back(flight);
+            }
+
+        }
+        else {
+            Rxml.readNext();
+        }
+    }
+
+    return flightVec;
+}
+
+
+void writeFlights(Flight* f) {
+
+    std::vector<Flight*> Flights = readFlights();
+
+    Flights.push_back(f);
+
+    QDir dir;
+    QFile file(dir.absolutePath()+"/Flights.xml");
+
+
+
+    QXmlStreamWriter xmlWriter;
+
+
+        if (!file.open(QIODevice::WriteOnly))
+        {
+            std::cout << "ERROR OPENING FILE" << std::endl;
+        }
+        else
+        {
+
+            xmlWriter.setDevice(&file);
+            // Writes a document start and opens the flights element
+            xmlWriter.writeStartDocument();
+            xmlWriter.writeStartElement("FLIGHTS");
+
+
+            for (int i = 0; i < Flights.size(); i++) {
+
+
+                QString id = QString::number(Flights[i]->getID());
+                QString capac = QString::number(Flights[i]->getCapacity());
+                QString dur = QString::number(Flights[i]->getDuration());
+                QString dest = Flights[i]->getDestination();
+                QString dep = Flights[i]->getDeparture();
+                QString date = Flights[i]->getDate();
+                QString dist = QString::number(Flights[i]->getDistance());
+
+                //open flight tag
+                xmlWriter.writeStartElement("FLIGHT");
+
+                //add one attribute and its value
+                xmlWriter.writeStartElement("ID");
+                xmlWriter.writeCharacters(id);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("CAPACITY");
+                xmlWriter.writeCharacters(capac);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("DURATION");
+                xmlWriter.writeCharacters(dur);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("DESTINATION");
+                xmlWriter.writeCharacters(dest);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("DEPARTURE");
+                xmlWriter.writeCharacters(dep);
+                xmlWriter.writeEndElement();
+
+
+                xmlWriter.writeStartElement("DATE");
+                xmlWriter.writeCharacters(date);
+                xmlWriter.writeEndElement();
+
+
+                xmlWriter.writeStartElement("DISTANCE");
+                xmlWriter.writeCharacters(dist);
+                xmlWriter.writeEndElement();
+
+
+                //close tag flight
+                xmlWriter.writeEndElement();
+
+
+            }
+
+
+            //end tag flights
+            xmlWriter.writeEndElement();
+            //end document
+            xmlWriter.writeEndDocument();
+       }
+
 
 }
