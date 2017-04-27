@@ -17,7 +17,8 @@ private:
 
 public:
     Airport(QString cont, QString coun, QString city, QString name, QString code, float lon, float lat );
-    printInfo();
+    void printInfo();
+    QString getName();
 };
 
 #endif // AIRPORT_H
