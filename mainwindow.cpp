@@ -18,16 +18,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
    std::vector<Airport*> Airports = readAirports();
    QStringList airportNames;
+   QStringList airportCountries;
 
    for (int i=0; i<Airports.size();i++){
+       QString airportCountry = Airports[i]->getCountry();
        QString airportName = Airports[i]->getName();
+       airportCountries.append(airportCountry);
        airportNames.append(airportName);
    }
 
-   ui->fromAirportList->addItems(airportNames);
-   ui->toAirportList->addItems(airportNames);
+   ui->fromAirportList->addItems(airportCountries);
+   ui->toAirportList->addItems(airportCountries);
+   ui->addFlightTo->addItems(airportNames);
+   ui->addFlightFrom->addItems(airportNames);
 
-
+   connect(ui->loginButton_2,SIGNAL(clicked()),ui->menuButtons,SLOT(close()));
+   connect(ui->loginButton_2,SIGNAL(clicked()),ui->popups,SLOT(show()));
 }
 
 MainWindow::~MainWindow()
@@ -35,13 +41,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_loginButton_clicked()
-{
-   ui->popups->show();
-   ui->loginButton->hide();
-   ui->registerButton->hide();
-   ui->popups->setCurrentIndex(0);
-}
 
 void MainWindow::on_loginBackButton_clicked()
 {
@@ -51,14 +50,6 @@ void MainWindow::on_loginBackButton_clicked()
 void MainWindow::on_registerBackButton_clicked()
 {
     ui->pages->setCurrentIndex(0);
-}
-
-void MainWindow::on_registerButton_clicked()
-{
-    ui->popups->show();
-    ui->popups->setCurrentIndex(1);
-    ui->loginButton->hide();
-    ui->registerButton->hide();
 }
 
 void MainWindow::on_returnCheckBox_stateChanged(int arg1)
@@ -80,8 +71,7 @@ void MainWindow::on_returnCheckBox_stateChanged(int arg1)
 void MainWindow::on_registerUserButton_clicked()
 {
     ui->popups->hide();
-    ui->loginButton->show();
-    ui->registerButton->show();
+    ui->menuButtons->show();
 
 
     QString email = ui->emailInput->text();
@@ -105,21 +95,54 @@ void MainWindow::on_searchFlightButton_2_clicked()
 
 void MainWindow::on_loginuserButton_2_clicked()
 {
-   ui->loginPopup->hide();
-   ui->loginButton->show();
-   ui->registerButton->show();
+   ui->popups->hide();
+   ui->menuButtons->show();
 }
 
 void MainWindow::on_loginBackButton_2_clicked()
 {
     ui->popups->hide();
-    ui->loginButton->show();
-    ui->registerButton->show();
+    ui->menuButtons->show();
 }
 
 void MainWindow::on_cancelRegister_clicked()
 {
     ui->popups->hide();
-    ui->loginButton->show();
-    ui->registerButton->show();
+    ui->menuButtons->show();
+}
+
+
+void MainWindow::on_registerButton_2_clicked()
+{
+    ui->popups->show();
+    ui->popups->setCurrentIndex(1);
+    ui->menuButtons->hide();
+}
+
+void MainWindow::on_addFlightButton_2_clicked()
+{
+    ui->popups->show();
+    ui->popups->setCurrentIndex(2);
+    ui->menuButtons->hide();
+}
+
+
+void MainWindow::on_cancelAddFlightButton_clicked()
+{
+    ui->popups->hide();
+    ui->menuButtons->show();
+}
+
+void MainWindow::on_addFlightButton_clicked()
+{
+    ui->popups->hide();
+    ui->menuButtons->show();
+    QDate date = ui->addFlightDate->date();
+    QString addFlightTo = ui->addFlightTo->itemData(ui->addFlightTo->currentIndex()).toString();
+    QString addFlightFrom = ui->addFlightFrom->itemData(ui->addFlightFrom->currentIndex()).toString();
+}
+
+void MainWindow::on_loginButton_2_clicked()
+{
+    ui->popups->setCurrentIndex(0);
 }

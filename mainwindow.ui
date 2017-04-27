@@ -34,37 +34,11 @@
      <number>0</number>
     </property>
     <widget class="QWidget" name="Home">
-     <widget class="QWidget" name="layoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>820</x>
-        <y>10</y>
-        <width>176</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <widget class="QPushButton" name="registerButton">
-         <property name="text">
-          <string>Register</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="loginButton">
-         <property name="text">
-          <string>Login</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QPushButton" name="exitButton">
       <property name="geometry">
        <rect>
-        <x>910</x>
-        <y>380</y>
+        <x>920</x>
+        <y>390</y>
         <width>75</width>
         <height>23</height>
        </rect>
@@ -85,133 +59,119 @@
       <property name="title">
        <string>Flight Details</string>
       </property>
-      <widget class="QComboBox" name="toAirportList">
-       <property name="geometry">
-        <rect>
-         <x>390</x>
-         <y>20</y>
-         <width>331</width>
-         <height>31</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QDateEdit" name="flightDateEdit">
-       <property name="geometry">
-        <rect>
-         <x>50</x>
-         <y>60</y>
-         <width>106</width>
-         <height>32</height>
-        </rect>
-       </property>
-       <property name="dateTime">
-        <datetime>
-         <hour>0</hour>
-         <minute>0</minute>
-         <second>0</second>
-         <year>2017</year>
-         <month>1</month>
-         <day>1</day>
-        </datetime>
-       </property>
-      </widget>
-      <widget class="QLabel" name="fromLabel">
-       <property name="geometry">
-        <rect>
-         <x>12</x>
-         <y>22</y>
-         <width>36</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>From:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="toLabel">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>20</y>
-         <width>19</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>To:</string>
-       </property>
-      </widget>
-      <widget class="QComboBox" name="fromAirportList">
-       <property name="geometry">
-        <rect>
-         <x>54</x>
-         <y>22</y>
-         <width>311</width>
-         <height>32</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="returnCheckBox">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>70</y>
-         <width>70</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>Return</string>
-       </property>
-      </widget>
       <widget class="QPushButton" name="searchFlightButton_2">
        <property name="geometry">
         <rect>
          <x>640</x>
-         <y>70</y>
-         <width>84</width>
-         <height>34</height>
+         <y>90</y>
+         <width>81</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="text">
         <string>Search</string>
        </property>
       </widget>
-      <widget class="QLabel" name="fromLabel_2">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>70</y>
-         <width>36</width>
-         <height>18</height>
+         <y>80</y>
+         <width>361</width>
+         <height>41</height>
         </rect>
        </property>
-       <property name="text">
-        <string>Date</string>
-       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <widget class="QLabel" name="fromLabel_2">
+          <property name="text">
+           <string>Date</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="flightDateEdit">
+          <property name="dateTime">
+           <datetime>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+            <year>2017</year>
+            <month>1</month>
+            <day>1</day>
+           </datetime>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="returnCheckBox">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>Return</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="returnDateEdit">
+          <property name="dateTime">
+           <datetime>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+            <year>2017</year>
+            <month>1</month>
+            <day>1</day>
+           </datetime>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
-      <widget class="QDateEdit" name="returnDateEdit">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>250</x>
-         <y>60</y>
-         <width>101</width>
-         <height>31</height>
+         <x>10</x>
+         <y>20</y>
+         <width>41</width>
+         <height>51</height>
         </rect>
        </property>
-       <property name="dateTime">
-        <datetime>
-         <hour>0</hour>
-         <minute>0</minute>
-         <second>0</second>
-         <year>2017</year>
-         <month>1</month>
-         <day>1</day>
-        </datetime>
+       <layout class="QVBoxLayout" name="verticalLayout_12">
+        <item>
+         <widget class="QLabel" name="fromLabel">
+          <property name="text">
+           <string>From:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="toLabel">
+          <property name="text">
+           <string>To:</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>20</y>
+         <width>321</width>
+         <height>51</height>
+        </rect>
        </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QComboBox" name="toAirportList"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="fromAirportList"/>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="QGroupBox" name="datesGroupBox">
@@ -233,10 +193,10 @@
      <widget class="QStackedWidget" name="popups">
       <property name="geometry">
        <rect>
-        <x>740</x>
-        <y>60</y>
-        <width>331</width>
-        <height>311</height>
+        <x>750</x>
+        <y>110</y>
+        <width>301</width>
+        <height>261</height>
        </rect>
       </property>
       <property name="currentIndex">
@@ -246,10 +206,10 @@
        <widget class="QGroupBox" name="loginPopup">
         <property name="geometry">
          <rect>
-          <x>40</x>
+          <x>10</x>
           <y>0</y>
           <width>251</width>
-          <height>241</height>
+          <height>171</height>
          </rect>
         </property>
         <property name="title">
@@ -258,10 +218,10 @@
         <widget class="QWidget" name="layoutWidget_3">
          <property name="geometry">
           <rect>
-           <x>12</x>
-           <y>30</y>
-           <width>216</width>
-           <height>182</height>
+           <x>20</x>
+           <y>20</y>
+           <width>201</width>
+           <height>131</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -338,9 +298,9 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>0</y>
-          <width>291</width>
-          <height>311</height>
+          <y>10</y>
+          <width>261</width>
+          <height>251</height>
          </rect>
         </property>
         <property name="title">
@@ -349,96 +309,74 @@
         <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>30</y>
-           <width>261</width>
-           <height>263</height>
+           <x>0</x>
+           <y>0</y>
+           <width>152</width>
+           <height>128</height>
           </rect>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_5">
-              <item>
-               <widget class="QLabel" name="emailLabel">
-                <property name="text">
-                 <string>Email</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="firstNameLabel">
-                <property name="text">
-                 <string>First name</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="lastNameLabel">
-                <property name="text">
-                 <string>Last name</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="passwordList">
-                <property name="text">
-                 <string>Password</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="passwordList_2">
-                <property name="text">
-                 <string>Confirm Password</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_4">
-              <item>
-               <widget class="QLineEdit" name="emailInput"/>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="firstNameInput"/>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lastNameInput"/>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="passwordInput">
-                <property name="echoMode">
-                 <enum>QLineEdit::Password</enum>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="passwordInput_2">
-                <property name="echoMode">
-                 <enum>QLineEdit::Password</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QPushButton" name="cancelRegister">
+             <widget class="QLabel" name="emailLabel">
               <property name="text">
-               <string>Cancel</string>
+               <string>Email</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="registerUserButton">
+             <widget class="QLabel" name="firstNameLabel">
               <property name="text">
-               <string>Register</string>
+               <string>First name</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lastNameLabel">
+              <property name="text">
+               <string>Last name</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="passwordList">
+              <property name="text">
+               <string>Password</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="passwordList_2">
+              <property name="text">
+               <string>Confirm Password</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QLineEdit" name="emailInput"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="firstNameInput"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lastNameInput"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="passwordInput">
+              <property name="echoMode">
+               <enum>QLineEdit::Password</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="passwordInput_2">
+              <property name="echoMode">
+               <enum>QLineEdit::Password</enum>
               </property>
              </widget>
             </item>
@@ -446,6 +384,138 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>190</y>
+           <width>231</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="cancelRegister">
+            <property name="text">
+             <string>Cancel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="registerUserButton">
+            <property name="text">
+             <string>Register</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="AddFlightPage">
+       <widget class="QGroupBox" name="addFlightPopup">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>201</width>
+          <height>171</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Add Flight</string>
+        </property>
+        <widget class="QWidget" name="layoutWidget_4">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>41</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QLabel" name="addFromLabel">
+            <property name="text">
+             <string>From</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="addToLabel">
+            <property name="text">
+             <string>To</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="addDateLabel">
+            <property name="text">
+             <string>Date</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_5">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>30</y>
+           <width>135</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QComboBox" name="addFlightFrom"/>
+          </item>
+          <item>
+           <widget class="QComboBox" name="addFlightTo"/>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="addFlightDate">
+            <property name="date">
+             <date>
+              <year>2017</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>130</y>
+           <width>171</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QPushButton" name="cancelAddFlightButton">
+            <property name="text">
+             <string>Cancel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="addFlightButton">
+            <property name="text">
+             <string>Add Flight</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <zorder>layoutWidget</zorder>
+        <zorder>layoutWidget_5</zorder>
+        <zorder>layoutWidget_4</zorder>
        </widget>
       </widget>
      </widget>
@@ -497,138 +567,108 @@
        </item>
       </layout>
      </widget>
+     <widget class="QGroupBox" name="menuButtons">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>10</y>
+        <width>251</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Menu</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>241</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QPushButton" name="bookFlightButton">
+          <property name="text">
+           <string>Book Flight</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="addFlightButton_2">
+          <property name="text">
+           <string>Add Flight</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="layoutWidget_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>239</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QPushButton" name="registerButton_2">
+          <property name="text">
+           <string>Register</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="loginButton_2">
+          <property name="text">
+           <string>Login</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
      <zorder>layoutWidget</zorder>
      <zorder>flightDetailsBox</zorder>
-     <zorder>layoutWidget_2</zorder>
      <zorder>exitButton</zorder>
      <zorder>datesGroupBox</zorder>
      <zorder>popups</zorder>
+     <zorder>menuButtons</zorder>
     </widget>
     <widget class="QWidget" name="Login"/>
-    <widget class="QWidget" name="Register">
-     <widget class="QLabel" name="registerPageLabel">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>91</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Register Page</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="registerBackButton">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>10</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Back</string>
-      </property>
-     </widget>
-    </widget>
+    <widget class="QWidget" name="Register"/>
     <widget class="QWidget" name="bookFlight"/>
-    <widget class="QWidget" name="addFlight">
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>110</y>
-        <width>59</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>From</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>150</y>
-        <width>59</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>To</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>240</y>
-        <width>88</width>
-        <height>34</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>add flight</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>100</y>
-        <width>111</width>
-        <height>32</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox_2">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>140</y>
-        <width>111</width>
-        <height>32</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QDateEdit" name="dateEdit">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>180</y>
-        <width>110</width>
-        <height>32</height>
-       </rect>
-      </property>
-      <property name="date">
-       <date>
-        <year>2017</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>190</y>
-        <width>59</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Date</string>
-      </property>
-     </widget>
-    </widget>
+    <widget class="QWidget" name="addFlight"/>
    </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>exitButton</tabstop>
+  <tabstop>toAirportList</tabstop>
+  <tabstop>flightDateEdit</tabstop>
+  <tabstop>fromAirportList</tabstop>
+  <tabstop>returnCheckBox</tabstop>
+  <tabstop>searchFlightButton_2</tabstop>
+  <tabstop>returnDateEdit</tabstop>
+  <tabstop>usernameField_2</tabstop>
+  <tabstop>passwordField_2</tabstop>
+  <tabstop>loginuserButton_2</tabstop>
+  <tabstop>loginBackButton_2</tabstop>
+  <tabstop>emailInput</tabstop>
+  <tabstop>firstNameInput</tabstop>
+  <tabstop>lastNameInput</tabstop>
+  <tabstop>passwordInput</tabstop>
+  <tabstop>passwordInput_2</tabstop>
+  <tabstop>cancelRegister</tabstop>
+  <tabstop>registerUserButton</tabstop>
+  <tabstop>listWidget_2</tabstop>
+  <tabstop>returnFlightList</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
