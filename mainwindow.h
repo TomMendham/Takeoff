@@ -26,11 +26,8 @@ private slots:
     void on_cancelRegister_clicked();
     void on_registerButton_2_clicked();
     void on_addFlightButton_2_clicked();
-
     void on_cancelAddFlightButton_clicked();
-
     void on_addFlightButton_clicked();
-
     void on_loginButton_2_clicked();
 
 private:

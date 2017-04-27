@@ -200,7 +200,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="LoginPage">
        <widget class="QGroupBox" name="loginPopup">
@@ -309,8 +309,8 @@
         <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
-           <x>0</x>
-           <y>0</y>
+           <x>10</x>
+           <y>20</y>
            <width>152</width>
            <height>128</height>
           </rect>
@@ -419,7 +419,7 @@
           <x>20</x>
           <y>20</y>
           <width>201</width>
-          <height>171</height>
+          <height>201</height>
          </rect>
         </property>
         <property name="title">
@@ -430,15 +430,29 @@
           <rect>
            <x>10</x>
            <y>30</y>
-           <width>41</width>
-           <height>91</height>
+           <width>51</width>
+           <height>131</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_7">
           <item>
+           <widget class="QLabel" name="IDLabel">
+            <property name="text">
+             <string>ID</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="addFromLabel">
             <property name="text">
              <string>From</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Capacity</string>
             </property>
            </widget>
           </item>
@@ -461,15 +475,32 @@
         <widget class="QWidget" name="layoutWidget_5">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>60</x>
            <y>30</y>
            <width>135</width>
-           <height>91</height>
+           <height>131</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
+           <widget class="QSpinBox" name="IDInput">
+            <property name="maximum">
+             <number>1000</number>
+            </property>
+            <property name="singleStep">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QComboBox" name="addFlightFrom"/>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="capacityNumber">
+            <property name="maximum">
+             <number>1000</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QComboBox" name="addFlightTo"/>
@@ -491,7 +522,7 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>130</y>
+           <y>170</y>
            <width>171</width>
            <height>25</height>
           </rect>
