@@ -25,14 +25,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    user.cpp
+    user.cpp \
+    airport.cpp \
+    XMLhandler.cpp
 
 HEADERS  += mainwindow.h \
-    user.h
+    user.h \
+    airport.h \
+    XMLhandler.h
 
 FORMS    += mainwindow.ui
 
 RESOURCES += \
     resource.qrc
 
-DISTFILES +=
+DISTFILES += \
+    Airports.xml
