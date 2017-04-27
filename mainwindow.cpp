@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->returnDateEdit->hide();
     ui->returnFlightLabel->hide();
     ui->returnFlightList->hide();
+    ui->popups->hide();
 
    std::vector<Airport*> Airports = readAirports();
    QStringList airportNames;
@@ -36,7 +37,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_loginButton_clicked()
 {
-    ui->pages->setCurrentIndex(1);
+   ui->popups->show();
+   ui->loginButton->hide();
+   ui->registerButton->hide();
+   ui->popups->setCurrentIndex(0);
 }
 
 void MainWindow::on_loginBackButton_clicked()
@@ -51,7 +55,10 @@ void MainWindow::on_registerBackButton_clicked()
 
 void MainWindow::on_registerButton_clicked()
 {
-    ui->pages->setCurrentIndex(2);
+    ui->popups->show();
+    ui->popups->setCurrentIndex(1);
+    ui->loginButton->hide();
+    ui->registerButton->hide();
 }
 
 void MainWindow::on_returnCheckBox_stateChanged(int arg1)
@@ -72,7 +79,12 @@ void MainWindow::on_returnCheckBox_stateChanged(int arg1)
 
 void MainWindow::on_registerUserButton_clicked()
 {
-       QString email = ui->emailInput->text();
+    ui->popups->hide();
+    ui->loginButton->show();
+    ui->registerButton->show();
+
+
+    QString email = ui->emailInput->text();
        QString firstName = ui->firstNameInput->text();
        QString lastName = ui->lastNameInput->text();
        QString password;
@@ -89,4 +101,25 @@ void MainWindow::on_searchFlightButton_2_clicked()
 {
     QString toAirport = ui->toAirportList->itemData(ui->toAirportList->currentIndex()).toString();
     QString fromAirport = ui->toAirportList->itemData(ui->toAirportList->currentIndex()).toString();
+}
+
+void MainWindow::on_loginuserButton_2_clicked()
+{
+   ui->loginPopup->hide();
+   ui->loginButton->show();
+   ui->registerButton->show();
+}
+
+void MainWindow::on_loginBackButton_2_clicked()
+{
+    ui->popups->hide();
+    ui->loginButton->show();
+    ui->registerButton->show();
+}
+
+void MainWindow::on_cancelRegister_clicked()
+{
+    ui->popups->hide();
+    ui->loginButton->show();
+    ui->registerButton->show();
 }

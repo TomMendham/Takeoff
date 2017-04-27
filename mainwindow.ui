@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1012</width>
-    <height>476</height>
+    <width>1089</width>
+    <height>440</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,8 +26,8 @@
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>981</width>
-      <height>461</height>
+      <width>1051</width>
+      <height>451</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -37,24 +37,24 @@
      <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>880</x>
+        <x>820</x>
         <y>10</y>
-        <width>86</width>
-        <height>76</height>
+        <width>176</width>
+        <height>41</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QPushButton" name="loginButton">
-         <property name="text">
-          <string>Login</string>
-         </property>
-        </widget>
-       </item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QPushButton" name="registerButton">
          <property name="text">
           <string>Register</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="loginButton">
+         <property name="text">
+          <string>Login</string>
          </property>
         </widget>
        </item>
@@ -63,8 +63,8 @@
      <widget class="QPushButton" name="exitButton">
       <property name="geometry">
        <rect>
-        <x>880</x>
-        <y>320</y>
+        <x>910</x>
+        <y>380</y>
         <width>75</width>
         <height>23</height>
        </rect>
@@ -79,7 +79,7 @@
         <x>10</x>
         <y>10</y>
         <width>731</width>
-        <height>121</height>
+        <height>131</height>
        </rect>
       </property>
       <property name="title">
@@ -213,16 +213,6 @@
         </datetime>
        </property>
       </widget>
-      <zorder>toAirportList</zorder>
-      <zorder>flightDateEdit</zorder>
-      <zorder>fromLabel</zorder>
-      <zorder>toLabel</zorder>
-      <zorder>fromAirportList</zorder>
-      <zorder>returnCheckBox</zorder>
-      <zorder>searchFlightButton_2</zorder>
-      <zorder>returnDateEdit</zorder>
-      <zorder>fromLabel_2</zorder>
-      <zorder>returnDateEdit</zorder>
      </widget>
      <widget class="QGroupBox" name="datesGroupBox">
       <property name="geometry">
@@ -230,7 +220,7 @@
         <x>10</x>
         <y>140</y>
         <width>731</width>
-        <height>61</height>
+        <height>81</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -240,162 +230,281 @@
        <string>Dates</string>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget_2">
+     <widget class="QStackedWidget" name="popups">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>60</y>
+        <width>331</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="LoginPage">
+       <widget class="QGroupBox" name="loginPopup">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>0</y>
+          <width>251</width>
+          <height>241</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Login</string>
+        </property>
+        <widget class="QWidget" name="layoutWidget_3">
+         <property name="geometry">
+          <rect>
+           <x>12</x>
+           <y>30</y>
+           <width>216</width>
+           <height>182</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <widget class="QLabel" name="usernameLabel_2">
+                <property name="text">
+                 <string>Username:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="passwordLabel_2">
+                <property name="text">
+                 <string>Password:</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <widget class="QLineEdit" name="usernameField_2">
+                <property name="maximumSize">
+                 <size>
+                  <width>135</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="passwordField_2">
+                <property name="maximumSize">
+                 <size>
+                  <width>135</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_11">
+            <item>
+             <widget class="QPushButton" name="loginuserButton_2">
+              <property name="text">
+               <string>Login</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="loginBackButton_2">
+              <property name="text">
+               <string>Back</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="RegisterPage">
+       <widget class="QGroupBox" name="registerPopup">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>0</y>
+          <width>291</width>
+          <height>311</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Register</string>
+        </property>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>261</width>
+           <height>263</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+               <widget class="QLabel" name="emailLabel">
+                <property name="text">
+                 <string>Email</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="firstNameLabel">
+                <property name="text">
+                 <string>First name</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lastNameLabel">
+                <property name="text">
+                 <string>Last name</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="passwordList">
+                <property name="text">
+                 <string>Password</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="passwordList_2">
+                <property name="text">
+                 <string>Confirm Password</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QLineEdit" name="emailInput"/>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="firstNameInput"/>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lastNameInput"/>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="passwordInput">
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="passwordInput_2">
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QPushButton" name="cancelRegister">
+              <property name="text">
+               <string>Cancel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="registerUserButton">
+              <property name="text">
+               <string>Register</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>220</y>
-        <width>361</width>
-        <height>121</height>
+        <y>230</y>
+        <width>731</width>
+        <height>191</height>
        </rect>
       </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Outbound&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListWidget" name="listWidget_2">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLabel" name="returnFlightLabel">
+           <property name="text">
+            <string>Return</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListWidget" name="returnFlightList">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>200</y>
-        <width>71</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Outbound&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="returnFlightLabel">
-      <property name="geometry">
-       <rect>
-        <x>480</x>
-        <y>200</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Return</string>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="returnFlightList">
-      <property name="geometry">
-       <rect>
-        <x>380</x>
-        <y>220</y>
-        <width>361</width>
-        <height>121</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-     </widget>
-     <zorder>returnFlightLabel</zorder>
-     <zorder>returnFlightList</zorder>
+     <zorder>layoutWidget</zorder>
      <zorder>flightDetailsBox</zorder>
      <zorder>layoutWidget_2</zorder>
      <zorder>exitButton</zorder>
      <zorder>datesGroupBox</zorder>
-     <zorder>listWidget_2</zorder>
-     <zorder>label</zorder>
+     <zorder>popups</zorder>
     </widget>
-    <widget class="QWidget" name="Login">
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>100</y>
-        <width>195</width>
-        <height>76</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QLabel" name="usernameLabel">
-           <property name="text">
-            <string>Username:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="usernameField">
-           <property name="maximumSize">
-            <size>
-             <width>135</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QLabel" name="passwordLabel">
-           <property name="text">
-            <string>Password:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="passwordField">
-           <property name="maximumSize">
-            <size>
-             <width>135</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QLabel" name="loginPageLabel">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>71</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Login Page</string>
-      </property>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>180</y>
-        <width>86</width>
-        <height>76</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QPushButton" name="loginuserButton">
-         <property name="text">
-          <string>Login</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="loginBackButton">
-         <property name="text">
-          <string>Back</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
+    <widget class="QWidget" name="Login"/>
     <widget class="QWidget" name="Register">
      <widget class="QLabel" name="registerPageLabel">
       <property name="geometry">
@@ -423,116 +532,99 @@
        <string>Back</string>
       </property>
      </widget>
-     <widget class="QGroupBox" name="groupBox">
+    </widget>
+    <widget class="QWidget" name="bookFlight"/>
+    <widget class="QWidget" name="addFlight">
+     <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>50</y>
-        <width>271</width>
-        <height>231</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Details</string>
-      </property>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>231</width>
-         <height>188</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QLabel" name="emailLabel">
-            <property name="text">
-             <string>Email</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="firstNameLabel">
-            <property name="text">
-             <string>First name</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lastNameLabel">
-            <property name="text">
-             <string>Last name</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="passwordList">
-            <property name="text">
-             <string>Password</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="passwordList_2">
-            <property name="text">
-             <string>Confirm Password</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QLineEdit" name="emailInput"/>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="firstNameInput"/>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lastNameInput"/>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="passwordInput">
-            <property name="echoMode">
-             <enum>QLineEdit::Password</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="passwordInput_2">
-            <property name="echoMode">
-             <enum>QLineEdit::Password</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-     <widget class="QPushButton" name="registerUserButton">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>290</y>
-        <width>75</width>
-        <height>23</height>
+        <x>0</x>
+        <y>110</y>
+        <width>59</width>
+        <height>18</height>
        </rect>
       </property>
       <property name="text">
-       <string>Register</string>
+       <string>From</string>
       </property>
      </widget>
-     <zorder>groupBox</zorder>
-     <zorder>registerPageLabel</zorder>
-     <zorder>registerBackButton</zorder>
-     <zorder>registerUserButton</zorder>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>150</y>
+        <width>59</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>To</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>240</y>
+        <width>88</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>add flight</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>100</y>
+        <width>111</width>
+        <height>32</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_2">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>140</y>
+        <width>111</width>
+        <height>32</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEdit">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>180</y>
+        <width>110</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="date">
+       <date>
+        <year>2017</year>
+        <month>1</month>
+        <day>1</day>
+       </date>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>190</y>
+        <width>59</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Date</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="bookFlight"/>
    </widget>
   </widget>
  </widget>
@@ -546,8 +638,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>582</x>
-     <y>309</y>
+     <x>980</x>
+     <y>400</y>
     </hint>
     <hint type="destinationlabel">
      <x>602</x>
