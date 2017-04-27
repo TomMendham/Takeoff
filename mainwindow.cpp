@@ -3,7 +3,6 @@
 #include <iostream>
 #include "user.h"
 #include "airport.h"
-#include "XMLhandler.h"
 #include "system.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -96,8 +95,6 @@ void MainWindow::on_loginuserButton_2_clicked()
    QString loginName = ui->usernameField_2->text();
    QString loginPassword = ui->passwordField_2->text();
 
-   int x = getX();
-   std::cout<<x<<std::endl;
 
    ui->popups->hide();
    ui->menuButtons->show();
