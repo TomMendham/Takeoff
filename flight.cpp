@@ -40,17 +40,17 @@ float Flight::calculateDistance(Airport* a1, Airport* a2)
     return d;
 }
 
-Flight::updateCapacity()
+//Flight::updateCapacity()
+//{
+
+//}
+
+int Flight::calculateDuration()
 {
 
 }
 
-Flight::calculateDuration()
-{
-
-}
-
-Flight::calculateConnectingFlight()
+int Flight::calculateConnectingFlight()
 {
 
 }

@@ -2,7 +2,6 @@
 #define XMLHANDLER_H
 
 
-
 std::vector<Airport*> readAirports();
 
 

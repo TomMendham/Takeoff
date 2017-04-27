@@ -18,7 +18,7 @@ private:
     bool isConnectingFlight;
 public:
     Flight(int id, QString dat, Airport *a1, Airport *a2);
-    updateCapacity();
+    //updateCapacity();
     int calculateDuration();
     int calculateConnectingFlight();
     float calculateDistance(Airport* a1, Airport* a2);

@@ -1,7 +1,9 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
 #include "user.h"
+#include "airport.h"
+#include "XMLhandler.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -9,10 +11,22 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->pages->setCurrentIndex(0);
-    ui->returnBox->hide();
+    ui->returnDateEdit->hide();
     ui->returnFlightLabel->hide();
     ui->returnFlightList->hide();
-    MainWindow::setWindowIcon(QIcon("/Images/aeroplane.png"));
+
+   std::vector<Airport*> Airports = readAirports();
+   QStringList airportNames;
+
+   for (int i=0; i<Airports.size();i++){
+       QString airportName = Airports[i]->getName();
+       airportNames.append(airportName);
+   }
+
+   ui->fromAirportList->addItems(airportNames);
+   ui->toAirportList->addItems(airportNames);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -43,13 +57,13 @@ void MainWindow::on_registerButton_clicked()
 void MainWindow::on_returnCheckBox_stateChanged(int arg1)
 {
     if (arg1 == 2){
-        connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnBox,SLOT(show()));
+        connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnDateEdit,SLOT(show()));
         connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnFlightList,SLOT(show()));
         connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnFlightLabel,SLOT(show()));
     }
     else
     {
-        connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnBox,SLOT(close()));
+        connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnDateEdit,SLOT(close()));
         connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnFlightList,SLOT(close()));
         connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnFlightLabel,SLOT(close()));
     }
@@ -69,4 +83,10 @@ void MainWindow::on_registerUserButton_clicked()
 
        }
        User* user = new User(email,firstName,lastName,password,false);
+}
+
+void MainWindow::on_searchFlightButton_2_clicked()
+{
+    QString toAirport = ui->toAirportList->itemData(ui->toAirportList->currentIndex()).toString();
+    QString fromAirport = ui->toAirportList->itemData(ui->toAirportList->currentIndex()).toString();
 }

@@ -4,9 +4,9 @@
 #include <QTextStream>
 #include <QXmlStreamReader>
 #include <iostream>
-#include "flight.h"
 #include "airport.h"
 #include "XMLhandler.h"
+#include <QDir>
 
 std::vector<Airport*> readAirports() {
     QXmlStreamReader Rxml;
@@ -16,8 +16,8 @@ std::vector<Airport*> readAirports() {
     float lon, lat;
     std::vector<Airport*> airportVec;
 
-
-    QFile file("C:\\Users\\Daniel\\Documents\\XML_test\\Airports.xml");
+    QDir dir;
+    QFile file(dir.absolutePath()+"/Airports.xml");
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
            std::cout << "ERROR OPENING FILE" << std::endl;
