@@ -27,14 +27,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     user.cpp \
     airport.cpp \
-    XMLhandler.cpp \
-    flight.cpp
+    flight.cpp \
+    system.cpp
 
 HEADERS  += mainwindow.h \
     user.h \
     airport.h \
-    XMLhandler.h \
-    flight.h
+    flight.h \
+    system.h
 
 FORMS    += mainwindow.ui
 
