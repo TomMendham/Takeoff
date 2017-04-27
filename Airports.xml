@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AIRPORTS>
+	<AIRPORT>
+		<CONTINENT>North America</CONTINENT>
+		<COUNTRY>USA</COUNTRY>
+		<CITY>Los Angeles</CITY>
+		<NAME>Los Angeles International Airport </NAME>
+		<CODE>LAX</CODE>
+		<LONG>33.9416</LONG>
+		<LAT>118.4085</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Europe</CONTINENT>
+		<COUNTRY>Germany</COUNTRY>
+		<CITY>Berlin</CITY>
+		<NAME>Berlin Tegel Airport</NAME>
+		<CODE>TXL</CODE>
+		<LONG>52.5588</LONG>
+		<LAT>13.2884</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Europe</CONTINENT>
+		<COUNTRY>England</COUNTRY>
+		<CITY>London</CITY>
+		<NAME>London Heathrow</NAME>
+		<CODE>LHR</CODE>
+		<LONG>51.4700</LONG>
+		<LAT>0.4543</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Europe</CONTINENT>
+		<COUNTRY>Portugal</COUNTRY>
+		<CITY>Lisbon</CITY>
+		<NAME>Lisbon Portela Airport</NAME>
+		<CODE>LIS</CODE>
+		<LONG>38.7756</LONG>
+		<LAT>9.1354</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Europe</CONTINENT>
+		<COUNTRY>Italy</COUNTRY>
+		<CITY>Rome</CITY>
+		<NAME>Leonardo da Vinci–Fiumicino Airport</NAME>
+		<CODE>FCO</CODE>
+		<LONG>41.7999</LONG>
+		<LAT>12.2462</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Europe</CONTINENT>
+		<COUNTRY>Slovakia</COUNTRY>
+		<CITY>Bratislava</CITY>
+		<NAME>Bratislava Airport</NAME>
+		<CODE>BTS</CODE>
+		<LONG>48.1703</LONG>
+		<LAT>17.2105</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Asia</CONTINENT>
+		<COUNTRY>India</COUNTRY>
+		<CITY>Amritsar</CITY>
+		<NAME>Sri Guru Ram Dass Jee International Airport</NAME>
+		<CODE>ATQ</CODE>
+		<LONG>31.7054</LONG>
+		<LAT>74.8067</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Australia</CONTINENT>
+		<COUNTRY>New Zealand</COUNTRY>
+		<CITY>Wellington</CITY>
+		<NAME>Wellington International Airport</NAME>
+		<CODE>WLG</CODE>
+		<LONG>41.3276</LONG>
+		<LAT>174.8076</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Asia</CONTINENT>
+		<COUNTRY>China</COUNTRY>
+		<CITY>Beijing</CITY>
+		<NAME>Beijing Capital International Airport</NAME>
+		<CODE>BJS</CODE>
+		<LONG>40.0799</LONG>
+		<LAT>116.6031</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Asia</CONTINENT>
+		<COUNTRY>Turkmenistan</COUNTRY>
+		<CITY>Ashgabat</CITY>
+		<NAME>Ashgabat International Airport</NAME>
+		<CODE>ASB</CODE>
+		<LONG>37.9845</LONG>
+		<LAT>58.3665</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>South America</CONTINENT>
+		<COUNTRY>Brazil</COUNTRY>
+		<CITY>Brasilia</CITY>
+		<NAME>Brasília International Airport</NAME>
+		<CODE>BSB</CODE>
+		<LONG>15.8697</LONG>
+		<LAT>47.9172</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>South America</CONTINENT>
+		<COUNTRY>Argentina</COUNTRY>
+		<CITY>Buenos Aires</CITY>
+		<NAME>Ministro Pistarini International Airport</NAME>
+		<CODE>EZE</CODE>
+		<LONG>34.8150</LONG>
+		<LAT>58.5348</LAT>
+	</AIRPORT>
+	<AIRPORT>
+		<CONTINENT>Africa</CONTINENT>
+		<COUNTRY>Morocco</COUNTRY>
+		<CITY>Rabat</CITY>
+		<NAME>Rabat–Sale Airport</NAME>
+		<CODE>RBA</CODE>
+		<LONG>34.0361</LONG>
+		<LAT>6.7481</LAT>
+	</AIRPORT>
+</AIRPORTS>
