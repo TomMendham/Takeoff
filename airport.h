@@ -2,6 +2,7 @@
 #define AIRPORT_H
 
 #include <QString>
+#include <utility>
 
 class Airport
 {
@@ -12,13 +13,14 @@ private:
     QString City;
     QString Name;
     QString Code;
-    float Long;
+    float Lon;
     float Lat;
 
 public:
     Airport(QString cont, QString coun, QString city, QString name, QString code, float lon, float lat );
     void printInfo();
     QString getName();
+    std::pair<float, float> getCoord();
 };
 
 #endif // AIRPORT_H

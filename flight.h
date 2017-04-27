@@ -2,6 +2,7 @@
 #define FLIGHT_H
 #include <QString>
 #include <math.h>
+#include "airport.h"
 
 class Flight
 {
@@ -16,11 +17,11 @@ private:
     float distance;
     bool isConnectingFlight;
 public:
-    Flight();
+    Flight(int id, QString dat, Airport *a1, Airport *a2);
     updateCapacity();
     int calculateDuration();
     int calculateConnectingFlight();
-    float calculateDistance(float lat1, float lat2, float long1, float long2);
+    float calculateDistance(Airport* a1, Airport* a2);
 };
 
 #endif // FLIGHT_H
