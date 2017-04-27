@@ -20,6 +20,7 @@ public:
     Airport(QString cont, QString coun, QString city, QString name, QString code, float lon, float lat );
     void printInfo();
     QString getName();
+    QString getCountry();
     std::pair<float, float> getCoord();
 };
 

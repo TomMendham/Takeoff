@@ -4,6 +4,7 @@
 #include <QTextStream>
 #include <QXmlStreamReader>
 #include <iostream>
+#include <sstream>
 #include "XMLhandler.h"
 #include <QDir>
 
@@ -181,8 +182,89 @@ std::vector<Flight*> readFlights() {
     return flightVec;
 }
 
+std::vector<User*> readUsers() {
+
+    QXmlStreamReader Rxml;
+
+
+    QString email, firstname, lastname, password;
+    bool admin;
+
+    std::vector<User*> userVec;
+
+    QDir dir;
+    QFile file(dir.absolutePath()+"/Users.xml");
+
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+           std::cout << "ERROR OPENING FILE" << std::endl;
+    }
+
+
+    Rxml.setDevice(&file);
+    Rxml.readNext();
+
+    while (!Rxml.atEnd()) {
+        if (Rxml.isStartElement()) {
+            if (Rxml.name() == "USERS") {
+                Rxml.readNext();
+            } else if (Rxml.name() == "USER") {
+                while (!Rxml.atEnd()) {
+                    if (Rxml.isEndElement()) {
+                        Rxml.readNext();
+                        break;
+                    } else if (Rxml.isCharacters()) {
+                        Rxml.readNext();
+                    } else if (Rxml.isStartElement()) {
+                        if (Rxml.name() == "EMAIL") {
+
+                            email = Rxml.readElementText();
+
+                        } else if (Rxml.name() == "FIRSTNAME") {
+
+                            firstname = Rxml.readElementText();
+
+                        } else if (Rxml.name() == "LASTNAME") {
+
+                            lastname = Rxml.readElementText();
+
+                        } else if (Rxml.name() == "PASSWORD") {
+
+                            password = Rxml.readElementText();
+
+                        } else if (Rxml.name() == "ADMIN") {
+
+                            std::string temp = Rxml.readElementText().toStdString();
+                            std::istringstream is(temp);
+                            is >> std::boolalpha >> admin;
+
+
+                        }
+
+                        Rxml.readNext();
+                    }
+                    else {
+                        Rxml.readNext();
+                    }
+                }
+            }
+
+            if (email != "") {
+                User* user = new User(email, firstname, lastname, password, admin);
+                userVec.push_back(user);
+            }
+
+        }
+        else {
+            Rxml.readNext();
+        }
+    }
+
+    return userVec;
+}
+
 
 void writeFlights(Flight* f) {
+
 
     std::vector<Flight*> Flights = readFlights();
 
@@ -270,3 +352,90 @@ void writeFlights(Flight* f) {
 
 
 }
+
+void writeUsers(User* u) {
+
+
+    std::vector<User*> Users = readUsers();
+
+    Users.push_back(u);
+
+    QDir dir;
+    QFile file(dir.absolutePath()+"/Users.xml");
+
+
+
+    QXmlStreamWriter xmlWriter;
+
+
+        if (!file.open(QIODevice::WriteOnly))
+        {
+            std::cout << "ERROR OPENING FILE" << std::endl;
+        }
+        else
+        {
+
+            xmlWriter.setDevice(&file);
+            // Writes a document start and opens the flights element
+            xmlWriter.writeStartDocument();
+            xmlWriter.writeStartElement("USERS");
+
+
+            for (int i = 0; i < Users.size(); i++) {
+
+
+                QString email = Users[i]->getEmail();
+                QString firstname = Users[i]->getFirstName();
+                QString lastname = Users[i]->getLastName();
+                QString password = Users[i]->getPassword();
+                QString admin = QString::number(Users[i]->getAdmin());
+
+
+                //open flight tag
+                xmlWriter.writeStartElement("USER");
+
+                //add one attribute and its value
+                xmlWriter.writeStartElement("EMAIL");
+                xmlWriter.writeCharacters(email);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("FIRSTNAME");
+                xmlWriter.writeCharacters(firstname);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("LASTNAME");
+                xmlWriter.writeCharacters(lastname);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("PASSWORD");
+                xmlWriter.writeCharacters(password);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("ADMIN");
+                xmlWriter.writeCharacters(admin);
+                xmlWriter.writeEndElement();
+
+
+                //close user tag
+                xmlWriter.writeEndElement();
+
+
+            }
+
+
+            //end users tag
+            xmlWriter.writeEndElement();
+            //end document
+            xmlWriter.writeEndDocument();
+       }
+
+
+}
+
+
+
+
+
+
+
+

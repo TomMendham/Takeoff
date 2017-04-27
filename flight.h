@@ -17,7 +17,7 @@ private:
     float distance;
 
 public:
-    Flight(int id, QString dat, Airport *a1, Airport *a2);
+    Flight(int id, QString dat, int capac, Airport *a1, Airport *a2);
     Flight(int id, int capac, QString dest, QString dep, int dur, QString dat, float dist);
 
     float calculateDistance(Airport* a1, Airport* a2);

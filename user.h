@@ -7,6 +7,15 @@ class User
 public:
     User();
     User(QString,QString,QString,QString,bool);
+
+
+    //Accessor functions
+    QString getEmail();
+    QString getFirstName();
+    QString getLastName();
+    QString getPassword();
+    bool getAdmin();
+
 private:
     QString email;
     QString firstName;

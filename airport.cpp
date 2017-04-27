@@ -21,6 +21,10 @@ QString Airport::getName() {
     return Name;
 }
 
+QString Airport::getCountry() {
+    return Country;
+}
+
 std::pair<float, float> Airport::getCoord() {
     std::pair<float,float> pair = std::make_pair(Lat, Lon);
     return pair;

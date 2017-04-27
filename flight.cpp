@@ -3,10 +3,10 @@
 #include <cmath>
 #include <iostream>
 
-Flight::Flight(int id, QString dat, Airport* a1, Airport* a2)
+Flight::Flight(int id, QString dat, int capac, Airport* a1, Airport* a2)
 {
     ID = id;
-    capacity = 0;
+    capacity = capac;
     destination = a2->getName();
     departure = a1->getName();
     date = dat;

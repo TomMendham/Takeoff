@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     std::vector<Airport*> Airports = readAirports();
 
     QString string = "04/07/1997";
-    Flight* f = new Flight(2,string,Airports[1],Airports[2]);
+    Flight* f = new Flight(2,string,250,Airports[1],Airports[2]);
 
 
 
@@ -28,6 +28,11 @@ int main(int argc, char *argv[])
     std::cout << Flights[1]->getID() << std::endl;
 
 
+    User* u = new User("daniel@takeoff.com", "Daniel", "Jones", "Password", true);
+    writeUsers(u);
+    std::vector<User*> Users = readUsers();
+
+    std::cout << Users[0]->getEmail().toStdString() << std::endl;
 
     return a.exec();
 }

@@ -12,3 +12,27 @@ User::User(QString _email, QString _first, QString _last, QString _password, boo
     password = _password;
     admin = _admin;
 }
+
+
+
+//Accessor functions
+QString User::getEmail() {
+    return email;
+}
+
+QString User::getFirstName() {
+    return firstName;
+}
+
+QString User::getLastName() {
+    return lastName;
+}
+
+QString User::getPassword() {
+    return password;
+}
+
+bool User::getAdmin() {
+    return admin;
+}
+
