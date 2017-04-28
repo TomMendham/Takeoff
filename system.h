@@ -14,7 +14,7 @@ public:
     System();
 
     User* checkLogin(QString user, QString pass);
-
+    std::vector<Flight*> searchForFlights(QString dest, QString dep, QString date);
 
     //XML FUNCTIONS
     std::vector<Airport*> readAirports();

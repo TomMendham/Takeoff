@@ -92,8 +92,32 @@ void MainWindow::on_registerUserButton_clicked()
 
 void MainWindow::on_searchFlightButton_2_clicked()
 {
-    QString toAirport = ui->toAirportList->itemData(ui->toAirportList->currentIndex()).toString();
-    QString fromAirport = ui->toAirportList->itemData(ui->toAirportList->currentIndex()).toString();
+    QString destinationCountry = ui->toAirportList->currentText();
+    QString departureCountry = ui->fromAirportList->currentText();
+    QString date = ui->flightDateEdit->text();
+
+    QString dest, dep;
+    std::vector<Airport*> airports = readAirports();
+
+    for (int i = 0; i < airports.size(); i++) {
+        if (airports[i]->getCountry() == destinationCountry) {
+            dest = airports[i]->getName();
+        }
+        if (airports[i]->getCountry() == departureCountry) {
+            dep = airports[i]->getName();
+        }
+    }
+
+    std::vector<Flight*> correctFlights = searchForFlights(dest, dep, date);
+
+    std::cout << correctFlights[0]->getDestination().toStdString() << std::endl;
+
+    QString flightToAdd = (correctFlights[0]->getDate()) + "\t" + correctFlights[0]->getDeparture() + "\t-->\t" +
+                correctFlights[0]->getDestination() + "\t" + QString::number(correctFlights[0]->getCapacity()) + " seats remaining.";
+
+    std::cout << flightToAdd.toStdString() << std::endl;
+    ui->outboundFlightList->addItem(flightToAdd);
+
 }
 
 void MainWindow::on_loginuserButton_2_clicked()

@@ -161,15 +161,15 @@
          <x>50</x>
          <y>20</y>
          <width>321</width>
-         <height>51</height>
+         <height>53</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QComboBox" name="toAirportList"/>
+         <widget class="QComboBox" name="fromAirportList"/>
         </item>
         <item>
-         <widget class="QComboBox" name="fromAirportList"/>
+         <widget class="QComboBox" name="toAirportList"/>
         </item>
        </layout>
       </widget>
@@ -311,8 +311,8 @@
           <rect>
            <x>10</x>
            <y>20</y>
-           <width>152</width>
-           <height>128</height>
+           <width>180</width>
+           <height>142</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -478,7 +478,7 @@
            <x>60</x>
            <y>30</y>
            <width>135</width>
-           <height>131</height>
+           <height>140</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -523,8 +523,8 @@
           <rect>
            <x>10</x>
            <y>170</y>
-           <width>171</width>
-           <height>25</height>
+           <width>195</width>
+           <height>30</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -570,7 +570,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="listWidget_2">
+          <widget class="QListWidget" name="outboundFlightList">
            <property name="styleSheet">
             <string notr="true"/>
            </property>
@@ -616,7 +616,7 @@
          <x>10</x>
          <y>20</y>
          <width>241</width>
-         <height>25</height>
+         <height>30</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -680,9 +680,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
   <tabstop>exitButton</tabstop>
-  <tabstop>toAirportList</tabstop>
-  <tabstop>flightDateEdit</tabstop>
   <tabstop>fromAirportList</tabstop>
+  <tabstop>flightDateEdit</tabstop>
+  <tabstop>toAirportList</tabstop>
   <tabstop>returnCheckBox</tabstop>
   <tabstop>searchFlightButton_2</tabstop>
   <tabstop>returnDateEdit</tabstop>
@@ -697,7 +697,7 @@
   <tabstop>passwordInput_2</tabstop>
   <tabstop>cancelRegister</tabstop>
   <tabstop>registerUserButton</tabstop>
-  <tabstop>listWidget_2</tabstop>
+  <tabstop>outboundFlightList</tabstop>
   <tabstop>returnFlightList</tabstop>
  </tabstops>
  <resources/>

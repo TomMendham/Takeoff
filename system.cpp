@@ -36,6 +36,42 @@ User* System::checkLogin(QString user, QString pass) {
 }
 
 
+std::vector<Flight*> System::searchForFlights(QString dest, QString dep, QString date) {
+    std::vector<Flight*> Flights = readFlights();
+    std::vector<Flight*> correctFlights;
+
+    std::string year = date.toStdString().substr(6,4);
+    std::string month = date.toStdString().substr(3,2);
+    std::string day = date.toStdString().substr(0,2);
+    int iDay = std::stoi(day);
+
+    std::string fYear, fMonth, fDay;
+
+    for (int i = 0; i < Flights.size(); i++) {
+        if (Flights[i]->getDeparture() == dep) {
+            if (Flights[i]->getDestination() == dest) {
+
+                fYear = Flights[i]->getDate().toStdString().substr(6,4);
+                fMonth = Flights[i]->getDate().toStdString().substr(3,2);
+                fDay = Flights[i]->getDate().toStdString().substr(0,2);
+
+                int ifDay = std::stoi(fDay);
+
+                if (fYear == year) {
+                    if (fMonth == month) {
+                        if ((ifDay > (iDay-3)) && (ifDay < iDay+3)) {
+                            correctFlights.push_back(Flights[i]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return correctFlights;
+}
+
+
 
 
 //XML FUNCTIONS
