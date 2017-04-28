@@ -56,13 +56,13 @@ float Flight::calculateDistance(Airport* a1, Airport* a2)
 
 //}
 
-int Flight::calculateDuration(float distance)
-{
-    int speed = 900;
-    int duration = distance / speed;
+//int Flight::calculateDuration(float distance)
+//{
+//    int speed = 900;
+//    int duration = distance / speed;
 
-    return duration;
-}
+//    return duration;
+//}
 
 //int Flight::calculateConnectingFlight()
 //{

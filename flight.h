@@ -32,7 +32,7 @@ public:
     float getDistance();
 
     //    updateCapacity();
-    //    int calculateDuration();
+//    int calculateDuration();
     //    int calculateConnectingFlight();
 };
 
