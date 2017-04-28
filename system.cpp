@@ -1,4 +1,7 @@
 #include "system.h"
+#include "user.h"
+#include "flight.h"
+#include "airport.h"
 #include <QCoreApplication>
 #include <QFile>
 #include <QStringList>
@@ -13,6 +16,25 @@ System::System()
 {
 
 }
+
+
+User* System::checkLogin(QString user, QString pass) {
+    std::vector<User*> Users = readUsers();
+
+
+
+    for (int i = 0; i < Users.size(); i++) {
+        if (Users[i]->getEmail() == user) {
+            if (Users[i]->getPassword() == pass) {
+                return Users[i];
+            }
+        }
+    }
+
+    return NULL;
+
+}
+
 
 
 
@@ -197,8 +219,7 @@ std::vector<User*> System::readUsers() {
     QXmlStreamReader Rxml;
 
 
-    QString email, firstname, lastname, password;
-    bool admin;
+    QString email, firstname, lastname, password, admin;
 
     std::vector<User*> userVec;
 
@@ -243,9 +264,7 @@ std::vector<User*> System::readUsers() {
 
                         } else if (Rxml.name() == "ADMIN") {
 
-                            std::string temp = Rxml.readElementText().toStdString();
-                            std::istringstream is(temp);
-                            is >> std::boolalpha >> admin;
+                            admin = Rxml.readElementText();
 
 
                         }
@@ -398,7 +417,7 @@ void System::writeUsers(User* u) {
                 QString firstname = Users[i]->getFirstName();
                 QString lastname = Users[i]->getLastName();
                 QString password = Users[i]->getPassword();
-                QString admin = QString::number(Users[i]->getAdmin());
+                QString admin = Users[i]->getAdmin();
 
 
                 //open flight tag

@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include "system.h"
+#include "ui_mainwindow.h"
+#include <iostream>
+#include "user.h"
+#include "airport.h"
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;

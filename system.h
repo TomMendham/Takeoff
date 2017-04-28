@@ -13,7 +13,7 @@ class System
 public:
     System();
 
-
+    User* checkLogin(QString user, QString pass);
 
 
     //XML FUNCTIONS

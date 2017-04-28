@@ -5,7 +5,7 @@ User::User()
 
 }
 
-User::User(QString _email, QString _first, QString _last, QString _password, bool _admin ){
+User::User(QString _email, QString _first, QString _last, QString _password, QString _admin ){
     email = _email;
     firstName = _first;
     lastName = _last;
@@ -32,7 +32,7 @@ QString User::getPassword() {
     return password;
 }
 
-bool User::getAdmin() {
+QString User::getAdmin() {
     return admin;
 }
 

@@ -6,7 +6,7 @@ class User
 {
 public:
     User();
-    User(QString,QString,QString,QString,bool);
+    User(QString,QString,QString,QString,QString);
 
 
     //Accessor functions
@@ -14,14 +14,14 @@ public:
     QString getFirstName();
     QString getLastName();
     QString getPassword();
-    bool getAdmin();
+    QString getAdmin();
 
 private:
     QString email;
     QString firstName;
     QString lastName;
     QString password;
-    bool admin;
+    QString admin;
 };
 
 #endif // USER_H

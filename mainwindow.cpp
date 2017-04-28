@@ -1,9 +1,6 @@
 ﻿#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include <iostream>
-#include "user.h"
-#include "airport.h"
-#include "system.h"
+
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->returnFlightLabel->hide();
     ui->returnFlightList->hide();
     ui->popups->hide();
-
+    ui->addFlightButton_2->hide();
 
    std::vector<Airport*> Airports = readAirports();
    QStringList airportNames;
@@ -62,22 +59,34 @@ void MainWindow::on_returnCheckBox_stateChanged(int arg1)
 
 void MainWindow::on_registerUserButton_clicked()
 {
-    ui->popups->hide();
-    ui->menuButtons->show();
 
 
-    QString email = ui->emailInput->text();
+
+       QString email = ui->emailInput->text();
        QString firstName = ui->firstNameInput->text();
        QString lastName = ui->lastNameInput->text();
        QString password;
        if (ui->passwordInput->text() == ui->passwordInput_2->text()){
            password = ui->passwordInput->text();
-       }
-       else{
+
+           if (email == NULL || firstName == NULL || lastName == NULL || password == NULL) {
+               QMessageBox::about(this, "ERROR", "Please fill out all fields.");
+           } else {
+               User* user = new User(email,firstName,lastName,password,false);
+               writeUsers(user);
+
+               ui->popups->hide();
+               ui->menuButtons->show();
+
+               QMessageBox::about(this, "SUCCESS", ("You have been registered, " + firstName));
+
+           }
 
        }
-       User* user = new User(email,firstName,lastName,password,false);
-       writeUsers(user);
+       else{
+            QMessageBox::about(this, "ERROR", "Passwords don't match.");
+       }
+
 
 }
 
@@ -89,12 +98,30 @@ void MainWindow::on_searchFlightButton_2_clicked()
 
 void MainWindow::on_loginuserButton_2_clicked()
 {
-   QString loginName = ui->usernameField_2->text();
-   QString loginPassword = ui->passwordField_2->text();
+    QString loginName = ui->usernameField_2->text();
+    QString loginPassword = ui->passwordField_2->text();
+
+    if (loginName!=NULL && loginPassword!=NULL) {
+        User* currentUser = checkLogin(loginName, loginPassword);
+        if(currentUser == NULL) {
+            QMessageBox::about(this, "ERROR", "Incorrect Login Details.");
+        } else {
+            QMessageBox::about(this, "SUCCESS", ("Logged in as " + currentUser->getFirstName()));
+            ui->popups->hide();
+            ui->menuButtons->show();
+
+            std::cout << currentUser->getAdmin().toStdString() << std::endl;
+
+            if (currentUser->getAdmin() == "1") {
+                ui->addFlightButton_2->show();
+            }
+        }
+
+    } else {
+        QMessageBox::about(this, "ERROR", "Please fill out both fields.");
+    }
 
 
-   ui->popups->hide();
-   ui->menuButtons->show();
 }
 
 void MainWindow::on_loginBackButton_2_clicked()
