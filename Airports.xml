@@ -6,7 +6,7 @@
 		<CITY>London</CITY>
 		<NAME>London Heathrow</NAME>
 		<CODE>LHR</CODE>
-		<LONG>-0.4543</LONG>
+                <LONG>-0.4529</LONG>
 		<LAT>51.4700</LAT>
 	</AIRPORT>
 	<AIRPORT>
@@ -24,8 +24,8 @@
 		<CITY>Sydney</CITY>
 		<NAME>Sydney</NAME>
 		<CODE>SYD</CODE>
-		<LONG>151.1753</LONG>
-		<LAT>-33.9399</LAT>
+                <LONG>151.2093</LONG>
+                <LAT>-33.8688</LAT>
 	</AIRPORT>
 	<AIRPORT>
 		<CONTINENT>Africa</CONTINENT>

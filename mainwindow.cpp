@@ -33,10 +33,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
    connect(ui->loginButton_2,SIGNAL(clicked()),ui->menuButtons,SLOT(close()));
    connect(ui->loginButton_2,SIGNAL(clicked()),ui->popups,SLOT(show()));
+
+
+
+
 }
 
 MainWindow::~MainWindow()
 {
+
     delete ui;
 }
 
@@ -59,8 +64,32 @@ void MainWindow::on_returnCheckBox_stateChanged(int arg1)
 
 void MainWindow::on_registerUserButton_clicked()
 {
+    //Tesing Testing
+    std::vector<std::vector<float>> matrix(V, std::vector<float>(V));
 
+    std::vector<Flight*> Flights = readFlights();
 
+    fillFlightGrid(Flights, matrix);
+
+    int parent[V];
+    int airportID = 1;
+
+    //getConnectingFlight(parent [V],int airportCode);
+    dijkstra(matrix, airportID, parent);
+
+    for (int i = 0; i < V; i++)
+    {
+        for (int j = 0; j < V; j++)
+        {
+            std::cout << matrix[i][j] << "              ";
+        }
+        std::cout  << std::endl;
+    }
+    for(int i = 0; i < 4; i++)
+    {
+        std::cout << parent[i] << std::endl;
+    }
+    //Tesing Testing
 
        QString email = ui->emailInput->text();
        QString firstName = ui->firstNameInput->text();

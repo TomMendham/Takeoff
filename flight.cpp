@@ -35,6 +35,8 @@ float Flight::calculateDistance(Airport* a1, Airport* a2)
     //a2coord.first = lat2
     //a2coord.second = lon2
 
+    float M_PI = 3.14159;
+
     //R is earths mean radius in km
     float R = 6371;
     //Converting to radians "*M_PI / 180.0"

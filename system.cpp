@@ -496,3 +496,196 @@ void System::writeUsers(User* u) {
 
 
 }
+
+//Function to fill the flight grid
+void System::fillFlightGrid(std::vector<Flight*> Flights, std::vector<std::vector<float>> &matrix)
+{
+    for (int i = 0; i < Flights.size(); i++)
+        if (Flights[i]->getDestination() == "London Heathrow")
+        {
+            for(int j = 0; j < 3; j++)
+            {
+                if (Flights[i]->getDestination() == "London Heathrow" && Flights[j]->getDeparture() == "Dubai International")
+                {
+                    matrix[1][0] = Flights[j]->getDistance();
+                    matrix[0][1] = Flights[j]->getDistance();
+                }
+                if (Flights[i]->getDestination() == "London Heathrow" && Flights[j]->getDeparture() == "Sydney")
+                {
+                    matrix[2][0] = Flights[j]->getDistance();
+                    matrix[0][2] = Flights[j]->getDistance();
+                }
+                if (Flights[i]->getDestination() == "London Heathrow" && Flights[j]->getDeparture() == "Cape Town")
+                {
+                    matrix[3][0] = Flights[j]->getDistance();
+                    matrix[0][3] = Flights[j]->getDistance();
+                }
+            }
+        }
+        else if (Flights[i]->getDestination() == "Dubai International")
+        {
+            for(int k = 3; k < 6; k++)
+            {
+                if (Flights[i]->getDestination() == "Dubai International" && Flights[k]->getDeparture() == "Sydney")
+                {
+                    matrix[1][2] = Flights[k]->getDistance();
+                    matrix[2][1] = Flights[k]->getDistance();
+                }
+                if (Flights[i]->getDestination() == "Dubai International" && Flights[k]->getDeparture() == "Cape Town")
+                {
+                    matrix[1][3] = Flights[k]->getDistance();
+                    matrix[3][1] = Flights[k]->getDistance();
+                }
+                if (Flights[i]->getDestination() == "Dubai International" && Flights[k]->getDeparture() == "London Heathrow")
+                {
+                    matrix[1][0] = Flights[k]->getDistance();
+                    matrix[0][1] = Flights[k]->getDistance();
+                }
+            }
+        }
+
+        else if (Flights[i]->getDestination() == "Sydney")
+        {
+            for(int l = 6; l < 9; l++)
+            {
+                if (Flights[i]->getDestination() == "Sydney" && Flights[l]->getDeparture() == "London Heathrow")
+                {
+                    matrix[2][0] = Flights[l]->getDistance();
+                    matrix[0][2] = Flights[l]->getDistance();
+                }
+                if (Flights[i]->getDestination() == "Sydney" && Flights[l]->getDeparture() == "Dubai International")
+                {
+                    matrix[2][1] = Flights[l]->getDistance();
+                    matrix[1][2] = Flights[l]->getDistance();
+                }
+                if (Flights[i]->getDestination() == "Sydney" && Flights[l]->getDeparture() == "Cape Town")
+                {
+                    matrix[3][2] = Flights[l]->getDistance();
+                    matrix[2][3] = Flights[l]->getDistance();
+                }
+            }
+        }
+        else if (Flights[i]->getDestination() == "Cape Town")
+        {
+            for(int c = 9; c < 12; c++)
+            {
+                if (Flights[i]->getDestination() == "Cape Town" && Flights[c]->getDeparture() == "London Heathrow")
+                {
+                    matrix[3][0] = Flights[c]->getDistance();
+                    matrix[0][3] = Flights[c]->getDistance();
+                }
+                if (Flights[i]->getDestination() == "Cape Town" && Flights[c]->getDeparture() == "Dubai International")
+                {
+                    matrix[3][1] = Flights[c]->getDistance();
+                    matrix[1][3] = Flights[c]->getDistance();
+                }
+                if (Flights[i]->getDestination() == "Cape Town" && Flights[c]->getDeparture() == "Sydney")
+                {
+                    matrix[3][2] = Flights[c]->getDistance();
+                    matrix[2][3] = Flights[c]->getDistance();
+                }
+            }
+        }
+}
+
+int System::getConnectingFlight(int departureAirportID, int destinationAirportID)
+{
+    std::vector<std::vector<float>> matrix(V, std::vector<float>(V));
+
+    std::vector<Flight*> Flights = readFlights();
+
+    fillFlightGrid(Flights, matrix);
+
+    int parent[V];
+
+    dijkstra(matrix, departureAirportID, parent);
+    int parentAirportID = getParentFlight(parent,destinationAirportID);
+
+    return parentAirportID;
+}
+
+int System::getParentFlight(int parent [V],int destinationAirportID)
+{
+    int connectingFlight = NULL;
+    for (int i = 0; i < V; i++)
+    {
+        if (i == destinationAirportID)
+        {
+            connectingFlight = parent [i];
+        }
+    }
+    return connectingFlight;
+}
+
+
+// A utility function to find the vertex with minimum distance
+// value, from the set of vertices not yet included in shortest
+// path tree
+int System::minDistance(float dist[], bool sptSet[])
+{
+    // Initialize min value
+    float min = INT_MAX, min_index;
+
+    for (int v = 0; v < V; v++)
+        if (sptSet[v] == false && dist[v] <= min)
+            min = dist[v], min_index = v;
+
+    return min_index;
+}
+
+// Funtion that implements Dijkstra's single source shortest path
+// algorithm for a graph represented using adjacency matrix
+// representation
+void System::dijkstra(std::vector<std::vector<float>> &matrix, int src, int parent [V])
+{
+    float dist[V];  // The output array. dist[i] will hold
+                  // the shortest distance from src to i
+
+    // sptSet[i] will true if vertex i is included / in shortest
+    // path tree or shortest distance from src to i is finalized
+    bool sptSet[V];
+
+    // Parent array to store shortest path tree
+    //int parent[V];
+
+    // Initialize all distances as INFINITE and stpSet[] as false
+    for (int i = 0; i < V; i++)
+    {
+        parent[0] = -1;
+        dist[i] = INT_MAX;
+        sptSet[i] = false;
+    }
+
+    // Distance of source vertex from itself is always 0
+    dist[src] = 0;
+
+    // Find shortest path for all vertices
+    for (int count = 0; count < V-1; count++)
+    {
+        // Pick the minimum distance vertex from the set of
+        // vertices not yet processed. u is always equal to src
+        // in first iteration.
+        int u = minDistance(dist, sptSet);
+
+        // Mark the picked vertex as processed
+        sptSet[u] = true;
+
+        // Update dist value of the adjacent vertices of the
+        // picked vertex.
+        for (int v = 0; v < V; v++)
+
+            // Update dist[v] only if is not in sptSet, there is
+            // an edge from u to v, and total weight of path from
+            // src to v through u is smaller than current value of
+            // dist[v]
+            if (!sptSet[v] && matrix[u][v] &&
+                dist[u] + matrix[u][v] < dist[v])
+            {
+                parent[v]  = u;
+                dist[v] = dist[u] + matrix[u][v];
+            }
+    }
+
+    // print the constructed distance array
+    //printSolution(dist, V, parent);
+}

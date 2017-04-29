@@ -5,7 +5,10 @@
 #include "airport.h"
 #include "flight.h"
 #include "user.h"
+#include <vector>
 
+// Number of vertices in the matrix
+#define V 4
 
 class System
 {
@@ -23,6 +26,14 @@ public:
 
     void writeFlights(Flight* f);
     void writeUsers(User* u);
+
+    //Connecting flight functions
+    int getConnectingFlight(int departureAirportID, int destinationAirportID);
+    void fillFlightGrid(std::vector<Flight*> Flights, std::vector<std::vector<float>> &matrix);
+    int getParentFlight(int parent [V],int destinationAirportID);
+    int minDistance(float dist[], bool sptSet[]);
+    void dijkstra(std::vector<std::vector<float>> &matrix, int src, int parent [V]);
+
 };
 
 #endif // SYSTEM_H
