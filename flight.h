@@ -15,12 +15,15 @@ private:
     int duration;
     QString date;
     float distance;
+    float price;
 
 public:
     Flight(int id, QString dat, int capac, Airport *a1, Airport *a2);
     Flight(int id, int capac, QString dest, QString dep, int dur, QString dat, float dist);
 
     float calculateDistance(Airport* a1, Airport* a2);
+    float calculatePrice(float distance);
+    int calculateDuration(float distance);
 
     //Accessor functions
     int getID();
@@ -33,7 +36,6 @@ public:
 
     //    updateCapacity();
 //    int calculateDuration();
-    //    int calculateConnectingFlight();
 };
 
 #endif // FLIGHT_H

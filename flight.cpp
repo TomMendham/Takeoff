@@ -35,7 +35,7 @@ float Flight::calculateDistance(Airport* a1, Airport* a2)
     //a2coord.first = lat2
     //a2coord.second = lon2
 
-    float M_PI = 3.14159;
+    //float M_PI = 3.14159;
 
     //R is earths mean radius in km
     float R = 6371;
@@ -58,18 +58,19 @@ float Flight::calculateDistance(Airport* a1, Airport* a2)
 
 //}
 
-//int Flight::calculateDuration(float distance)
-//{
-//    int speed = 900;
-//    int duration = distance / speed;
+int Flight::calculateDuration(float distance)
+{
+    int speed = 900;
+    int duration = distance / speed;
 
-//    return duration;
-//}
+    return duration;
+}
 
-//int Flight::calculateConnectingFlight()
-//{
-
-//}
+float Flight::calculatePrice(float distance)
+{
+    float price = distance * 0.03;
+    return price;
+}
 
 
 //Accessor functions
