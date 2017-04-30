@@ -239,5 +239,20 @@ void MainWindow::on_addFlightButton_clicked()
 
 void MainWindow::on_loginButton_2_clicked()
 {
+    ui->popups->show();
     ui->popups->setCurrentIndex(0);
+    ui->menuButtons->hide();
+}
+
+void MainWindow::on_bookFlightButton_clicked()
+{
+    ui->popups->show();
+    ui->popups->setCurrentIndex(2);
+    ui->menuButtons->hide();
+}
+
+void MainWindow::on_cancelPushButton_clicked()
+{
+    ui->popups->hide();
+    ui->menuButtons->show();
 }

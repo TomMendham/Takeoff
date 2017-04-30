@@ -35,6 +35,10 @@ private slots:
     void on_addFlightButton_clicked();
     void on_loginButton_2_clicked();
 
+    void on_bookFlightButton_clicked();
+
+    void on_cancelPushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
