@@ -132,10 +132,8 @@ std::vector<Airport*> System::readAirports() {
                             lon = std::stof(temp);
 
                         } else if (Rxml.name() == "LAT") {
-
                             std::string temp = Rxml.readElementText().toStdString();
                             lat = std::stof(temp);
-
                         }
 
                         Rxml.readNext();
@@ -147,7 +145,7 @@ std::vector<Airport*> System::readAirports() {
             }
 
             if (cont != "") {
-                Airport* airport = new Airport(cont, coun, city, name, code, lon, lat);
+                Airport* airport = new Airport(cont, coun, city, name, code, lat, lon);
                 airportVec.push_back(airport);
             }
 
@@ -496,6 +494,8 @@ void System::writeUsers(User* u) {
 
 
 }
+
+
 
 //Function to fill the flight grid
 void System::fillFlightGrid(std::vector<Flight*> Flights, std::vector<std::vector<float>> &matrix)
