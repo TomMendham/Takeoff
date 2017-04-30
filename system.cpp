@@ -496,7 +496,7 @@ void System::writeUsers(User* u) {
 }
 
 
-
+//CONNECTING FLIGHT FUNCTION
 //Function to fill the flight grid
 void System::fillFlightGrid(std::vector<Flight*> Flights, std::vector<std::vector<float>> &matrix)
 {
