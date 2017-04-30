@@ -138,15 +138,15 @@ void MainWindow::on_searchFlightButton_2_clicked()
     }
 
     std::vector<Flight*> correctFlights = searchForFlights(dest, dep, date);
+    std::cout << correctFlights.size() << std::endl;
 
-    std::cout << correctFlights[0]->getDestination().toStdString() << std::endl;
+    ui->outboundFlightList->clear();
+    for (int i = 0; i < correctFlights.size(); i++) {
+        QString flightToAdd = (correctFlights[0]->getDate()) + "\t" + correctFlights[0]->getDeparture() + "\t-->\t" +
+                    correctFlights[0]->getDestination() + "\t" + QString::number(correctFlights[0]->getCapacity()) + " seats remaining.";
 
-    QString flightToAdd = (correctFlights[0]->getDate()) + "\t" + correctFlights[0]->getDeparture() + "\t-->\t" +
-                correctFlights[0]->getDestination() + "\t" + QString::number(correctFlights[0]->getCapacity()) + " seats remaining.";
-
-    std::cout << flightToAdd.toStdString() << std::endl;
-    ui->outboundFlightList->addItem(flightToAdd);
-
+        ui->outboundFlightList->addItem(flightToAdd);
+    }
 }
 
 void MainWindow::on_loginuserButton_2_clicked()

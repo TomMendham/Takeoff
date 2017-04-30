@@ -7,8 +7,8 @@ Flight::Flight(int id, QString dat, int capac, Airport* a1, Airport* a2)
 {
     ID = id;
     capacity = capac;
-    destination = a2->getName();
-    departure = a1->getName();
+    destination = a1->getName();
+    departure = a2->getName();
     date = dat;
     distance = calculateDistance(a1, a2);
     //duration = calculateDuration(distance);
