@@ -64,31 +64,31 @@ void MainWindow::on_returnCheckBox_stateChanged(int arg1)
 
 void MainWindow::on_registerUserButton_clicked()
 {
-    //Tesing Testing
-    std::vector<std::vector<float>> matrix(V, std::vector<float>(V));
+//    //Tesing Testing
+//    //std::vector<std::vector<float>> matrix(V, std::vector<float>(V));
 
-    std::vector<Flight*> Flights = readFlights();
+//    std::vector<Flight*> Flights = readFlights();
 
-    fillFlightGrid(Flights, matrix);
+//    fillFlightGrid(Flights, matrix);
 
-    int parent[V];
-    int airportID = 1;
+//    int parent[V];
+//    int airportID = 1;
 
-    //getConnectingFlight(parent [V],int airportCode);
-    dijkstra(matrix, airportID, parent);
+//    //getConnectingFlight(parent [V],int airportCode);
+//    dijkstra(matrix, airportID, parent);
 
-    for (int i = 0; i < V; i++)
-    {
-        for (int j = 0; j < V; j++)
-        {
-            std::cout << matrix[i][j] << "              ";
-        }
-        std::cout  << std::endl;
-    }
-    for(int i = 0; i < 4; i++)
-    {
-        std::cout << parent[i] << std::endl;
-    }
+//    for (int i = 0; i < V; i++)
+//    {
+//        for (int j = 0; j < V; j++)
+//        {
+//            std::cout << matrix[i][j] << "              ";
+//        }
+//        std::cout  << std::endl;
+//    }
+//    for(int i = 0; i < 4; i++)
+//    {
+//        std::cout << parent[i] << std::endl;
+//    }
     //Tesing Testing
 
        QString email = ui->emailInput->text();
@@ -101,7 +101,7 @@ void MainWindow::on_registerUserButton_clicked()
            if (email == NULL || firstName == NULL || lastName == NULL || password == NULL) {
                QMessageBox::about(this, "ERROR", "Please fill out all fields.");
            } else {
-               User* user = new User(email,firstName,lastName,password,false);
+               User* user = new User(email,firstName,lastName,password,"1");
                writeUsers(user);
 
                ui->popups->hide();
@@ -138,15 +138,28 @@ void MainWindow::on_searchFlightButton_2_clicked()
     }
 
     std::vector<Flight*> correctFlights = searchForFlights(dest, dep, date);
-    std::cout << correctFlights.size() << std::endl;
 
     ui->outboundFlightList->clear();
     for (int i = 0; i < correctFlights.size(); i++) {
-        QString flightToAdd = ("£" + QString::number(correctFlights[i]->getPrice()) + "  |  " + correctFlights[i]->getDate()) + "  |  " +
+        QString flightToAdd = (QString::number(correctFlights[i]->getID()) + " | £" + QString::number(correctFlights[i]->getPrice()) + "  |  " + correctFlights[i]->getDate()) + "  |  " +
                                 correctFlights[i]->getDeparture() + " --> " + correctFlights[i]->getDestination() + "  |  " +
                                 QString::number(correctFlights[i]->getCapacity()) + " seats remaining.";
 
         ui->outboundFlightList->addItem(flightToAdd);
+    }
+
+    if (ui->returnCheckBox->isChecked()) {
+        QString returnDate = ui->returnDateEdit->text();
+        std::vector<Flight*> correctReturnFlights = searchForFlights(dep, dest, returnDate);
+
+        ui->returnFlightList->clear();
+        for (int i = 0; i < correctReturnFlights.size(); i++) {
+            QString returnFlightToAdd = ("£" + QString::number(correctReturnFlights[i]->getPrice()) + "  |  " + correctReturnFlights[i]->getDate()) + "  |  " +
+                                    correctReturnFlights[i]->getDeparture() + " --> " + correctReturnFlights[i]->getDestination() + "  |  " +
+                                    QString::number(correctReturnFlights[i]->getCapacity()) + " seats remaining.";
+
+            ui->returnFlightList->addItem(returnFlightToAdd);
+        }
     }
 }
 
@@ -156,7 +169,8 @@ void MainWindow::on_loginuserButton_2_clicked()
     QString loginPassword = ui->passwordField_2->text();
 
     if (loginName!=NULL && loginPassword!=NULL) {
-        User* currentUser = checkLogin(loginName, loginPassword);
+       // User* currentUser = checkLogin(loginName, loginPassword);
+        currentUser = checkLogin(loginName, loginPassword);
         if(currentUser == NULL) {
             QMessageBox::about(this, "ERROR", "Incorrect Login Details.");
         } else {
@@ -169,13 +183,13 @@ void MainWindow::on_loginuserButton_2_clicked()
             if (currentUser->getAdmin() == "1") {
                 ui->addFlightButton_2->show();
             }
+
+
         }
 
     } else {
         QMessageBox::about(this, "ERROR", "Please fill out both fields.");
     }
-
-
 }
 
 void MainWindow::on_loginBackButton_2_clicked()
@@ -256,4 +270,16 @@ void MainWindow::on_cancelPushButton_clicked()
 {
     ui->popups->hide();
     ui->menuButtons->show();
+}
+
+void MainWindow::on_bookPushButton_clicked()
+{
+    std::string flight = ui->outboundFlightList->currentItem()->text().toStdString();
+
+    std::size_t found = flight.find("|");
+
+    std::string str = flight.substr(0, found - 1);
+
+    currentUser->addBookedFlight(str);
+
 }

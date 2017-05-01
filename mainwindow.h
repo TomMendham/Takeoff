@@ -39,8 +39,11 @@ private slots:
 
     void on_cancelPushButton_clicked();
 
+    void on_bookPushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    User* currentUser;
 };
 
 #endif // MAINWINDOW_H

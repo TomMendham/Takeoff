@@ -8,6 +8,7 @@ public:
     User();
     User(QString,QString,QString,QString,QString);
 
+    void addBookedFlight(std::string str);
 
     //Accessor functions
     QString getEmail();
@@ -15,6 +16,7 @@ public:
     QString getLastName();
     QString getPassword();
     QString getAdmin();
+    QString getBookedFlights();
 
 private:
     QString email;
@@ -22,6 +24,7 @@ private:
     QString lastName;
     QString password;
     QString admin;
+    QString bookedFlights;
 };
 
 #endif // USER_H

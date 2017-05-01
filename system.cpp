@@ -226,7 +226,7 @@ std::vector<Flight*> System::readFlights() {
                         } else if (Rxml.name() == "PRICE") {
 
                             std::string temp = Rxml.readElementText().toStdString();
-                            pric = (std::stof(temp) * 1.00);
+                            pric = std::stof(temp);
                         }
 
 
@@ -257,7 +257,7 @@ std::vector<User*> System::readUsers() {
     QXmlStreamReader Rxml;
 
 
-    QString email, firstname, lastname, password, admin;
+    QString email, firstname, lastname, password, admin, bookedFlights;
 
     std::vector<User*> userVec;
 
@@ -304,6 +304,9 @@ std::vector<User*> System::readUsers() {
 
                             admin = Rxml.readElementText();
 
+                        } else if (Rxml.name() == "BOOKEDFLIGHTS") {
+
+                            bookedFlights = Rxml.readElementText();
 
                         }
 
@@ -334,8 +337,6 @@ void System::writeFlights(Flight* f) {
 
 
     std::vector<Flight*> Flights = readFlights();
-
-    Flights.push_back(f);
 
     QDir dir;
     QFile file(dir.absolutePath()+"/Flights.xml");
@@ -461,6 +462,7 @@ void System::writeUsers(User* u) {
                 QString lastname = Users[i]->getLastName();
                 QString password = Users[i]->getPassword();
                 QString admin = Users[i]->getAdmin();
+                QString bookedFlights = Users[i]->getBookedFlights();
 
 
                 //open flight tag
@@ -487,6 +489,10 @@ void System::writeUsers(User* u) {
                 xmlWriter.writeCharacters(admin);
                 xmlWriter.writeEndElement();
 
+                xmlWriter.writeStartElement("BOOKEDFLIGHTS");
+                xmlWriter.writeCharacters(bookedFlights);
+                xmlWriter.writeEndElement();
+
 
                 //close user tag
                 xmlWriter.writeEndElement();
@@ -503,6 +509,8 @@ void System::writeUsers(User* u) {
 
 
 }
+
+
 
 
 //CONNECTING FLIGHT FUNCTION
