@@ -520,103 +520,85 @@ void System::writeUsers(User* u) {
 
 //CONNECTING FLIGHT FUNCTIONS
 //Function to fill the flight grid
-void System::fillFlightGrid(std::vector<Flight*> Flights, std::vector<std::vector<float>> &matrix)
+void System::fillFlightGrid(std::vector<std::vector<float>> &matrix)
 {
+    std::vector<Flight*> Flights = readFlights();
+
     for (int i = 0; i < Flights.size(); i++)
-        if (Flights[i]->getDestination() == "London Heathrow")
+    {
+        if (Flights[i]->getDestination() == "Dubai International"&& Flights[i]->getDeparture() == "London Heathrow" )
         {
-            for(int j = 0; j < 3; j++)
-            {
-                if (Flights[i]->getDestination() == "London Heathrow" && Flights[j]->getDeparture() == "Dubai International")
-                {
-                    matrix[1][0] = Flights[j]->getDistance();
-                    matrix[0][1] = Flights[j]->getDistance();
-                }
-                if (Flights[i]->getDestination() == "London Heathrow" && Flights[j]->getDeparture() == "Sydney")
-                {
-                    matrix[2][0] = (Flights[j]->getDistance() + 10000);
-                    matrix[0][2] = (Flights[j]->getDistance() + 10000);
-                }
-                if (Flights[i]->getDestination() == "London Heathrow" && Flights[j]->getDeparture() == "Cape Town")
-                {
-                    matrix[3][0] = Flights[j]->getDistance();
-                    matrix[0][3] = Flights[j]->getDistance();
-                }
-            }
+            matrix[1][0] = Flights[i]->getDistance();
+            matrix[0][1] = Flights[i]->getDistance();
         }
-        else if (Flights[i]->getDestination() == "Dubai International")
+        if (Flights[i]->getDestination() == "Sydney"&& Flights[i]->getDeparture() == "London Heathrow")
         {
-            for(int k = 3; k < 6; k++)
-            {
-                if (Flights[i]->getDestination() == "Dubai International" && Flights[k]->getDeparture() == "Sydney")
-                {
-                    matrix[1][2] = Flights[k]->getDistance();
-                    matrix[2][1] = Flights[k]->getDistance();
-                }
-                if (Flights[i]->getDestination() == "Dubai International" && Flights[k]->getDeparture() == "Cape Town")
-                {
-                    matrix[1][3] = Flights[k]->getDistance();
-                    matrix[3][1] = Flights[k]->getDistance();
-                }
-                if (Flights[i]->getDestination() == "Dubai International" && Flights[k]->getDeparture() == "London Heathrow")
-                {
-                    matrix[1][0] = Flights[k]->getDistance();
-                    matrix[0][1] = Flights[k]->getDistance();
-                }
-            }
+            matrix[2][0] = (Flights[i]->getDistance() + 10000);
+            matrix[0][2] = (Flights[i]->getDistance() + 10000);
+        }
+        if (Flights[i]->getDestination() == "Cape Town"&& Flights[i]->getDeparture() == "London Heathrow")
+        {
+            matrix[3][0] = Flights[i]->getDistance();
+            matrix[0][3] = Flights[i]->getDistance();
         }
 
-        else if (Flights[i]->getDestination() == "Sydney")
+        if (Flights[i]->getDestination() == "Sydney" && Flights[i]->getDeparture() == "Dubai International")
         {
-            for(int l = 6; l < 9; l++)
-            {
-                if (Flights[i]->getDestination() == "Sydney" && Flights[l]->getDeparture() == "London Heathrow")
-                {
-                    matrix[2][0] = (Flights[l]->getDistance()+ 10000);
-                    matrix[0][2] = (Flights[l]->getDistance()+ 10000);
-                }
-                if (Flights[i]->getDestination() == "Sydney" && Flights[l]->getDeparture() == "Dubai International")
-                {
-                    matrix[2][1] = Flights[l]->getDistance();
-                    matrix[1][2] = Flights[l]->getDistance();
-                }
-                if (Flights[i]->getDestination() == "Sydney" && Flights[l]->getDeparture() == "Cape Town")
-                {
-                    matrix[3][2] = Flights[l]->getDistance();
-                    matrix[2][3] = Flights[l]->getDistance();
-                }
-            }
+            matrix[1][2] = Flights[i]->getDistance();
+            matrix[2][1] = Flights[i]->getDistance();
         }
-        else if (Flights[i]->getDestination() == "Cape Town")
+        if (Flights[i]->getDestination() == "Cape Town" && Flights[i]->getDeparture() == "Dubai International")
         {
-            for(int c = 9; c < 12; c++)
-            {
-                if (Flights[i]->getDestination() == "Cape Town" && Flights[c]->getDeparture() == "London Heathrow")
-                {
-                    matrix[3][0] = Flights[c]->getDistance();
-                    matrix[0][3] = Flights[c]->getDistance();
-                }
-                if (Flights[i]->getDestination() == "Cape Town" && Flights[c]->getDeparture() == "Dubai International")
-                {
-                    matrix[3][1] = Flights[c]->getDistance();
-                    matrix[1][3] = Flights[c]->getDistance();
-                }
-                if (Flights[i]->getDestination() == "Cape Town" && Flights[c]->getDeparture() == "Sydney")
-                {
-                    matrix[3][2] = Flights[c]->getDistance();
-                    matrix[2][3] = Flights[c]->getDistance();
-                }
-            }
+            matrix[1][3] = Flights[i]->getDistance();
+            matrix[3][1] = Flights[i]->getDistance();
         }
+        if (Flights[i]->getDestination() == "London Heathrow" && Flights[i]->getDeparture() == "Dubai International")
+        {
+            matrix[1][0] = Flights[i]->getDistance();
+            matrix[0][1] = Flights[i]->getDistance();
+        }
+
+        if (Flights[i]->getDestination() == "London Heathrow" && Flights[i]->getDeparture() == "Sydney")
+        {
+            matrix[2][0] = (Flights[i]->getDistance()+ 10000);
+            matrix[0][2] = (Flights[i]->getDistance()+ 10000);
+        }
+        if (Flights[i]->getDestination() == "Dubai International" && Flights[i]->getDeparture() == "Sydney")
+        {
+            matrix[2][1] = Flights[i]->getDistance();
+            matrix[1][2] = Flights[i]->getDistance();
+        }
+        if (Flights[i]->getDestination() == "Cape Town" && Flights[i]->getDeparture() == "Sydney")
+        {
+            matrix[3][2] = Flights[i]->getDistance();
+            matrix[2][3] = Flights[i]->getDistance();
+        }
+
+        if (Flights[i]->getDestination() == "London Heathrow" && Flights[i]->getDeparture() == "Cape Town")
+        {
+            matrix[3][0] = Flights[i]->getDistance();
+            matrix[0][3] = Flights[i]->getDistance();
+        }
+        if (Flights[i]->getDestination() == "Dubai International" && Flights[i]->getDeparture() == "Cape Town")
+        {
+            matrix[3][1] = Flights[i]->getDistance();
+            matrix[1][3] = Flights[i]->getDistance();
+        }
+        if (Flights[i]->getDestination() == "Sydney" && Flights[i]->getDeparture() == "Cape Town")
+        {
+            matrix[3][2] = Flights[i]->getDistance();
+            matrix[2][3] = Flights[i]->getDistance();
+        }
+    }
 }
 
 int System::getConnectingFlight(int departureAirportID, int destinationAirportID)
 {
     std::vector<std::vector<float>> matrix(V, std::vector<float>(V));
 
-    std::vector<Flight*> Flights = readFlights();
+    //std::vector<Flight*> Flights = readFlights();
 
-    fillFlightGrid(Flights, matrix);
+    fillFlightGrid(matrix);
 
     int parent[V];
 

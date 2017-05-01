@@ -29,7 +29,7 @@ public:
 
     //Connecting flight functions
     int getConnectingFlight(int departureAirportID, int destinationAirportID);
-    void fillFlightGrid(std::vector<Flight*> Flights, std::vector<std::vector<float>> &matrix);
+    void fillFlightGrid(std::vector<std::vector<float>> &matrix);
     int getParentFlight(int parent [V],int destinationAirportID);
     int minDistance(float dist[], bool sptSet[]);
     void dijkstra(std::vector<std::vector<float>> &matrix, int src, int parent [V]);

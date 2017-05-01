@@ -106,7 +106,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>11</x>
@@ -182,7 +182,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="LoginPage">
        <widget class="QGroupBox" name="loginPopup">
@@ -498,7 +498,7 @@
           <x>10</x>
           <y>10</y>
           <width>261</width>
-          <height>251</height>
+          <height>161</height>
          </rect>
         </property>
         <property name="title">
@@ -510,7 +510,7 @@
            <x>9</x>
            <y>19</y>
            <width>241</width>
-           <height>221</height>
+           <height>131</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_12">
@@ -595,7 +595,7 @@
         <property name="title">
          <string>Add Flight</string>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -706,9 +706,6 @@
           </item>
          </layout>
         </widget>
-        <zorder>layoutWidget</zorder>
-        <zorder>layoutWidget_5</zorder>
-        <zorder>layoutWidget_4</zorder>
        </widget>
       </widget>
      </widget>
