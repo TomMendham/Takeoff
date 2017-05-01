@@ -317,3 +317,8 @@ void MainWindow::on_myFlightsBack_clicked()
     ui->outboundFlightList->show();ui->outboundFlightLabel->show();
 }
 
+
+void MainWindow::on_outboundFlightList_itemPressed(QListWidgetItem *item)
+{
+    ui->bookFlightButton->setEnabled(true);
+}
