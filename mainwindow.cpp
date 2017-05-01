@@ -127,14 +127,20 @@ void MainWindow::on_searchFlightButton_2_clicked()
     ui->outboundFlightList->clear();
     QString flightToAdd = "";
 
-    std::vector<Flight*> connectingFlights = searchForFlights(connectingAirportName, dest, date);
+
+    std::vector<Flight*> connectingFlights = searchForFlights(dest, connectingAirportName, date);
+
     //Check if there is a connecting flight on that date
+    if (connectingFlights.size() == 0)
+    {
+        isConnecting = false;
+        QMessageBox::about(this, "ERROR", "No Connecting flights on this date.");
+    }
     for (int i = 0; i < connectingFlights.size(); i++)
     {
         if (connectingFlights[i]->getDestination() == dest && connectingFlights[i]->getDeparture() == connectingAirportName)
         {
-                 isConnecting = false;
-                 QMessageBox::about(this, "ERROR", "No Connecting flights on this date.");
+                 isConnecting = true;
         }
     }
 
