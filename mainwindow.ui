@@ -34,19 +34,6 @@
      <number>0</number>
     </property>
     <widget class="QWidget" name="Home">
-     <widget class="QPushButton" name="exitButton">
-      <property name="geometry">
-       <rect>
-        <x>920</x>
-        <y>390</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Exit</string>
-      </property>
-     </widget>
      <widget class="QGroupBox" name="flightDetailsBox">
       <property name="geometry">
        <rect>
@@ -173,22 +160,6 @@
         </item>
        </layout>
       </widget>
-     </widget>
-     <widget class="QGroupBox" name="datesGroupBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>140</y>
-        <width>731</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="title">
-       <string>Dates</string>
-      </property>
      </widget>
      <widget class="QStackedWidget" name="popups">
       <property name="geometry">
@@ -664,9 +635,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>230</y>
+        <y>150</y>
         <width>731</width>
-        <height>191</height>
+        <height>271</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -685,6 +656,20 @@
             <string notr="true"/>
            </property>
           </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_13">
+         <item>
+          <widget class="QLabel" name="myFlightsLabel">
+           <property name="text">
+            <string>My Flights</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListView" name="myFlightsList"/>
          </item>
         </layout>
        </item>
@@ -780,12 +765,40 @@
        </layout>
       </widget>
      </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>810</x>
+        <y>390</y>
+        <width>158</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <item>
+        <widget class="QPushButton" name="myFlights">
+         <property name="text">
+          <string>My Flights</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="exitButton">
+         <property name="text">
+          <string>Exit</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <zorder>layoutWidget</zorder>
      <zorder>flightDetailsBox</zorder>
      <zorder>exitButton</zorder>
-     <zorder>datesGroupBox</zorder>
      <zorder>popups</zorder>
      <zorder>menuButtons</zorder>
+     <zorder>myFlightsLabel</zorder>
+     <zorder>myFlightsList</zorder>
+     <zorder>myFlights</zorder>
     </widget>
     <widget class="QWidget" name="Login"/>
     <widget class="QWidget" name="Register"/>

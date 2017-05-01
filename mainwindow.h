@@ -41,6 +41,8 @@ private slots:
 
     void on_bookPushButton_clicked();
 
+    void on_LogoutButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     User* currentUser;

@@ -288,3 +288,10 @@ void MainWindow::on_bookPushButton_clicked()
 
 
 }
+
+void MainWindow::on_LogoutButton_clicked()
+{
+    ui->LogoutButton->hide();
+    ui->loginButton_2->show();
+    currentUser = NULL;
+}
