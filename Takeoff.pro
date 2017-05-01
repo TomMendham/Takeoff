@@ -42,4 +42,6 @@ RESOURCES += \
     resource.qrc
 
 DISTFILES += \
-    Airports.xml
+    Airports.xml \
+    Flights.xml \
+    Users.xml
