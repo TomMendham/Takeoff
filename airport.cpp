@@ -1,7 +1,7 @@
 #include "airport.h"
 #include <iostream>
 
-Airport::Airport(QString cont, QString coun, QString city, QString name, QString code, float lat, float lon )
+Airport::Airport(QString cont, QString coun, QString city, QString name, QString code, float lat, float lon, int id )
 {
     Continent = cont;
     Country = coun;
@@ -10,7 +10,7 @@ Airport::Airport(QString cont, QString coun, QString city, QString name, QString
     Code = code;
     Lat = lat;
     Lon = lon;
-
+    ID = id;
 }
 
 void Airport::printInfo() {
@@ -28,4 +28,8 @@ QString Airport::getCountry() {
 std::pair<float, float> Airport::getCoord() {
     std::pair<float,float> pair = std::make_pair(Lat, Lon);
     return pair;
+}
+
+int getID() {
+    return ID;
 }

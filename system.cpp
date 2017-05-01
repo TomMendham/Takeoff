@@ -82,6 +82,7 @@ std::vector<Airport*> System::readAirports() {
 
     QString cont, coun, city, name, code;
     float lon, lat;
+    int id;
     std::vector<Airport*> airportVec;
 
     QDir dir;
@@ -134,6 +135,11 @@ std::vector<Airport*> System::readAirports() {
                         } else if (Rxml.name() == "LAT") {
                             std::string temp = Rxml.readElementText().toStdString();
                             lat = std::stof(temp);
+
+                        } else if (Rxml.name() == "ID") {
+                            std::string temp = Rxml.readElementText().toStdString();
+                            id = std::stoi(temp);
+
                         }
 
                         Rxml.readNext();
@@ -145,7 +151,7 @@ std::vector<Airport*> System::readAirports() {
             }
 
             if (cont != "") {
-                Airport* airport = new Airport(cont, coun, city, name, code, lat, lon);
+                Airport* airport = new Airport(cont, coun, city, name, code, lat, lon, id);
                 airportVec.push_back(airport);
             }
 
@@ -435,7 +441,6 @@ void System::writeUsers(User* u) {
 
     QDir dir;
     QFile file(dir.absolutePath()+"/Users.xml");
-
 
 
     QXmlStreamWriter xmlWriter;

@@ -15,12 +15,14 @@ private:
     QString Code;
     float Lon;
     float Lat;
+    int ID;
 
 public:
-    Airport(QString cont, QString coun, QString city, QString name, QString code, float lon, float lat );
+    Airport(QString cont, QString coun, QString city, QString name, QString code, float lon, float lat, int id );
     void printInfo();
     QString getName();
     QString getCountry();
+    int getID();
     std::pair<float, float> getCoord();
 };
 
