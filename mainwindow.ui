@@ -14,8 +14,8 @@
    <string>Takeoff</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="aeroplane.png">
-    <normaloff>.</normaloff>.</iconset>
+   <iconset>
+    <normaloff>Images/aeroplane.png</normaloff>Images/aeroplane.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -600,8 +600,8 @@
           <rect>
            <x>10</x>
            <y>30</y>
-           <width>181</width>
-           <height>161</height>
+           <width>197</width>
+           <height>181</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -814,7 +814,7 @@
         <rect>
          <x>10</x>
          <y>50</y>
-         <width>231</width>
+         <width>295</width>
          <height>31</height>
         </rect>
        </property>
@@ -848,7 +848,7 @@
        <rect>
         <x>770</x>
         <y>390</y>
-        <width>241</width>
+        <width>295</width>
         <height>30</height>
        </rect>
       </property>

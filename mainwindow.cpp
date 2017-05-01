@@ -74,7 +74,7 @@ void MainWindow::on_registerUserButton_clicked()
                QMessageBox::about(this, "ERROR", "Please fill out all fields.");
            } else {
                User* user = new User(email,firstName,lastName,password,"1");
-               writeUsers(user);
+               writeUsers(user, true);
 
                ui->popups->hide();
                ui->menuButtons->show();
@@ -127,11 +127,11 @@ void MainWindow::on_searchFlightButton_2_clicked()
     ui->outboundFlightList->clear();
     QString flightToAdd = "";
 
-    std::vector<Flight*> connectingFlights = searchForFlights(connectingAirportName, dep, date);
+    std::vector<Flight*> connectingFlights = searchForFlights(connectingAirportName, dest, date);
     //Check if there is a connecting flight on that date
     for (int i = 0; i < connectingFlights.size(); i++)
     {
-        if (connectingFlights[i]->getDestination() == connectingAirportName && connectingFlights[i]->getDeparture() == dep)
+        if (connectingFlights[i]->getDestination() == dest && connectingFlights[i]->getDeparture() == connectingAirportName)
         {
                  isConnecting = false;
                  QMessageBox::about(this, "ERROR", "No Connecting flights on this date.");
@@ -287,6 +287,9 @@ void MainWindow::on_bookPushButton_clicked()
     std::string str = flight.substr(0, found - 1);
 
     currentUser->addBookedFlight(str);
+
+    User* emptyUser;
+    writeUsers(emptyUser, false);
 
 
 
