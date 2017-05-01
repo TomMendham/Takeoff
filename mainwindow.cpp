@@ -323,6 +323,8 @@ void MainWindow::on_myFlightsBack_clicked()
 
 void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
 {
+    ui->bookFlightButton->setEnabled(true);
+
     QString destinationCountry = ui->toAirportList->currentText();
     QString departureCountry = ui->fromAirportList->currentText();
 
@@ -378,4 +380,3 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
 
         }
     }
-}
