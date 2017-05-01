@@ -139,10 +139,28 @@ void MainWindow::on_searchFlightButton_2_clicked()
     std::vector<Flight*> correctFlights = searchForFlights(dest, dep, date);
 
     ui->outboundFlightList->clear();
+    QString flightToAdd = "";
+
     for (int i = 0; i < correctFlights.size(); i++) {
-        QString flightToAdd = (QString::number(correctFlights[i]->getID()) + " | £" + QString::number(correctFlights[i]->getPrice()) + "  |  " + correctFlights[i]->getDate()) + "  |  " +
-                                correctFlights[i]->getDeparture() + " --> " + correctFlights[i]->getDestination() + "  |  " +
-                                QString::number(correctFlights[i]->getCapacity()) + " seats remaining.";
+        if (correctFlights[i]->getDistance() > 15000)
+        {
+            int departureAirportID = searchForAirport(correctFlights[i]->getDeparture());
+            int destinationAirportID = searchForAirport(correctFlights[i]->getDestination());
+
+            int parentAirportID = getConnectingFlight(departureAirportID, destinationAirportID);
+            QString connectingAirportName = airports[parentAirportID]->getName();
+
+            flightToAdd = (QString::number(correctFlights[i]->getID()) + " | £" + QString::number(correctFlights[i]->getPrice()) + "  |  " + correctFlights[i]->getDate()) + "  |  " +
+                                    correctFlights[i]->getDeparture() + " --> " + correctFlights[i]->getDestination() + "  |  " +
+                                    QString::number(correctFlights[i]->getCapacity()) + " seats remaining." + " Conecting through " + connectingAirportName;
+
+        }
+        else
+        {
+            flightToAdd = (QString::number(correctFlights[i]->getID()) + " | £" + QString::number(correctFlights[i]->getPrice()) + "  |  " + correctFlights[i]->getDate()) + "  |  " +
+                                    correctFlights[i]->getDeparture() + " --> " + correctFlights[i]->getDestination() + "  |  " +
+                                    QString::number(correctFlights[i]->getCapacity()) + " seats remaining.";
+        }
 
         ui->outboundFlightList->addItem(flightToAdd);
     }

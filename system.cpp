@@ -71,11 +71,11 @@ std::vector<Flight*> System::searchForFlights(QString dest, QString dep, QString
     return correctFlights;
 }
 
-std::vector<Airport*> System::searchForAirport(QString airportName) {
+int System::searchForAirport(QString airportName) {
     std::vector<Airport*> Airports = readAirports();
     int ID;
 
-    for (int i = 0; i < Airport.size(); i++)
+    for (int i = 0; i < Airports.size(); i++)
     {
         if (Airports[i]->getName() == airportName)
         {
@@ -547,8 +547,8 @@ void System::fillFlightGrid(std::vector<Flight*> Flights, std::vector<std::vecto
                 }
                 if (Flights[i]->getDestination() == "London Heathrow" && Flights[j]->getDeparture() == "Sydney")
                 {
-                    matrix[2][0] = Flights[j]->getDistance();
-                    matrix[0][2] = Flights[j]->getDistance();
+                    matrix[2][0] = (Flights[j]->getDistance() + 10000);
+                    matrix[0][2] = (Flights[j]->getDistance() + 10000);
                 }
                 if (Flights[i]->getDestination() == "London Heathrow" && Flights[j]->getDeparture() == "Cape Town")
                 {
@@ -585,8 +585,8 @@ void System::fillFlightGrid(std::vector<Flight*> Flights, std::vector<std::vecto
             {
                 if (Flights[i]->getDestination() == "Sydney" && Flights[l]->getDeparture() == "London Heathrow")
                 {
-                    matrix[2][0] = Flights[l]->getDistance();
-                    matrix[0][2] = Flights[l]->getDistance();
+                    matrix[2][0] = (Flights[l]->getDistance()+ 10000);
+                    matrix[0][2] = (Flights[l]->getDistance()+ 10000);
                 }
                 if (Flights[i]->getDestination() == "Sydney" && Flights[l]->getDeparture() == "Dubai International")
                 {
