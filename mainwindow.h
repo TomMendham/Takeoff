@@ -34,12 +34,13 @@ private slots:
     void on_cancelAddFlightButton_clicked();
     void on_addFlightButton_clicked();
     void on_loginButton_2_clicked();
-
     void on_bookFlightButton_clicked();
-
     void on_cancelPushButton_clicked();
-
     void on_bookPushButton_clicked();
+    void on_LogoutButton_clicked();
+    void on_myFlightsButton_clicked();
+
+    void on_myFlightsBack_clicked();
 
 private:
     Ui::MainWindow *ui;
