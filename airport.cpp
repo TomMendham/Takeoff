@@ -30,6 +30,6 @@ std::pair<float, float> Airport::getCoord() {
     return pair;
 }
 
-int getID() {
+int Airport::getID() {
     return ID;
 }
