@@ -35,6 +35,9 @@
     </property>
     <widget class="QWidget" name="Home">
      <widget class="QGroupBox" name="flightDetailsBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -644,7 +647,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="outboundFlightLabel">
            <property name="text">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Outbound&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -669,7 +672,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="myFlightsList"/>
+          <widget class="QListView" name="myFlightsList">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -768,17 +775,24 @@
      <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>810</x>
+        <x>770</x>
         <y>390</y>
-        <width>158</width>
+        <width>239</width>
         <height>25</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_11">
        <item>
-        <widget class="QPushButton" name="myFlights">
+        <widget class="QPushButton" name="myFlightsButton">
          <property name="text">
           <string>My Flights</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="myFlightsBack">
+         <property name="text">
+          <string>Back</string>
          </property>
         </widget>
        </item>
@@ -798,7 +812,7 @@
      <zorder>menuButtons</zorder>
      <zorder>myFlightsLabel</zorder>
      <zorder>myFlightsList</zorder>
-     <zorder>myFlights</zorder>
+     <zorder>myFlightsButton</zorder>
     </widget>
     <widget class="QWidget" name="Login"/>
     <widget class="QWidget" name="Register"/>

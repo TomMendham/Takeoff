@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->popups->hide();
     ui->addFlightButton_2->hide();
     ui->LogoutButton->hide();
+    ui->myFlightsButton->hide();ui->myFlightsLabel->hide();ui->myFlightsList->hide();ui->myFlightsBack->hide();
 
    std::vector<Airport*> Airports = readAirports();
    QStringList airportNames;
@@ -34,9 +35,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
    connect(ui->loginButton_2,SIGNAL(clicked()),ui->menuButtons,SLOT(close()));
    connect(ui->loginButton_2,SIGNAL(clicked()),ui->popups,SLOT(show()));
-
-
-
 
 }
 
@@ -180,8 +178,10 @@ void MainWindow::on_loginuserButton_2_clicked()
             ui->menuButtons->show();
             ui->loginButton_2->hide();
             ui->LogoutButton->show();
+            ui->myFlightsButton->show();
 
             std::cout << currentUser->getAdmin().toStdString() << std::endl;
+            this->setWindowTitle("Takeoff - "+currentUser->getFirstName());
 
             if (currentUser->getAdmin() == "1") {
                 ui->addFlightButton_2->show();
@@ -291,7 +291,29 @@ void MainWindow::on_bookPushButton_clicked()
 
 void MainWindow::on_LogoutButton_clicked()
 {
+    QMessageBox::about(this, "SUCCESS", ("You are now logged out!"));
+    this->setWindowTitle("Takeoff");
     ui->LogoutButton->hide();
     ui->loginButton_2->show();
     currentUser = NULL;
 }
+
+void MainWindow::on_myFlightsButton_clicked()
+{
+    ui->flightDetailsBox->setEnabled(false);
+    ui->myFlightsBack->show();
+    ui->myFlightsButton->hide();
+    ui->myFlightsLabel->show();ui->myFlightsList->show();
+    ui->returnFlightList->hide();ui->returnFlightLabel->hide();
+    ui->outboundFlightList->hide();ui->outboundFlightLabel->hide();
+}
+
+void MainWindow::on_myFlightsBack_clicked()
+{
+    ui->myFlightsBack->hide();
+    ui->flightDetailsBox->setEnabled(true);
+    ui->myFlightsLabel->hide();ui->myFlightsList->hide();ui->myFlightsButton->show();
+    ui->returnFlightList->show();ui->returnFlightLabel->show();
+    ui->outboundFlightList->show();ui->outboundFlightLabel->show();
+}
+
