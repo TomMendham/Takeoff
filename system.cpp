@@ -71,20 +71,6 @@ std::vector<Flight*> System::searchForFlights(QString dest, QString dep, QString
     return correctFlights;
 }
 
-int System::searchForAirport(QString airportName) {
-    std::vector<Airport*> Airports = readAirports();
-    int ID;
-
-    for (int i = 0; i < Airports.size(); i++)
-    {
-        if (Airports[i]->getName() == airportName)
-        {
-            ID = Airports[i]->getID();
-        }
-    }
-
-    return ID;
-}
 
 
 //XML FUNCTIONS
@@ -650,6 +636,7 @@ int System::getParentFlight(int parent [V],int destinationAirportID)
             connectingFlight = parent [i];
         }
     }
+    std::cout << connectingFlight << std::endl;
     return connectingFlight;
 }
 
