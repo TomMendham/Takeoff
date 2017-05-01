@@ -66,63 +66,6 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>80</y>
-         <width>361</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_9">
-        <item>
-         <widget class="QLabel" name="fromLabel_2">
-          <property name="text">
-           <string>Date</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateEdit" name="flightDateEdit">
-          <property name="dateTime">
-           <datetime>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-            <year>2017</year>
-            <month>1</month>
-            <day>1</day>
-           </datetime>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="returnCheckBox">
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="text">
-           <string>Return</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateEdit" name="returnDateEdit">
-          <property name="dateTime">
-           <datetime>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-            <year>2017</year>
-            <month>1</month>
-            <day>1</day>
-           </datetime>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
          <y>20</y>
          <width>41</width>
          <height>51</height>
@@ -160,6 +103,71 @@
         </item>
         <item>
          <widget class="QComboBox" name="toAirportList"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>11</x>
+         <y>81</y>
+         <width>361</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_14">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLabel" name="fromLabel_2">
+            <property name="text">
+             <string>Date:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="flightDateEdit">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2017</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <item>
+           <widget class="QCheckBox" name="returnCheckBox">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>Return:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="returnDateEdit">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2017</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -795,7 +803,7 @@
         <rect>
          <x>10</x>
          <y>20</y>
-         <width>241</width>
+         <width>231</width>
          <height>30</height>
         </rect>
        </property>
@@ -821,7 +829,7 @@
         <rect>
          <x>10</x>
          <y>50</y>
-         <width>295</width>
+         <width>231</width>
          <height>31</height>
         </rect>
        </property>
@@ -855,7 +863,7 @@
        <rect>
         <x>770</x>
         <y>390</y>
-        <width>295</width>
+        <width>241</width>
         <height>30</height>
        </rect>
       </property>
