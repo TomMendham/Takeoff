@@ -71,7 +71,20 @@ std::vector<Flight*> System::searchForFlights(QString dest, QString dep, QString
     return correctFlights;
 }
 
+std::vector<Airport*> System::searchForAirport(QString airportName) {
+    std::vector<Airport*> Airports = readAirports();
+    int ID;
 
+    for (int i = 0; i < Airport.size(); i++)
+    {
+        if (Airports[i]->getName() == airportName)
+        {
+            ID = Airports[i]->getID();
+        }
+    }
+
+    return ID;
+}
 
 
 //XML FUNCTIONS
@@ -518,7 +531,7 @@ void System::writeUsers(User* u) {
 
 
 
-//CONNECTING FLIGHT FUNCTION
+//CONNECTING FLIGHT FUNCTIONS
 //Function to fill the flight grid
 void System::fillFlightGrid(std::vector<Flight*> Flights, std::vector<std::vector<float>> &matrix)
 {
