@@ -236,7 +236,7 @@ void MainWindow::on_registerButton_2_clicked()
 void MainWindow::on_addFlightButton_2_clicked()
 {
     ui->popups->show();
-    ui->popups->setCurrentIndex(3);
+    ui->popups->setCurrentIndex(4);
     ui->menuButtons->hide();
 }
 

@@ -356,6 +356,7 @@ void System::writeFlights(Flight* f) {
 
 
     std::vector<Flight*> Flights = readFlights();
+    Flights.push_back(f);
 
     QDir dir;
     QFile file(dir.absolutePath()+"/Flights.xml");
