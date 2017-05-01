@@ -36,7 +36,6 @@ public:
     float getPrice();
 
     //    updateCapacity();
-//    int calculateDuration();
 };
 
 #endif // FLIGHT_H

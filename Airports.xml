@@ -8,6 +8,7 @@
 		<CODE>LHR</CODE>
                 <LONG>-0.4529</LONG>
 		<LAT>51.4700</LAT>
+                <ID>0</ID>
 	</AIRPORT>
 	<AIRPORT>
 		<CONTINENT>Asia</CONTINENT>
@@ -17,6 +18,7 @@
 		<CODE>DXB</CODE>
 		<LONG>55.3657</LONG>
 		<LAT>25.2532</LAT>
+                <ID>1</ID>
 	</AIRPORT>
 	<AIRPORT>
 		<CONTINENT>Oceania</CONTINENT>
@@ -26,6 +28,7 @@
 		<CODE>SYD</CODE>
                 <LONG>151.2093</LONG>
                 <LAT>-33.8688</LAT>
+                <ID>2</ID>
 	</AIRPORT>
 	<AIRPORT>
 		<CONTINENT>Africa</CONTINENT>
@@ -35,6 +38,7 @@
 		<CODE>CPT</CODE>
 		<LONG>18.6020</LONG>
 		<LAT>-33.9714</LAT>
+                <ID>3</ID>
 	</AIRPORT>
 	
 </AIRPORTS>
