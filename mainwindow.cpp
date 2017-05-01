@@ -324,6 +324,18 @@ void MainWindow::on_myFlightsButton_clicked()
     ui->myFlightsLabel->show();ui->myFlightsList->show();
     ui->returnFlightList->hide();ui->returnFlightLabel->hide();
     ui->outboundFlightList->hide();ui->outboundFlightLabel->hide();
+
+    std::string bookedFlights = currentUser->getBookedFlights().toStdString();
+    std::vector<std::string> myFlightsVector;
+
+    std::stringstream ss(bookedFlights);
+
+    int i;
+
+    while(ss >> i)
+    {
+        bookedFlights
+    }
 }
 
 void MainWindow::on_myFlightsBack_clicked()
