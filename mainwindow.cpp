@@ -303,6 +303,7 @@ void MainWindow::on_LogoutButton_clicked()
 
 void MainWindow::on_myFlightsButton_clicked()
 {
+    ui->myFlightsList->clear();
     ui->flightDetailsBox->setEnabled(false);
     ui->myFlightsBack->show();
     ui->myFlightsButton->hide();
@@ -311,24 +312,48 @@ void MainWindow::on_myFlightsButton_clicked()
     ui->outboundFlightList->hide();ui->outboundFlightLabel->hide();
 
     std::string bookedFlights = currentUser->getBookedFlights().toStdString();
-    std::vector<std::string> myFlightsVector;
+    std::vector<std::string> IDVector;
+    std::stringstream ss("1,2,3");
+    std::string output;
 
-    std::stringstream ss(bookedFlights);
 
-    int i;
+   while(std::getline(ss,output,','))
+   {
+      IDVector.push_back(output);
+   }
 
-//    while(ss >> i)
-//    {
-//        bookedFlights
-//    }
+   std::vector<Flight*> flights = readFlights();
+   std::vector<Flight*> myFlights;
+
+   //Find relevant flights to ID
+   std::cout << flights.size();
+
+   for (int i = 0; i< flights.size(); i++){
+       for (int j = 0; j < IDVector.size(); j++){
+           if (flights[i]->getID() == std::stoi(IDVector[j])) {
+                myFlights.push_back(flights[i]);
+           }
+       }
+    }
+
+   QString flightToAdd;
+
+   for (int i = 0; i < myFlights.size(); i++) {
+           flightToAdd = (QString::number(myFlights[i]->getID()) + " | £" + QString::number(myFlights[i]->getPrice()) + "  |  " + myFlights[i]->getDate()) + "  |  " +
+                                   myFlights[i]->getDeparture() + " --> " + myFlights[i]->getDestination() + "  |  " +
+                                   QString::number(myFlights[i]->getCapacity()) + " seats remaining.";
+
+
+       ui->myFlightsList->addItem(flightToAdd);
+   }
 }
 
 void MainWindow::on_myFlightsBack_clicked()
 {
+
     ui->myFlightsBack->hide();
     ui->flightDetailsBox->setEnabled(true);
     ui->myFlightsLabel->hide();ui->myFlightsList->hide();ui->myFlightsButton->show();
-    ui->returnFlightList->show();ui->returnFlightLabel->show();
     ui->outboundFlightList->show();ui->outboundFlightLabel->show();
 }
 
@@ -399,4 +424,39 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
 
     }
 
+}
+
+void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
+{
+    ui->popups->show();
+    ui->popups->setCurrentIndex(3);
+    std::string bookedFlights = currentUser->getBookedFlights().toStdString();
+    std::vector<std::string> IDVector;
+    std::stringstream ss("1,2,3");
+    std::string output;
+
+    std::vector<Airport*> airports = readAirports();
+    std::vector<Flight*> flights = readFlights();
+
+
+   while(std::getline(ss,output,','))
+   {
+      IDVector.push_back(output);
+   }
+
+   ui->myFlightsList->selectionModel()->selectedIndexes();
+   std::vector<int> indexList;
+
+   std::string flight = ui->myFlightsList->currentItem()->text().toStdString();
+   std::size_t found = flight.find("|");
+   std::string str = flight.substr(0, found - 1);
+
+   for (int i = 0; i < IDVector.size(); i++)
+    {
+       if (IDVector[i] == str){
+        ui->durationLabel->setText(QString::number(flights[std::stoi(str)]->getDuration()) + " hours");
+        ui->spacesAvailableLabel->setText(QString::number(flights[std::stoi(str)]->getCapacity()));
+        ui->priceLabel->setText("£" + QString::number(flights[std::stoi(str)]->getPrice() + flights[std::stoi(str)]->getPrice()));
+       }
+    }
 }

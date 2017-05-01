@@ -43,6 +43,8 @@ private slots:
     void on_myFlightsBack_clicked();
     void on_outboundFlightList_clicked(const QModelIndex &index);
 
+    void on_myFlightsList_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
     User* currentUser;
