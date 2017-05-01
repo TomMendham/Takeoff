@@ -11,10 +11,11 @@ Flight::Flight(int id, QString dat, int capac, Airport* a1, Airport* a2)
     departure = a2->getName();
     date = dat;
     distance = calculateDistance(a1, a2);
-    //duration = calculateDuration(distance);
+    duration = calculateDuration(distance);
+    price = calculatePrice(distance);
 }
 
-Flight::Flight(int id, int capac, QString dest, QString dep, int dur, QString dat, float dist) {
+Flight::Flight(int id, int capac, QString dest, QString dep, int dur, QString dat, float dist, float pri) {
     ID = id;
     capacity = capac;
     destination = dest;
@@ -22,6 +23,7 @@ Flight::Flight(int id, int capac, QString dest, QString dep, int dur, QString da
     duration = dur;
     date = dat;
     distance = dist;
+    price = pri;
 }
 
 float Flight::calculateDistance(Airport* a1, Airport* a2)
@@ -101,6 +103,11 @@ QString Flight::getDate() {
 
 float Flight::getDistance() {
     return distance;
+}
+
+
+float Flight::getPrice() {
+    return price;
 }
 
 

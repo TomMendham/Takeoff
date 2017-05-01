@@ -165,7 +165,7 @@ std::vector<Flight*> System::readFlights() {
 
     int ID, capacity, duration;
     QString destination, departure, date;
-    float distance;
+    float distance, pric;
 
     std::vector<Flight*> flightVec;
 
@@ -223,8 +223,12 @@ std::vector<Flight*> System::readFlights() {
 
                             std::string temp = Rxml.readElementText().toStdString();
                             distance = std::stof(temp);
+                        } else if (Rxml.name() == "PRICE") {
 
+                            std::string temp = Rxml.readElementText().toStdString();
+                            pric = (std::stof(temp) * 1.00);
                         }
+
 
                         Rxml.readNext();
                     }
@@ -235,7 +239,7 @@ std::vector<Flight*> System::readFlights() {
             }
 
             if (destination != "") {
-                Flight* flight = new Flight(ID, capacity, destination, departure, duration, date, distance);
+                Flight* flight = new Flight(ID, capacity, destination, departure, duration, date, distance, pric);
                 flightVec.push_back(flight);
             }
 
@@ -364,6 +368,7 @@ void System::writeFlights(Flight* f) {
                 QString dep = Flights[i]->getDeparture();
                 QString date = Flights[i]->getDate();
                 QString dist = QString::number(Flights[i]->getDistance());
+                QString pric = QString::number(Flights[i]->getPrice());
 
                 //open flight tag
                 xmlWriter.writeStartElement("FLIGHT");
@@ -397,6 +402,10 @@ void System::writeFlights(Flight* f) {
 
                 xmlWriter.writeStartElement("DISTANCE");
                 xmlWriter.writeCharacters(dist);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("PRICE");
+                xmlWriter.writeCharacters(pric);
                 xmlWriter.writeEndElement();
 
 

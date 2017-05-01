@@ -19,7 +19,7 @@ private:
 
 public:
     Flight(int id, QString dat, int capac, Airport *a1, Airport *a2);
-    Flight(int id, int capac, QString dest, QString dep, int dur, QString dat, float dist);
+    Flight(int id, int capac, QString dest, QString dep, int dur, QString dat, float dist, float pric);
 
     float calculateDistance(Airport* a1, Airport* a2);
     float calculatePrice(float distance);
@@ -33,6 +33,7 @@ public:
     int getDuration();
     QString getDate();
     float getDistance();
+    float getPrice();
 
     //    updateCapacity();
 //    int calculateDuration();

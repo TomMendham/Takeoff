@@ -142,8 +142,9 @@ void MainWindow::on_searchFlightButton_2_clicked()
 
     ui->outboundFlightList->clear();
     for (int i = 0; i < correctFlights.size(); i++) {
-        QString flightToAdd = (correctFlights[0]->getDate()) + "\t" + correctFlights[0]->getDeparture() + "\t-->\t" +
-                    correctFlights[0]->getDestination() + "\t" + QString::number(correctFlights[0]->getCapacity()) + " seats remaining.";
+        QString flightToAdd = ("£" + QString::number(correctFlights[i]->getPrice()) + "  |  " + correctFlights[i]->getDate()) + "  |  " +
+                                correctFlights[i]->getDeparture() + " --> " + correctFlights[i]->getDestination() + "  |  " +
+                                QString::number(correctFlights[i]->getCapacity()) + " seats remaining.";
 
         ui->outboundFlightList->addItem(flightToAdd);
     }
