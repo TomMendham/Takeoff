@@ -200,7 +200,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="LoginPage">
        <widget class="QGroupBox" name="loginPopup">
@@ -760,6 +760,13 @@
          <widget class="QPushButton" name="registerButton_2">
           <property name="text">
            <string>Register</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="LogoutButton">
+          <property name="text">
+           <string>Logout</string>
           </property>
          </widget>
         </item>

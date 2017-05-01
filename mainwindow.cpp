@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->returnFlightList->hide();
     ui->popups->hide();
     ui->addFlightButton_2->hide();
+    ui->LogoutButton->hide();
 
    std::vector<Airport*> Airports = readAirports();
    QStringList airportNames;
@@ -177,6 +178,8 @@ void MainWindow::on_loginuserButton_2_clicked()
             QMessageBox::about(this, "SUCCESS", ("Logged in as " + currentUser->getFirstName()));
             ui->popups->hide();
             ui->menuButtons->show();
+            ui->loginButton_2->hide();
+            ui->LogoutButton->show();
 
             std::cout << currentUser->getAdmin().toStdString() << std::endl;
 
