@@ -8,6 +8,7 @@
 #include "user.h"
 #include "airport.h"
 #include <QMessageBox>
+#include <sstream>
 
 namespace Ui {
 class MainWindow;
@@ -39,9 +40,7 @@ private slots:
     void on_bookPushButton_clicked();
     void on_LogoutButton_clicked();
     void on_myFlightsButton_clicked();
-    void on_outboundFlightList_itemPressed(QListWidgetItem *item);
     void on_myFlightsBack_clicked();
-
     void on_outboundFlightList_clicked(const QModelIndex &index);
 
 private:

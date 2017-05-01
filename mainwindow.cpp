@@ -317,10 +317,10 @@ void MainWindow::on_myFlightsButton_clicked()
 
     int i;
 
-    while(ss >> i)
-    {
-        bookedFlights
-    }
+//    while(ss >> i)
+//    {
+//        bookedFlights
+//    }
 }
 
 void MainWindow::on_myFlightsBack_clicked()
@@ -365,13 +365,13 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
     //Get the selected flight ID
     for (int i = 0; i < flights.size(); i++)
     {
-        if (flights.getDestination() == dest && flights.getDeparture() == dep)
+        if (flights[i]->getDestination() == dest && flights[i]->getDeparture() == dep)
         {
-            flightID = flights[i].getID();
+            flightID = flights[i]->getID();
         }
     }
 
-    for (int i = 0; i < correctFlights.size(); i++) {
+    for (int i = 0; i < flights.size(); i++) {
         if (flights[i]->getDistance() > 15000)
         {
             int parentAirportID = getConnectingFlight(departureAirportID, destinationAirportID);
@@ -379,16 +379,17 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
 
             ui->connectingFlightLabel->setText(connectingAirportName);
             ui->durationLabel->setText(flights[flightID]->getDuration() + " hours");
-            ui->spacesAvailableLabel->setText(flights[flightID]->getCapacity());
-            ui->priceLabel->setText("£" + flights[flightID]->getPrice());
+            ui->spacesAvailableLabel->setText(QString::number(flights[flightID]->getCapacity()));
+            ui->priceLabel->setText("£" + QString::number(flights[flightID]->getPrice()));
 
         }
         else
         {
             ui->connectingFlightLabel->setText("Not needed");
             ui->durationLabel->setText(flights[flightID]->getDuration() + " hours");
-            ui->spacesAvailableLabel->setText(flights[flightID]->getCapacity());
-            ui->priceLabel->setText("£" + flights[flightID]->getPrice());
+            //ui->spacesAvailableLabel->setText(flights[flightID]->getCapacity());
+            //ui->priceLabel->setText("£" + flights[flightID]->getPrice());
 
         }
     }
+}
