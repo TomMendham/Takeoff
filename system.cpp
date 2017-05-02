@@ -607,6 +607,105 @@ void System::editUsers(QString email, QString str) {
 
 }
 
+void System::editFlights(QString id) {
+
+    std::vector<Flight*> Flights = readFlights();
+
+
+    for (int j = 0; j < Flights.size(); j++) {
+        if (Flights[j]->getID() == std::stoi(id.toStdString())) {
+            Flights[j]->updateCapacity();
+        }
+    }
+
+
+    QDir dir;
+    QFile file(dir.absolutePath()+"/Flights.xml");
+
+
+
+    QXmlStreamWriter xmlWriter;
+
+
+        if (!file.open(QIODevice::WriteOnly))
+        {
+            std::cout << "ERROR OPENING FILE" << std::endl;
+        }
+        else
+        {
+
+            xmlWriter.setDevice(&file);
+            // Writes a document start and opens the flights element
+            xmlWriter.writeStartDocument();
+            xmlWriter.writeStartElement("FLIGHTS");
+
+
+            for (int i = 0; i < Flights.size(); i++) {
+
+
+                QString id = QString::number(Flights[i]->getID());
+                QString capac = QString::number(Flights[i]->getCapacity());
+                QString dur = QString::number(Flights[i]->getDuration());
+                QString dest = Flights[i]->getDestination();
+                QString dep = Flights[i]->getDeparture();
+                QString date = Flights[i]->getDate();
+                QString dist = QString::number(Flights[i]->getDistance());
+                QString pric = QString::number(Flights[i]->getPrice());
+
+                //open flight tag
+                xmlWriter.writeStartElement("FLIGHT");
+
+                //add one attribute and its value
+                xmlWriter.writeStartElement("ID");
+                xmlWriter.writeCharacters(id);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("CAPACITY");
+                xmlWriter.writeCharacters(capac);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("DURATION");
+                xmlWriter.writeCharacters(dur);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("DESTINATION");
+                xmlWriter.writeCharacters(dest);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("DEPARTURE");
+                xmlWriter.writeCharacters(dep);
+                xmlWriter.writeEndElement();
+
+
+                xmlWriter.writeStartElement("DATE");
+                xmlWriter.writeCharacters(date);
+                xmlWriter.writeEndElement();
+
+
+                xmlWriter.writeStartElement("DISTANCE");
+                xmlWriter.writeCharacters(dist);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("PRICE");
+                xmlWriter.writeCharacters(pric);
+                xmlWriter.writeEndElement();
+
+
+                //close tag flight
+                xmlWriter.writeEndElement();
+
+
+            }
+
+
+            //end tag flights
+            xmlWriter.writeEndElement();
+            //end document
+            xmlWriter.writeEndDocument();
+       }
+
+}
+
 
 
 //CONNECTING FLIGHT FUNCTIONS

@@ -25,6 +25,8 @@ public:
     float calculatePrice(float distance);
     int calculateDuration(float distance);
 
+    void updateCapacity();
+
     //Accessor functions
     int getID();
     int getCapacity();

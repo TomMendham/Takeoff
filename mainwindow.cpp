@@ -331,6 +331,7 @@ void MainWindow::on_cancelPushButton_clicked()
     editUsers(currentUser->getEmail(), qstr);
 
 
+    editFlights(qstr);
 
 }
 
