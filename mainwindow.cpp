@@ -164,11 +164,15 @@ void MainWindow::on_searchFlightButton_2_clicked()
                 isConnecting = false;
                 QMessageBox::about(this, "ERROR", "No Connecting flights on this date.");
             }
-            //Check if there is a connecting flight on the return date
-            if (connectingReturnFlights.size() == 0 || connectingReturnFlights2.size() == 0)
+            //Check if the return check box is ticked
+            if (ui->returnCheckBox->isChecked())
             {
-                isConnectingReturn = false;
-                QMessageBox::about(this, "ERROR", "No Connecting flights on the return date.");
+                //Check if there is a connecting flight on the return date
+                if (connectingReturnFlights.size() == 0 || connectingReturnFlights2.size() == 0)
+                {
+                    isConnectingReturn = false;
+                    QMessageBox::about(this, "ERROR", "No Connecting flights on the return date.");
+                }
             }
         }
     }

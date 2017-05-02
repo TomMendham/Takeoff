@@ -826,8 +826,7 @@ int System::minDistance(float dist[], bool sptSet[])
 // Reference:: http://www.geeksforgeeks.org/printing-paths-dijkstras-shortest-path-algorithm/
 void System::dijkstra(std::vector<std::vector<float>> &matrix, int source, int parent [V])
 {
-    float distance[V];  // The output array. distance[i] will hold
-                  // the shortest distance from source to i
+    float distance[V];  //distance[i] will hold the shortest distance from source to i
 
     // sptSet[i] will be true if vertex i is included / in shortest
     // path tree or shortest distance from source to i is finalized
@@ -842,15 +841,14 @@ void System::dijkstra(std::vector<std::vector<float>> &matrix, int source, int p
     }
 
     // Distance of source vertex from itself is always 0
-    dist[source] = 0;
+    distance[source] = 0;
 
     // Find shortest path for all vertices
     for (int count = 0; count < V-1; count++)
     {
         // Pick the minimum distance vertex from the set of
-        // vertices not yet processed. u is always equal to source
-        // in first iteration.
-        int u = minDistance(dist, sptSet);
+        // vertices not yet processed. u is always equal to source in first iteration.
+        int u = minDistance(distance, sptSet);
 
         // Mark the picked vertex as processed
         sptSet[u] = true;
@@ -861,10 +859,9 @@ void System::dijkstra(std::vector<std::vector<float>> &matrix, int source, int p
 
             // Update distance[v] only if it is not in sptSet, there is
             // an edge from u to v, and total weight of path from
-            // source to v through u is smaller than current value of
-            // distance[v]
+            // source to v through u is smaller than current value of distance[v]
             if (!sptSet[v] && matrix[u][v] &&
-                distance[u] + matrix[u][v] < dist[v])
+                distance[u] + matrix[u][v] < distance[v])
             {
                 parent[v]  = u;
                 distance[v] = distance[u] + matrix[u][v];
