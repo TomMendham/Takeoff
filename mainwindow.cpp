@@ -67,20 +67,29 @@ void MainWindow::on_registerUserButton_clicked()
        QString firstName = ui->firstNameInput->text();
        QString lastName = ui->lastNameInput->text();
        QString password;
+
        if (ui->passwordInput->text() == ui->passwordInput_2->text()){
+           User* user = new User(email,firstName,lastName,password,"1","");
            password = ui->passwordInput->text();
+           user = checkLogin(email, password);
 
-           if (email == NULL || firstName == NULL || lastName == NULL || password == NULL) {
-               QMessageBox::about(this, "ERROR", "Please fill out all fields.");
-           } else {
-               User* user = new User(email,firstName,lastName,password,"1","");
-               writeUsers(user);
+           if (user == NULL){
+               if (email == NULL || firstName == NULL || lastName == NULL || password == NULL) {
+                   QMessageBox::about(this, "ERROR", "Please fill out all fields.");
+               } else {
+                   User* user = new User(email,firstName,lastName,password,"1","");
+                   writeUsers(user);
 
-               ui->popups->hide();
-               ui->menuButtons->show();
+                   ui->popups->hide();
+                   ui->menuButtons->show();
 
-               QMessageBox::about(this, "SUCCESS", ("You have been registered, " + firstName));
+                   QMessageBox::about(this, "SUCCESS", ("You have been registered, " + firstName));
 
+              }
+           }
+           else
+           {
+               QMessageBox::about(this, "ERROR", "That user already exists");
            }
 
        }
@@ -304,9 +313,17 @@ void MainWindow::on_loginButton_2_clicked()
 
 void MainWindow::on_bookFlightButton_clicked()
 {
-    ui->popups->show();
-    ui->popups->setCurrentIndex(2);
-    ui->menuButtons->hide();
+    if (currentUser == NULL){
+        QMessageBox::about(this, "NO ACCESS", ("You must login or register to do that!"));
+        ui->popups->show();
+        ui->popups->setCurrentIndex(0);
+        ui->menuButtons->hide();
+    }
+    else{
+        ui->popups->show();
+        ui->popups->setCurrentIndex(2);
+        ui->menuButtons->hide();
+    }
 }
 
 void MainWindow::on_cancelPushButton_clicked()
