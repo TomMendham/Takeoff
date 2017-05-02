@@ -182,7 +182,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="LoginPage">
        <widget class="QGroupBox" name="loginPopup">
@@ -465,7 +465,7 @@
           <rect>
            <x>30</x>
            <y>190</y>
-           <width>176</width>
+           <width>195</width>
            <height>37</height>
           </rect>
          </property>
@@ -774,8 +774,8 @@
         <rect>
          <x>10</x>
          <y>30</y>
-         <width>268</width>
-         <height>82</height>
+         <width>241</width>
+         <height>71</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -830,7 +830,7 @@
        <rect>
         <x>770</x>
         <y>390</y>
-        <width>295</width>
+        <width>261</width>
         <height>37</height>
        </rect>
       </property>

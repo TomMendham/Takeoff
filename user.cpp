@@ -22,7 +22,6 @@ User::User(QString _email, QString _first, QString _last, QString _password, QSt
 
 void User::addBookedFlight(QString str) {
     bookedFlights += str + ",";
-    std::cout << bookedFlights.toStdString() << std::endl;
 }
 
 

@@ -1,7 +1,7 @@
 #ifndef FLIGHT_H
 #define FLIGHT_H
 #include <QString>
-#include <math.h>
+#include <cmath>
 #include "airport.h"
 
 class Flight
@@ -37,7 +37,6 @@ public:
     float getDistance();
     float getPrice();
 
-    //    updateCapacity();
 };
 
 #endif // FLIGHT_H

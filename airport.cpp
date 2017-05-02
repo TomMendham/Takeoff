@@ -13,9 +13,6 @@ Airport::Airport(QString cont, QString coun, QString city, QString name, QString
     ID = id;
 }
 
-void Airport::printInfo() {
-    std::cout << "COUNTRY: " << Country.toStdString() << std::endl;
-}
 
 QString Airport::getName() {
     return Name;

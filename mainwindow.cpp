@@ -271,7 +271,7 @@ void MainWindow::on_loginuserButton_2_clicked()
             ui->loginButton_2->hide();
             ui->LogoutButton->show();
             ui->myFlightsButton->show();
-
+            ui->registerButton_2->hide();
 
             this->setWindowTitle("Takeoff - "+currentUser->getFirstName());
 
@@ -492,6 +492,13 @@ void MainWindow::on_LogoutButton_clicked()
     ui->LogoutButton->hide();
     ui->loginButton_2->show();
     ui->addFlightButton_2->hide();
+    ui->registerButton_2->show();
+    ui->myFlightsButton->hide();
+    ui->bookFlightButton->show();
+    ui->myFlightsList->hide();ui->myFlightsLabel->hide();
+    ui->myFlightsButton->hide();ui->myFlightsBack->hide();
+    ui->outboundFlightList->show();ui->outboundFlightLabel->show();
+    ui->flightDetailsBox->setEnabled(true);
     currentUser = NULL;
 }
 
@@ -505,6 +512,10 @@ void MainWindow::on_myFlightsButton_clicked()
     ui->myFlightsLabel->show();ui->myFlightsList->show();
     ui->returnFlightList->hide();ui->returnFlightLabel->hide();
     ui->outboundFlightList->hide();ui->outboundFlightLabel->hide();
+    ui->addFlightButton_2->hide();
+    ui->bookFlightButton->hide();
+    ui->popups->hide();
+    ui->menuButtons->show();
 
     //Read in users booked flights
     std::string bookedFlights = currentUser->getBookedFlights().toStdString();
@@ -558,6 +569,9 @@ void MainWindow::on_myFlightsBack_clicked()
     ui->flightDetailsBox->setEnabled(true);
     ui->myFlightsLabel->hide();ui->myFlightsList->hide();ui->myFlightsButton->show();
     ui->outboundFlightList->show();ui->outboundFlightLabel->show();
+    ui->popups->hide();
+    ui->addFlightButton_2->show();
+    ui->bookFlightButton->show();
 }
 
 void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
@@ -596,27 +610,28 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
    std::size_t found = flight.find("|");
    std::string str = flight.substr(0, found - 1);
 
+   bool flightSet = false;
    //Loop over flights
    for (int i = 0; i < flights.size(); i++)
     {
        //Check if it is a connecting flight
        if (flights[i]->getDistance() > 15000)
        {
-           if (IDVector[i] == str)
+           if (flights[i]->getID() == std::stoi(str))
            {
-
                int returnFlight = 2;
                //Airport Names
                QString departureAirportName = flights[i]->getDeparture();
                QString destinationAirportName = flights[i]->getDestination();
                //Call the return showDeatils to disaply details
                showDetails(returnFlight, departureAirportName, destinationAirportName);
+               flightSet = true;
            }
        }
        else
        {
            //If vector matches add these details to screen
-           if (IDVector[i] == str)
+           if (flights[i]->getID() == std::stoi(str) && flightSet == false)
            {
             //Change UI
             ui->connectingFlightLabel->setText("Not needed");
