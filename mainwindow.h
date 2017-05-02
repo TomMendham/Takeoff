@@ -47,7 +47,7 @@ private slots:
 
     void on_returnFlightList_clicked(const QModelIndex &index);
 
-    void showDetails(bool returnFlight, QString departureAirportName, QString destinationAirportName);
+    void showDetails(int returnFlight, QString departureAirportName, QString destinationAirportName);
 
 private:
     Ui::MainWindow *ui;

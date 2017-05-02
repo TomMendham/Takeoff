@@ -489,7 +489,7 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
     ui->popups->show();
     ui->menuButtons->show();
 
-    bool returnFlight = false;
+    bool returnFlight = 0;
     showDetails(returnFlight, "", "");
 }
 
@@ -521,7 +521,7 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
            if (IDVector[i] == str)
            {
 
-               bool returnFlight = true;
+               bool returnFlight = 2;
                //Airport Names
                QString departureAirportName = flights[i]->getDeparture();
                QString destinationAirportName = flights[i]->getDestination();
@@ -550,23 +550,37 @@ void MainWindow::on_returnFlightList_clicked(const QModelIndex &index)
     ui->popups->setCurrentIndex(3);
     ui->popups->show();
 
-    bool returnFlight = true;
+    bool returnFlight = 1;
     showDetails(returnFlight, "", "");
 }
 
-void MainWindow::showDetails(bool returnFlight, QString departureAirportName, QString destinationAirportName)
+void MainWindow::showDetails(int returnFlight, QString departureAirportName, QString destinationAirportName)
 {
+    //Declaring the flight IDs
+    int flightID;
+    int connectingFLightID;
+
     QString departureCountry;
     QString destinationCountry;
-    if (returnFlight && departureAirportName == "" && destinationAirportName == "")
+    if (returnFlight == 1 && departureAirportName == "" && destinationAirportName == "")
     {
         departureCountry = ui->toAirportList->currentText();
         destinationCountry = ui->fromAirportList->currentText();
+
+        //Get the ID of a flight when not a connecting flight
+        std::string flight = ui->returnFlightList->currentItem()->text().toStdString();
+        std::size_t found = flight.find("|");
+        flightID = std::stoi(flight.substr(0, found - 1));
     }
-    else if (!returnFlight && departureAirportName == "" && destinationAirportName == "")
+    else if (returnFlight == 0 && departureAirportName == "" && destinationAirportName == "")
     {
         destinationCountry = ui->toAirportList->currentText();
         departureCountry = ui->fromAirportList->currentText();
+
+        //Get the ID of a flight when not a connecting flight
+        std::string flight = ui->outboundFlightList->currentItem()->text().toStdString();
+        std::size_t found = flight.find("|");
+        flightID = std::stoi(flight.substr(0, found - 1));
     }
 
 
@@ -579,8 +593,7 @@ void MainWindow::showDetails(bool returnFlight, QString departureAirportName, QS
     int departureAirportID;
     int destinationAirportID;
 
-    int flightID;
-    int connectingFLightID;
+
 
     for (int i = 0; i < airports.size(); i++) {
         if (departureAirportName == "" && destinationAirportName == "")
@@ -619,10 +632,13 @@ void MainWindow::showDetails(bool returnFlight, QString departureAirportName, QS
            connectingFLightID = flights[i]->getID();
         }
     }
-
-    std::string flight = ui->myFlightsList->currentItem()->text().toStdString();
-    std::size_t found = flight.find("|");
-    flightID = std::stoi(flight.substr(0, found - 1));
+    if (returnFlight == 2 )
+    {
+        //Get the ID of a flight when not a connecting flight
+        std::string flight = ui->myFlightsList->currentItem()->text().toStdString();
+        std::size_t found = flight.find("|");
+        flightID = std::stoi(flight.substr(0, found - 1));
+    }
 
 
     //Check if the flight needs a connecting flight and if it does dispaly it
