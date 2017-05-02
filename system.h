@@ -27,6 +27,7 @@ public:
     void writeFlights(Flight* f);
     void writeUsers(User* u);
     void editUsers(QString email, QString str);
+    void editFlights(QString id);
 
     //Connecting flight functions
     int getConnectingFlight(int departureAirportID, int destinationAirportID);

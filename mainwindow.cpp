@@ -144,18 +144,24 @@ void MainWindow::on_searchFlightButton_2_clicked()
     std::vector<Flight*> connectingFlights2 = searchForFlights(connectingAirportName, dep, date);
     std::vector<Flight*> connectingReturnFlights = searchForFlights(connectingAirportName, dest, returnDate);
     std::vector<Flight*> connectingReturnFlights2 = searchForFlights(dep, connectingAirportName, returnDate);
-
-    //Check if there is a connecting flight on that date
-    if (connectingFlights.size() == 0 || connectingFlights2.size() == 0)
+    //Checking if there are any connecting flights
+    for (int i = 0; i < correctFlights.size(); i++)
     {
-        isConnecting = false;
-        QMessageBox::about(this, "ERROR", "No Connecting flights on this date.");
-    }
-    //Check if there is a connecting flight on the return date
-    if (connectingReturnFlights.size() == 0 || connectingReturnFlights2.size() == 0)
-    {
-        isConnectingReturn = false;
-        QMessageBox::about(this, "ERROR", "No Connecting flights on the return date.");
+        if (correctFlights[i]->getDistance() > 15000)
+        {
+            //Check if there is a connecting flight on that date
+            if (connectingFlights.size() == 0 || connectingFlights2.size() == 0)
+            {
+                isConnecting = false;
+                QMessageBox::about(this, "ERROR", "No Connecting flights on this date.");
+            }
+            //Check if there is a connecting flight on the return date
+            if (connectingReturnFlights.size() == 0 || connectingReturnFlights2.size() == 0)
+            {
+                isConnectingReturn = false;
+                QMessageBox::about(this, "ERROR", "No Connecting flights on the return date.");
+            }
+        }
     }
     //Checking if the correct connecting flights exist
     for (int i = 0; i < connectingFlights.size(); i++)
@@ -348,6 +354,7 @@ void MainWindow::on_cancelPushButton_clicked()
     editUsers(currentUser->getEmail(), qstr);
 
 
+    editFlights(qstr);
 
 }
 
