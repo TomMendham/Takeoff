@@ -51,7 +51,7 @@ float Flight::calculateDistance(Airport* a1, Airport* a2)
     double v = sin((radLon2 - radLon1)/2);
 
     float d = 2 * R * asin(sqrt(u * u + cos(radLat1) * cos(radLat2) * v * v));
-    std::cout << "D: " << d << std::endl;
+
     return d;
 }
 

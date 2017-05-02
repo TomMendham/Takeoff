@@ -157,17 +157,19 @@ void MainWindow::on_searchFlightButton_2_clicked()
     int parentAirportID = getConnectingFlight(departureAirportID, destinationAirportID);
     QString connectingAirportName = airports[parentAirportID]->getName();
 
-    std::vector<Flight*> correctFlights = searchForFlights(dest, dep, date);
+    std::vector<Flight*> correctFlights = searchForFlights(dest, dep, date, 3);
+
     //Cleared the lists so that there is no old information in them
+
     ui->outboundFlightList->clear();
     ui->returnFlightList->clear();
     QString flightToAdd = "";
 
     //Get all of the flight on specific dates
-    std::vector<Flight*> connectingFlights = searchForFlights(dest, connectingAirportName, date);
-    std::vector<Flight*> connectingFlights2 = searchForFlights(connectingAirportName, dep, date);
-    std::vector<Flight*> connectingReturnFlights = searchForFlights(connectingAirportName, dest, returnDate);
-    std::vector<Flight*> connectingReturnFlights2 = searchForFlights(dep, connectingAirportName, returnDate);
+    std::vector<Flight*> connectingFlights = searchForFlights(dest, connectingAirportName, date, 1);
+    std::vector<Flight*> connectingFlights2 = searchForFlights(connectingAirportName, dep, date, 1);
+    std::vector<Flight*> connectingReturnFlights = searchForFlights(connectingAirportName, dest, returnDate, 1);
+    std::vector<Flight*> connectingReturnFlights2 = searchForFlights(dep, connectingAirportName, returnDate, 1);
     //Checking if there are any connecting flights
     for (int i = 0; i < correctFlights.size(); i++)
     {
@@ -234,7 +236,7 @@ void MainWindow::on_searchFlightButton_2_clicked()
         //Check if needed to do for return
         if (ui->returnCheckBox->isChecked() && isConnectingReturn) {
             QString returnDate = ui->returnDateEdit->text();
-            std::vector<Flight*> correctReturnFlights = searchForFlights(dep, dest, returnDate);
+            std::vector<Flight*> correctReturnFlights = searchForFlights(dep, dest, returnDate, 1);
 
             //Clear return flight list and fill with new return flights
             ui->returnFlightList->clear();
@@ -270,7 +272,7 @@ void MainWindow::on_loginuserButton_2_clicked()
             ui->LogoutButton->show();
             ui->myFlightsButton->show();
 
-            std::cout << currentUser->getAdmin().toStdString() << std::endl;
+
             this->setWindowTitle("Takeoff - "+currentUser->getFirstName());
 
             if (currentUser->getAdmin() == "1") {
@@ -400,6 +402,7 @@ void MainWindow::on_bookPushButton_clicked()
                 std::string returnFlight = ui->returnFlightList->currentItem()->text().toStdString();
 
                 //Declare vector of strings (flight details)
+
                 std::vector<std::string> strings;
 
                 strings.push_back(flight);
@@ -409,20 +412,37 @@ void MainWindow::on_bookPushButton_clicked()
                 for (int i = 0; i < strings.size(); i++) {
                     //Find ID from start of string
                     std::size_t found = strings[i].find("|");
-                    std::string str = strings[i].substr(0, found - 1);
-                    QString qstr = QString::fromStdString(str);
 
-                    //Get current user details
-                    currentUser->addBookedFlight(qstr);
+                    std::string id = strings[i].substr(0, found - 1);
 
-                    //Edit current user
-                    editUsers(currentUser->getEmail(), qstr);
-                    editFlights(qstr);
+                    QString qID = QString::fromStdString(id);
+
+                    //Gets the date of the flight
+                    std::string dateStr = strings[i].substr(found + 2, 10);
+                    QString qDateStr = QString::fromStdString(dateStr);
+
+                    //Finds the individual flights for the connecting flight
+                    std::vector<Flight*> bothFlights = findBothFlights(qID, qDateStr);
+
+                    //Loops though the individual flights to update the capacity
+                    for (int j = 0; j < bothFlights.size(); j++) {
+                        QString bothQID = QString::fromStdString(std::to_string(bothFlights[j]->getID()));
+
+                        //Edits the flight capacity
+                        editFlights(bothQID);
+                    }
+
+                    //Adds the flight to the users booked flights and write to file
+                    currentUser->addBookedFlight(qID);
+                    editUsers(currentUser->getEmail(), qID);
+
+                    //Upadtes the capacity of the main flight
+                    editFlights(qID);
+
                 }
 
 
-                ui->menuButtons->show();
-                ui->popups->hide();
+
             } else {
                 QMessageBox::about(this, "ERROR", "Please fill select an outgoing and return flight.");
             }
@@ -432,18 +452,36 @@ void MainWindow::on_bookPushButton_clicked()
          //Get flight ID
          std::string flight = ui->outboundFlightList->currentItem()->text().toStdString();
          std::size_t found = flight.find("|");
-         std::string str = flight.substr(0, found - 1);
 
-         //Change to QString
-         QString qstr = QString::fromStdString(str);
+         std::string id = flight.substr(0, found - 1);
 
-         //Add booked flight to current user
-         currentUser->addBookedFlight(qstr);
-         editUsers(currentUser->getEmail(), qstr);
+         QString qID = QString::fromStdString(id);
 
-         //Edit flight list to change capacity
-         editFlights(qstr);
+         //Gets the date
+         std::string dateStr = flight.substr(found + 2, 10);
+         QString qDateStr = QString::fromStdString(dateStr);
+
+         //Finds the individual flights
+         std::vector<Flight*> bothFlights = findBothFlights(qID, qDateStr);
+
+         //Loops through the vector to edit the flight capacity
+         for (int j = 0; j < bothFlights.size(); j++) {
+             QString bothQID = QString::fromStdString(std::to_string(bothFlights[j]->getID()));
+
+             editFlights(bothQID);
+         }
+
+         //Adds the flight to the users flight list and writes to file
+         currentUser->addBookedFlight(qID);
+         editUsers(currentUser->getEmail(), qID);
+
+         //Edits the capacity of the flight int the file
+         editFlights(qID);
+
      }
+
+     ui->menuButtons->show();
+     ui->popups->hide();
 }
 
 void MainWindow::on_LogoutButton_clicked()
@@ -487,7 +525,6 @@ void MainWindow::on_myFlightsButton_clicked()
    std::vector<Flight*> myFlights;
 
    //Find relevant flights to ID
-   std::cout << flights.size();
 
    //Loop over flight array finding relevent ID to add to myflights vector
    for (int i = 0; i< flights.size(); i++){

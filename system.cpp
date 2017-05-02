@@ -36,7 +36,7 @@ User* System::checkLogin(QString user, QString pass) {
 }
 
 
-std::vector<Flight*> System::searchForFlights(QString dest, QString dep, QString date) {
+std::vector<Flight*> System::searchForFlights(QString dest, QString dep, QString date, int diff) {
     std::vector<Flight*> Flights = readFlights();
     std::vector<Flight*> correctFlights;
 
@@ -59,7 +59,7 @@ std::vector<Flight*> System::searchForFlights(QString dest, QString dep, QString
 
                 if (fYear == year) {
                     if (fMonth == month) {
-                        if ((ifDay > (iDay-3)) && (ifDay < iDay+3)) {
+                        if ((ifDay > (iDay-diff)) && (ifDay < iDay+diff)) {
                             correctFlights.push_back(Flights[i]);
                         }
                     }
@@ -868,4 +868,58 @@ void System::dijkstra(std::vector<std::vector<float>> &matrix, int source, int p
             }
     }
 
+}
+
+
+std::vector<Flight*> System::findBothFlights(QString flightID, QString date) {
+
+    std::vector<Flight*> flights = readFlights();
+    std::vector<Airport*> airports = readAirports();
+
+    std::vector<Flight*> bothFlights;
+
+    QString depName, destName, connName;
+    int depID, destID, connID;
+
+    for (int i = 0; i < flights.size(); i++) {
+        if (flights[i]->getID() == std::stoi(flightID.toStdString())) {
+            if (flights[i]->getDistance() > 15000) {
+                depName = flights[i]->getDeparture();
+                destName = flights[i]->getDestination();
+            }
+        }
+    }
+
+    if (depName != NULL) {
+
+        for (int j = 0; j < airports.size(); j++) {
+            if (airports[j]->getName() == depName) {
+                depID = airports[j]->getID();
+            }
+            if (airports[j]->getName() == destName) {
+                destID = airports[j]->getID();
+            }
+        }
+
+        connID = getConnectingFlight(depID, destID);
+
+        for (int k = 0; k < airports.size(); k++) {
+            if (airports[k]->getID() == connID) {
+                connName = airports[k]->getName();
+            }
+        }
+
+        std::vector<Flight*> firstFlights = searchForFlights(connName, depName, date, 1);
+        std::vector<Flight*> secondFlights = searchForFlights(destName, connName, date, 1);
+
+        for (int l = 0; l < firstFlights.size(); l++) {
+            bothFlights.push_back(firstFlights[l]);
+        }
+        for (int l = 0; l < secondFlights.size(); l++) {
+            bothFlights.push_back(secondFlights[l]);
+        }
+
+    }
+
+    return bothFlights;
 }
