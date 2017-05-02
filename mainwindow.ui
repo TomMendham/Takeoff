@@ -182,7 +182,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="LoginPage">
        <widget class="QGroupBox" name="loginPopup">
@@ -246,6 +246,9 @@
                   <width>135</width>
                   <height>16777215</height>
                  </size>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
                 </property>
                </widget>
               </item>
