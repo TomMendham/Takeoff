@@ -429,7 +429,7 @@ void MainWindow::on_myFlightsButton_clicked()
    QString flightToAdd;
 
    for (int i = 0; i < myFlights.size(); i++) {
-           flightToAdd = (QString::number(myFlights[i]->getID()) + " | £" + QString::number(myFlights[i]->getPrice()) + "  |  " + myFlights[i]->getDate()) + "  |  " +
+           flightToAdd = (QString::number(myFlights[i]->getID()) + " | " + myFlights[i]->getDate()) + "  |  " +
                                    myFlights[i]->getDeparture() + " --> " + myFlights[i]->getDestination() + "  |  " +
                                    QString::number(myFlights[i]->getCapacity()) + " seats remaining.";
 
@@ -575,18 +575,21 @@ void MainWindow::showDetails(bool returnFlight, QString departureAirportName, QS
     }
     //Get connecting airport ID
     int parentAirportID = getConnectingFlight(departureAirportID, destinationAirportID);
+
     //Get the selected flight ID
     for (int i = 0; i < flights.size(); i++)
     {
-        if (flights[i]->getDestination() == dest && flights[i]->getDeparture() == dep)
-        {
-            flightID = flights[i]->getID();
-        }
         if(flights[i]->getDestination() == airports[parentAirportID]->getName() && flights[i]->getDeparture() == dep)
         {
            connectingFLightID = flights[i]->getID();
         }
     }
+
+    std::string flight = ui->myFlightsList->currentItem()->text().toStdString();
+    std::size_t found = flight.find("|");
+    flightID = std::stoi(flight.substr(0, found - 1));
+
+
     //Check if the flight needs a connecting flight and if it does dispaly it
     if (flights[flightID]->getDistance() > 15000)
     {
