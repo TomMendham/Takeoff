@@ -48,6 +48,7 @@ private slots:
     void on_returnFlightList_clicked(const QModelIndex &index);
 
     void showDetails(int returnFlight, QString departureAirportName, QString destinationAirportName);
+    std::vector<Flight*> sortFligts(std::vector<Flight*> &correctFlights);
 
 private:
     Ui::MainWindow *ui;

@@ -380,8 +380,7 @@ void MainWindow::on_bookFlightButton_clicked()
                 QMessageBox::about(this, "NO ACCESS", ("You must select a flight to book one"));
             }
         }
-    }
-
+}
 
 void MainWindow::on_cancelPushButton_clicked()
 {
@@ -389,7 +388,7 @@ void MainWindow::on_cancelPushButton_clicked()
     ui->menuButtons->show();
 }
 
- void MainWindow::on_bookPushButton_clicked()
+void MainWindow::on_bookPushButton_clicked()
 {
      //If a return flight is needed do below
      if (ui->returnCheckBox->isChecked()) {
@@ -499,6 +498,8 @@ void MainWindow::on_myFlightsButton_clicked()
        }
     }
 
+   myFlights = sortFligts(myFlights);
+
    QString flightToAdd;
 
    //Add flights of user to the flight details page
@@ -567,7 +568,7 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
            if (IDVector[i] == str)
            {
 
-               bool returnFlight = 2;
+               int returnFlight = 2;
                //Airport Names
                QString departureAirportName = flights[i]->getDeparture();
                QString destinationAirportName = flights[i]->getDestination();
@@ -713,4 +714,38 @@ void MainWindow::showDetails(int returnFlight, QString departureAirportName, QSt
 
     }
 
+}
+
+std::vector<Flight*> MainWindow::sortFligts(std::vector<Flight*> &correctFlights)
+{
+    //Check if sorting finished
+    bool sortDone = false;
+    float nextPrice;
+
+        while (!sortDone)
+        {
+            sortDone = true;
+
+            for (int i = 0; i < correctFlights.size(); ++i)
+            {
+                //Get the prices of the flights
+                float price = correctFlights[i]->getPrice();
+                if (i != correctFlights.size()-1)
+                {
+                    nextPrice = correctFlights[i+1]->getPrice();
+                    //Compare the current price with the next one
+                    if ( price > nextPrice)
+                    {
+                        //If the current price is smaller than the next price swap them
+                        Flight* tmp = correctFlights[i];
+                        correctFlights[i] = correctFlights[i+1];
+                        correctFlights[i+1] = tmp;
+
+                        //Because there was a swap made we need to go through the array again
+                        sortDone = false;
+                    }
+                }
+            }
+        }
+    return correctFlights;
 }
