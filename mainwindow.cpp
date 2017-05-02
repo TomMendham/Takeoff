@@ -114,6 +114,7 @@ void MainWindow::on_searchFlightButton_2_clicked()
     bool isConnecting = true;
     bool isConnectingReturn = true;
 
+
     //Airport IDs
     int departureAirportID;
     int destinationAirportID;
@@ -127,6 +128,12 @@ void MainWindow::on_searchFlightButton_2_clicked()
             dep = airports[i]->getName();
             departureAirportID = airports[i]->getID();
         }
+    }
+
+
+    if (departureAirportID == destinationAirportID){
+        QMessageBox::about(this, "ERROR", "Cannot fly from and to the same airport");
+        return;
     }
 
     //Get connecting airport ID and name
@@ -319,18 +326,28 @@ void MainWindow::on_loginButton_2_clicked()
 
 void MainWindow::on_bookFlightButton_clicked()
 {
-    if (currentUser == NULL){
-        QMessageBox::about(this, "NO ACCESS", ("You must login or register to do that!"));
-        ui->popups->show();
-        ui->popups->setCurrentIndex(0);
-        ui->menuButtons->hide();
+
+        if (currentUser == NULL){
+            QMessageBox::about(this, "NO ACCESS", ("You must login or register to do that!"));
+            ui->popups->show();
+            ui->popups->setCurrentIndex(0);
+            ui->menuButtons->hide();
+        }
+        else
+        {
+            if (ui->outboundFlightList->currentItem()!= NULL||ui->returnFlightList->currentItem() != NULL)
+            {
+            ui->popups->show();
+            ui->popups->setCurrentIndex(2);
+            ui->menuButtons->hide();
+            }
+            else
+            {
+                QMessageBox::about(this, "NO ACCESS", ("You must select a flight to book one"));
+            }
+        }
     }
-    else{
-        ui->popups->show();
-        ui->popups->setCurrentIndex(2);
-        ui->menuButtons->hide();
-    }
-}
+
 
 void MainWindow::on_cancelPushButton_clicked()
 {
@@ -355,6 +372,7 @@ void MainWindow::on_cancelPushButton_clicked()
 
 
     editFlights(qstr);
+    ui->menuButtons->show();
 
 }
 
@@ -364,6 +382,7 @@ void MainWindow::on_LogoutButton_clicked()
     this->setWindowTitle("Takeoff");
     ui->LogoutButton->hide();
     ui->loginButton_2->show();
+    ui->addFlightButton_2->hide();
     currentUser = NULL;
 }
 
