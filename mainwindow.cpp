@@ -296,7 +296,10 @@ void MainWindow::on_addFlightButton_clicked()
     std::vector<Airport*> Airports = readAirports();
     ui->popups->hide();
     ui->menuButtons->show();
-    int ID = ui->IDInput->value();
+    std::vector<Flight*> Flights = readFlights();
+
+    int ID = Flights.size();
+
     QString date = ui->addFlightDate->date().toString("dd.MM.yyyy");
     int capacity = ui->capacityNumber->value();
     QString addFlightTo = ui->addFlightTo->currentText();
