@@ -324,7 +324,7 @@ std::vector<User*> System::readUsers() {
             }
 
             if (email != "") {
-                User* user = new User(email, firstname, lastname, password, admin);
+                User* user = new User(email, firstname, lastname, password, admin, bookedFlights);
                 userVec.push_back(user);
             }
 
@@ -432,14 +432,14 @@ void System::writeFlights(Flight* f) {
 
 }
 
-void System::writeUsers(User* u, bool newUser) {
+void System::writeUsers(User* u) {
 
 
     std::vector<User*> Users = readUsers();
 
-    if (newUser) {
-        Users.push_back(u);
-    }
+
+
+    Users.push_back(u);
 
     QDir dir;
     QFile file(dir.absolutePath()+"/Users.xml");
@@ -517,6 +517,95 @@ void System::writeUsers(User* u, bool newUser) {
 
 }
 
+void System::editUsers(QString email, QString str) {
+
+    std::vector<User*> Users = readUsers();
+
+
+
+
+    for (int j = 0; j < Users.size(); j++) {
+        if (Users[j]->getEmail() == email) {
+            Users[j]->addBookedFlight(str);
+        }
+    }
+
+
+
+    QDir dir;
+    QFile file(dir.absolutePath()+"/Users.xml");
+
+
+    QXmlStreamWriter xmlWriter;
+
+
+        if (!file.open(QIODevice::WriteOnly))
+        {
+            std::cout << "ERROR OPENING FILE" << std::endl;
+        }
+        else
+        {
+
+            xmlWriter.setDevice(&file);
+            // Writes a document start and opens the flights element
+            xmlWriter.writeStartDocument();
+            xmlWriter.writeStartElement("USERS");
+
+
+            for (int i = 0; i < Users.size(); i++) {
+
+
+                QString email = Users[i]->getEmail();
+                QString firstname = Users[i]->getFirstName();
+                QString lastname = Users[i]->getLastName();
+                QString password = Users[i]->getPassword();
+                QString admin = Users[i]->getAdmin();
+                QString bookedFlights = Users[i]->getBookedFlights();
+
+
+                //open flight tag
+                xmlWriter.writeStartElement("USER");
+
+                //add one attribute and its value
+                xmlWriter.writeStartElement("EMAIL");
+                xmlWriter.writeCharacters(email);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("FIRSTNAME");
+                xmlWriter.writeCharacters(firstname);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("LASTNAME");
+                xmlWriter.writeCharacters(lastname);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("PASSWORD");
+                xmlWriter.writeCharacters(password);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("ADMIN");
+                xmlWriter.writeCharacters(admin);
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("BOOKEDFLIGHTS");
+                xmlWriter.writeCharacters(bookedFlights);
+                xmlWriter.writeEndElement();
+
+
+                //close user tag
+                xmlWriter.writeEndElement();
+
+
+            }
+
+
+            //end users tag
+            xmlWriter.writeEndElement();
+            //end document
+            xmlWriter.writeEndDocument();
+       }
+
+}
 
 
 

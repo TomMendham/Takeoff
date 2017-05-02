@@ -73,8 +73,8 @@ void MainWindow::on_registerUserButton_clicked()
            if (email == NULL || firstName == NULL || lastName == NULL || password == NULL) {
                QMessageBox::about(this, "ERROR", "Please fill out all fields.");
            } else {
-               User* user = new User(email,firstName,lastName,password,"1");
-               writeUsers(user, true);
+               User* user = new User(email,firstName,lastName,password,"1","");
+               writeUsers(user);
 
                ui->popups->hide();
                ui->menuButtons->show();
@@ -284,7 +284,7 @@ void MainWindow::on_cancelPushButton_clicked()
     ui->menuButtons->show();
 }
 
-void MainWindow::on_bookPushButton_clicked()
+ void MainWindow::on_bookPushButton_clicked()
 {
     std::string flight = ui->outboundFlightList->currentItem()->text().toStdString();
 
@@ -292,10 +292,12 @@ void MainWindow::on_bookPushButton_clicked()
 
     std::string str = flight.substr(0, found - 1);
 
-    currentUser->addBookedFlight(str);
+    QString qstr = QString::fromStdString(str);
 
-    User* emptyUser;
-    writeUsers(emptyUser, false);
+    currentUser->addBookedFlight(qstr);
+
+
+    editUsers(currentUser->getEmail(), qstr);
 
 
 
@@ -322,13 +324,15 @@ void MainWindow::on_myFlightsButton_clicked()
 
     std::string bookedFlights = currentUser->getBookedFlights().toStdString();
     std::vector<std::string> IDVector;
-    std::stringstream ss("1,2,3");
+    std::stringstream ss(bookedFlights);
     std::string output;
 
 
    while(std::getline(ss,output,','))
    {
-      IDVector.push_back(output);
+      if (output != "") {
+        IDVector.push_back(output);
+      }
    }
 
    std::vector<Flight*> flights = readFlights();

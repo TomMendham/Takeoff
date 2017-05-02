@@ -6,9 +6,10 @@ class User
 {
 public:
     User();
-    User(QString,QString,QString,QString,QString);
+    User(QString,QString,QString,QString,QString,QString);
 
-    void addBookedFlight(std::string str);
+    void addBookedFlight(QString str);
+
 
     //Accessor functions
     QString getEmail();

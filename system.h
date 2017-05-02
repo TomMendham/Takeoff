@@ -25,7 +25,8 @@ public:
     std::vector<User*> readUsers() ;
 
     void writeFlights(Flight* f);
-    void writeUsers(User* u, bool newUser);
+    void writeUsers(User* u);
+    void editUsers(QString email, QString str);
 
     //Connecting flight functions
     int getConnectingFlight(int departureAirportID, int destinationAirportID);

@@ -3,22 +3,28 @@
 
 User::User()
 {
-
+    email = "";
+    firstName = "";
+    lastName = "";
+    password = "";
+    admin = "";
+    bookedFlights = "";
 }
 
-User::User(QString _email, QString _first, QString _last, QString _password, QString _admin ) {
+User::User(QString _email, QString _first, QString _last, QString _password, QString _admin, QString _bookedFlights ) {
     email = _email;
     firstName = _first;
     lastName = _last;
     password = _password;
     admin = _admin;
-    bookedFlights = ",";
+    bookedFlights = _bookedFlights;
 }
 
-void User::addBookedFlight(std::string str) {
-    bookedFlights += QString::fromStdString(str) + ","; 
+void User::addBookedFlight(QString str) {
+    bookedFlights += str + ",";
     std::cout << bookedFlights.toStdString() << std::endl;
 }
+
 
 
 //Accessor functions
