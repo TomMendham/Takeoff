@@ -17,7 +17,7 @@ public:
     System();
 
     User* checkLogin(QString user, QString pass);
-    std::vector<Flight*> searchForFlights(QString dest, QString dep, QString date);
+    std::vector<Flight*> searchForFlights(QString dest, QString dep, QString date, int diff);
 
     //XML FUNCTIONS
     std::vector<Airport*> readAirports();
@@ -35,6 +35,8 @@ public:
     int getParentFlight(int parent [V],int destinationAirportID);
     int minDistance(float dist[], bool sptSet[]);
     void dijkstra(std::vector<std::vector<float>> &matrix, int src, int parent [V]);
+
+    std::vector<Flight*> findBothFlights(QString flightID, QString date);
 
 };
 
