@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
    connect(ui->loginButton_2,SIGNAL(clicked()),ui->menuButtons,SLOT(close()));
    connect(ui->loginButton_2,SIGNAL(clicked()),ui->popups,SLOT(show()));
 
+   currentUser = NULL;
+
 }
 
 MainWindow::~MainWindow()
@@ -360,23 +362,56 @@ void MainWindow::on_cancelPushButton_clicked()
 
  void MainWindow::on_bookPushButton_clicked()
 {
-    std::string flight = ui->outboundFlightList->currentItem()->text().toStdString();
 
-    std::size_t found = flight.find("|");
+     if (ui->returnCheckBox->isChecked()) {
 
-    std::string str = flight.substr(0, found - 1);
+            if (ui->outboundFlightList->currentItem() != NULL && ui->returnFlightList->currentItem() != NULL) {
 
-    QString qstr = QString::fromStdString(str);
+                std::string flight = ui->outboundFlightList->currentItem()->text().toStdString();
 
-    currentUser->addBookedFlight(qstr);
+                std::string returnFlight = ui->returnFlightList->currentItem()->text().toStdString();
+
+                std::vector<std::string> strings;
+
+                strings.push_back(flight);
+                strings.push_back(returnFlight);
+
+                for (int i = 0; i < strings.size(); i++) {
+                    std::size_t found = strings[i].find("|");
+
+                    std::string str = strings[i].substr(0, found - 1);
+
+                    QString qstr = QString::fromStdString(str);
+
+                    currentUser->addBookedFlight(qstr);
+
+                    editUsers(currentUser->getEmail(), qstr);
+
+                    editFlights(qstr);
+                }
 
 
-    editUsers(currentUser->getEmail(), qstr);
+                ui->menuButtons->show();
+                ui->popups->hide();
+            } else {
+                QMessageBox::about(this, "ERROR", "Please fill select an outgoing and return flight.");
+            }
+     } else {
 
+         std::string flight = ui->outboundFlightList->currentItem()->text().toStdString();
 
-    editFlights(qstr);
-    ui->menuButtons->show();
+         std::size_t found = flight.find("|");
 
+         std::string str = flight.substr(0, found - 1);
+
+         QString qstr = QString::fromStdString(str);
+
+         currentUser->addBookedFlight(qstr);
+
+         editUsers(currentUser->getEmail(), qstr);
+
+         editFlights(qstr);
+     }
 }
 
 void MainWindow::on_LogoutButton_clicked()
