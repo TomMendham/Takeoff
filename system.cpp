@@ -696,8 +696,6 @@ void System::editFlights(QString id) {
 
 
             }
-
-
             //end tag flights
             xmlWriter.writeEndElement();
             //end document
@@ -785,19 +783,17 @@ void System::fillFlightGrid(std::vector<std::vector<float>> &matrix)
 int System::getConnectingFlight(int departureAirportID, int destinationAirportID)
 {
     std::vector<std::vector<float>> matrix(V, std::vector<float>(V));
-
-    //std::vector<Flight*> Flights = readFlights();
-
+    //Fill in the flight grid with the corresponding flight distances
     fillFlightGrid(matrix);
 
     int parent[V];
-
+    //Run the algorithm function to fill in the parent array
     dijkstra(matrix, departureAirportID, parent);
     int parentAirportID = getParentFlight(parent,destinationAirportID);
 
     return parentAirportID;
 }
-
+//Get the ID of the connecting airport from the parent array and return it
 int System::getParentFlight(int parent [V],int destinationAirportID)
 {
     int connectingFlight = NULL;
@@ -811,10 +807,9 @@ int System::getParentFlight(int parent [V],int destinationAirportID)
     return connectingFlight;
 }
 
-
-// A utility function to find the vertex with minimum distance
-// value, from the set of vertices not yet included in shortest
-// path tree
+// A function to find the vertex with minimum distance
+// value, from the set of vertices not yet included in shortest path tree
+// Reference:: http://www.geeksforgeeks.org/printing-paths-dijkstras-shortest-path-algorithm/
 int System::minDistance(float dist[], bool sptSet[])
 {
     // Initialize min value
@@ -827,39 +822,35 @@ int System::minDistance(float dist[], bool sptSet[])
     return min_index;
 }
 
-// Funtion that implements Dijkstra's single source shortest path
-// algorithm for a graph represented using adjacency matrix
-// representation
-void System::dijkstra(std::vector<std::vector<float>> &matrix, int src, int parent [V])
+// Funtion that implements Dijkstra's single source shortest path algorithm
+// Reference:: http://www.geeksforgeeks.org/printing-paths-dijkstras-shortest-path-algorithm/
+void System::dijkstra(std::vector<std::vector<float>> &matrix, int source, int parent [V])
 {
-    float dist[V];  // The output array. dist[i] will hold
-                  // the shortest distance from src to i
+    float distance[V];  // The output array. distance[i] will hold
+                  // the shortest distance from source to i
 
-    // sptSet[i] will true if vertex i is included / in shortest
-    // path tree or shortest distance from src to i is finalized
+    // sptSet[i] will be true if vertex i is included / in shortest
+    // path tree or shortest distance from source to i is finalized
     bool sptSet[V];
-
-    // Parent array to store shortest path tree
-    //int parent[V];
 
     // Initialize all distances as INFINITE and stpSet[] as false
     for (int i = 0; i < V; i++)
     {
         parent[0] = -1;
-        dist[i] = INT_MAX;
+        distance[i] = INT_MAX;
         sptSet[i] = false;
     }
 
     // Distance of source vertex from itself is always 0
-    dist[src] = 0;
+    distance[source] = 0;
 
     // Find shortest path for all vertices
     for (int count = 0; count < V-1; count++)
     {
         // Pick the minimum distance vertex from the set of
-        // vertices not yet processed. u is always equal to src
+        // vertices not yet processed. u is always equal to source
         // in first iteration.
-        int u = minDistance(dist, sptSet);
+        int u = minDistance(distance, sptSet);
 
         // Mark the picked vertex as processed
         sptSet[u] = true;
@@ -868,20 +859,18 @@ void System::dijkstra(std::vector<std::vector<float>> &matrix, int src, int pare
         // picked vertex.
         for (int v = 0; v < V; v++)
 
-            // Update dist[v] only if is not in sptSet, there is
+            // Update distance[v] only if it is not in sptSet, there is
             // an edge from u to v, and total weight of path from
-            // src to v through u is smaller than current value of
-            // dist[v]
+            // source to v through u is smaller than current value of
+            // distance[v]
             if (!sptSet[v] && matrix[u][v] &&
-                dist[u] + matrix[u][v] < dist[v])
+                distance[u] + matrix[u][v] < distance[v])
             {
                 parent[v]  = u;
-                dist[v] = dist[u] + matrix[u][v];
+                distance[v] = distance[u] + matrix[u][v];
             }
     }
 
-    // print the constructed distance array
-    //printSolution(dist, V, parent);
 }
 
 
