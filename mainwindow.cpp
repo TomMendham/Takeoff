@@ -132,7 +132,7 @@ void MainWindow::on_searchFlightButton_2_clicked()
         }
     }
 
-
+    //Check to make sure that the user is not trying to search for a flight with same dist and dest
     if (departureAirportID == destinationAirportID){
         QMessageBox::about(this, "ERROR", "Cannot fly from and to the same airport");
         return;
@@ -143,7 +143,7 @@ void MainWindow::on_searchFlightButton_2_clicked()
     QString connectingAirportName = airports[parentAirportID]->getName();
 
     std::vector<Flight*> correctFlights = searchForFlights(dest, dep, date);
-
+    //Cleared the lists so that there is no old information in them
     ui->outboundFlightList->clear();
     ui->returnFlightList->clear();
     QString flightToAdd = "";
@@ -488,7 +488,7 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
     ui->popups->setCurrentIndex(3);
     ui->popups->show();
     ui->menuButtons->show();
-
+    //Call the return showDeatils to disaply details
     bool returnFlight = 0;
     showDetails(returnFlight, "", "");
 }
@@ -516,6 +516,7 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
 
    for (int i = 0; i < flights.size(); i++)
     {
+       //Check if it is a connecting flight
        if (flights[i]->getDistance() > 15000)
        {
            if (IDVector[i] == str)
@@ -525,7 +526,7 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
                //Airport Names
                QString departureAirportName = flights[i]->getDeparture();
                QString destinationAirportName = flights[i]->getDestination();
-
+               //Call the return showDeatils to disaply details
                showDetails(returnFlight, departureAirportName, destinationAirportName);
            }
        }
@@ -534,7 +535,6 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
            if (IDVector[i] == str)
            {
             ui->connectingFlightLabel->setText("Not needed");
-            //ui->connectingFlightLabel->setText(connectingAirportName);
             ui->durationLabel->setText(QString::number(flights[std::stoi(str)]->getDuration()) + " hours");
             ui->spacesAvailableLabel->setText(QString::number(flights[std::stoi(str)]->getCapacity()));
             ui->priceLabel->setText("£" + QString::number(flights[std::stoi(str)]->getPrice()));
@@ -549,7 +549,7 @@ void MainWindow::on_returnFlightList_clicked(const QModelIndex &index)
     ui->menuButtons->show();
     ui->popups->setCurrentIndex(3);
     ui->popups->show();
-
+    //Call the return showDeatils to disaply details
     bool returnFlight = 1;
     showDetails(returnFlight, "", "");
 }
@@ -632,6 +632,7 @@ void MainWindow::showDetails(int returnFlight, QString departureAirportName, QSt
            connectingFLightID = flights[i]->getID();
         }
     }
+    //Check if the flight is selected from my flights
     if (returnFlight == 2 )
     {
         //Get the ID of a flight when not a connecting flight

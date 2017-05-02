@@ -7,7 +7,7 @@
 #include "user.h"
 #include <vector>
 
-// Number of vertices in the matrix
+// Number of vertices in the matrix in our case number of airports
 #define V 4
 
 class System
