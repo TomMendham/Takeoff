@@ -453,8 +453,8 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
     ui->popups->setCurrentIndex(3);
     ui->popups->show();
 
-    bool returnFlight = true;
-    showDetails(returnFlight);
+    bool returnFlight = false;
+    showDetails(returnFlight, "", "");
 }
 
 void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
@@ -484,17 +484,20 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
        {
            if (IDVector[i] == str)
            {
-            ui->connectingFlightLabel->setText(connectingAirportName);
-            ui->durationLabel->setText(QString::number(flights[std::stoi(str)]->getDuration()) + " hours");
-            ui->spacesAvailableLabel->setText(QString::number(flights[std::stoi(str)]->getCapacity()));
-            ui->priceLabel->setText("£" + QString::number(flights[std::stoi(str)]->getPrice()));
+
+               bool returnFlight = true;
+               //Airport Names
+               QString departureAirportName = flights[i]->getDeparture();
+               QString destinationAirportName = flights[i]->getDestination();
+
+               showDetails(returnFlight, departureAirportName, destinationAirportName);
            }
        }
        else
        {
            if (IDVector[i] == str)
            {
-            ui->connectingFlightLabel->setText(connectingAirportName);
+            ui->connectingFlightLabel->setText("Not needed");
             ui->durationLabel->setText(QString::number(flights[std::stoi(str)]->getDuration()) + " hours");
             ui->spacesAvailableLabel->setText(QString::number(flights[std::stoi(str)]->getCapacity()));
             ui->priceLabel->setText("£" + QString::number(flights[std::stoi(str)]->getPrice()));
@@ -510,19 +513,19 @@ void MainWindow::on_returnFlightList_clicked(const QModelIndex &index)
     ui->popups->show();
 
     bool returnFlight = true;
-    showDetails(returnFlight);
+    showDetails(returnFlight, "", "");
 }
 
-void MainWindow::showDetails(bool returnFlight)
+void MainWindow::showDetails(bool returnFlight, QString departureAirportName, QString destinationAirportName)
 {
     QString departureCountry;
     QString destinationCountry;
-    if (returnFlight)
+    if (returnFlight && departureAirportName == "" && destinationAirportName == "")
     {
         departureCountry = ui->toAirportList->currentText();
         destinationCountry = ui->fromAirportList->currentText();
     }
-    else if (!returnFlight)
+    else if (!returnFlight && departureAirportName == "" && destinationAirportName == "")
     {
         destinationCountry = ui->toAirportList->currentText();
         departureCountry = ui->fromAirportList->currentText();
@@ -542,14 +545,29 @@ void MainWindow::showDetails(bool returnFlight)
     int connectingFLightID;
 
     for (int i = 0; i < airports.size(); i++) {
-        if (airports[i]->getCountry() == destinationCountry) {
-            dest = airports[i]->getName();
-            destinationAirportID = airports[i]->getID();
+        if (departureAirportName == "" && destinationAirportName == "")
+        {
+            if (airports[i]->getCountry() == destinationCountry) {
+                dest = airports[i]->getName();
+                destinationAirportID = airports[i]->getID();
+            }
+            if (airports[i]->getCountry() == departureCountry) {
+                dep = airports[i]->getName();
+                departureAirportID = airports[i]->getID();
+            }
         }
-        if (airports[i]->getCountry() == departureCountry) {
-            dep = airports[i]->getName();
-            departureAirportID = airports[i]->getID();
+        else
+        {
+            if (airports[i]->getName() == destinationAirportName) {
+                dest = destinationAirportName;
+                destinationAirportID = airports[i]->getID();
+            }
+            if (airports[i]->getName() == departureAirportName) {
+                dep = departureAirportName;
+                departureAirportID = airports[i]->getID();
+            }
         }
+
 
     }
     //Get connecting airport ID
