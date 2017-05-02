@@ -492,10 +492,6 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
                QString destinationAirportName = flights[i]->getDestination();
 
                showDetails(returnFlight, departureAirportName, destinationAirportName);
-            //ui->connectingFlightLabel->setText(connectingAirportName);
-            ui->durationLabel->setText(QString::number(flights[std::stoi(str)]->getDuration()) + " hours");
-            ui->spacesAvailableLabel->setText(QString::number(flights[std::stoi(str)]->getCapacity()));
-            ui->priceLabel->setText("£" + QString::number(flights[std::stoi(str)]->getPrice()));
            }
        }
        else
