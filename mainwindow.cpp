@@ -96,12 +96,14 @@ void MainWindow::on_searchFlightButton_2_clicked()
     QString destinationCountry = ui->toAirportList->currentText();
     QString departureCountry = ui->fromAirportList->currentText();
     QString date = ui->flightDateEdit->text();
+    QString returnDate = ui->returnDateEdit->text();
 
     QString dest, dep;
     std::vector<Airport*> airports = readAirports();
     std::vector<Flight*> flights = readFlights();
 
     bool isConnecting = true;
+    bool isConnectingReturn = true;
 
     //Airport IDs
     int departureAirportID;
@@ -125,45 +127,76 @@ void MainWindow::on_searchFlightButton_2_clicked()
     std::vector<Flight*> correctFlights = searchForFlights(dest, dep, date);
 
     ui->outboundFlightList->clear();
+    ui->returnFlightList->clear();
     QString flightToAdd = "";
 
-
+    //Get all of the flight on specific dates
     std::vector<Flight*> connectingFlights = searchForFlights(dest, connectingAirportName, date);
+    std::vector<Flight*> connectingFlights2 = searchForFlights(connectingAirportName, dep, date);
+    std::vector<Flight*> connectingReturnFlights = searchForFlights(connectingAirportName, dest, returnDate);
+    std::vector<Flight*> connectingReturnFlights2 = searchForFlights(dep, connectingAirportName, returnDate);
 
     //Check if there is a connecting flight on that date
-    if (connectingFlights.size() == 0)
+    if (connectingFlights.size() == 0 || connectingFlights2.size() == 0)
     {
         isConnecting = false;
         QMessageBox::about(this, "ERROR", "No Connecting flights on this date.");
     }
+    //Check if there is a connecting flight on the return date
+    if (connectingReturnFlights.size() == 0 || connectingReturnFlights2.size() == 0)
+    {
+        isConnectingReturn = false;
+        QMessageBox::about(this, "ERROR", "No Connecting flights on the return date.");
+    }
+    //Checking if the correct connecting flights exist
     for (int i = 0; i < connectingFlights.size(); i++)
     {
         if (connectingFlights[i]->getDestination() == dest && connectingFlights[i]->getDeparture() == connectingAirportName)
         {
-                 isConnecting = true;
+            for (int i = 0; i < connectingFlights2.size(); i++)
+            {
+                if(connectingFlights2[i]->getDestination() == connectingAirportName && connectingFlights2[i]->getDeparture() == dep)
+                {
+                    isConnecting = true;
+                }
+            }
+        }
+    }
+    //Checking if the correct return connecting flights exist
+    for (int i = 0; i < connectingReturnFlights.size(); i++)
+    {
+        if (connectingReturnFlights[i]->getDestination() == connectingAirportName && connectingReturnFlights[i]->getDeparture() == dest)
+        {
+            for (int i = 0; i < connectingReturnFlights2.size(); i++)
+            {
+                if(connectingReturnFlights2[i]->getDestination() == dep && connectingReturnFlights2[i]->getDeparture() == connectingAirportName)
+                {
+                    isConnectingReturn = true;
+                }
+            }
         }
     }
 
+    //If there is a connecting on that date dispaly the flight
     if(isConnecting)
     {
         for (int i = 0; i < correctFlights.size(); i++) {
-                flightToAdd = (QString::number(correctFlights[i]->getID()) + " | £" + QString::number(correctFlights[i]->getPrice()) + "  |  " + correctFlights[i]->getDate()) + "  |  " +
-                                        correctFlights[i]->getDeparture() + " --> " + correctFlights[i]->getDestination() + "  |  " +
-                                        QString::number(correctFlights[i]->getCapacity()) + " seats remaining.";
+                flightToAdd = (QString::number(correctFlights[i]->getID()) + " | " + correctFlights[i]->getDate()) + "  |  " +
+                                        correctFlights[i]->getDeparture() + " --> " + correctFlights[i]->getDestination();
 
 
             ui->outboundFlightList->addItem(flightToAdd);
         }
 
-        if (ui->returnCheckBox->isChecked()) {
+        if (ui->returnCheckBox->isChecked() && isConnectingReturn) {
             QString returnDate = ui->returnDateEdit->text();
             std::vector<Flight*> correctReturnFlights = searchForFlights(dep, dest, returnDate);
 
             ui->returnFlightList->clear();
             for (int i = 0; i < correctReturnFlights.size(); i++) {
-                QString returnFlightToAdd = ("£" + QString::number(correctReturnFlights[i]->getPrice()) + "  |  " + correctReturnFlights[i]->getDate()) + "  |  " +
-                                        correctReturnFlights[i]->getDeparture() + " --> " + correctReturnFlights[i]->getDestination() + "  |  " +
-                                        QString::number(correctReturnFlights[i]->getCapacity()) + " seats remaining.";
+                QString returnFlightToAdd = (QString::number(correctReturnFlights[i]->getID()) + " | " +
+                                             correctReturnFlights[i]->getDate()) + "  |  " +
+                                        correctReturnFlights[i]->getDeparture() + " --> " + correctReturnFlights[i]->getDestination();
 
                 ui->returnFlightList->addItem(returnFlightToAdd);
             }
@@ -216,7 +249,6 @@ void MainWindow::on_cancelRegister_clicked()
     ui->menuButtons->show();
 }
 
-
 void MainWindow::on_registerButton_2_clicked()
 {
     ui->popups->show();
@@ -230,7 +262,6 @@ void MainWindow::on_addFlightButton_2_clicked()
     ui->popups->setCurrentIndex(4);
     ui->menuButtons->hide();
 }
-
 
 void MainWindow::on_cancelAddFlightButton_clicked()
 {
@@ -363,13 +394,12 @@ void MainWindow::on_myFlightsButton_clicked()
 
 void MainWindow::on_myFlightsBack_clicked()
 {
-
+    ui->returnCheckBox->setChecked(0);
     ui->myFlightsBack->hide();
     ui->flightDetailsBox->setEnabled(true);
     ui->myFlightsLabel->hide();ui->myFlightsList->hide();ui->myFlightsButton->show();
     ui->outboundFlightList->show();ui->outboundFlightLabel->show();
 }
-
 
 void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
 {
@@ -425,7 +455,7 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
         ui->connectingFlightLabel->setText(connectingAirportName);
         ui->durationLabel->setText(QString::number(flights[flightID]->getDuration()) + " hours");
         ui->spacesAvailableLabel->setText(QString::number(flights[flightID]->getCapacity()));
-        ui->priceLabel->setText("£" + QString::number(flights[flightID]->getPrice() + flights[connectingFLightID]->getPrice()));
+        ui->priceLabel->setText("£" + QString::number(flights[flightID]->getPrice()));
 
     }
     else
@@ -471,5 +501,72 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
         ui->spacesAvailableLabel->setText(QString::number(flights[std::stoi(str)]->getCapacity()));
         ui->priceLabel->setText("£" + QString::number(flights[std::stoi(str)]->getPrice() + flights[std::stoi(str)]->getPrice()));
        }
+    }
+}
+
+void MainWindow::on_returnFlightList_clicked(const QModelIndex &index)
+{
+    ui->bookFlightButton->setEnabled(true);
+    ui->popups->setCurrentIndex(3);
+    ui->popups->show();
+
+    QString departureCountry = ui->toAirportList->currentText();
+    QString destinationCountry = ui->fromAirportList->currentText();
+
+    QString dest,dep;
+
+    std::vector<Airport*> airports = readAirports();
+    std::vector<Flight*> flights = readFlights();
+
+    //Airport IDs
+    int departureAirportID;
+    int destinationAirportID;
+
+    int flightID;
+    int connectingFLightID;
+
+    for (int i = 0; i < airports.size(); i++) {
+        if (airports[i]->getCountry() == destinationCountry) {
+            dest = airports[i]->getName();
+            destinationAirportID = airports[i]->getID();
+        }
+        if (airports[i]->getCountry() == departureCountry) {
+            dep = airports[i]->getName();
+            departureAirportID = airports[i]->getID();
+        }
+
+    }
+    //Get connecting airport ID
+    int parentAirportID = getConnectingFlight(departureAirportID, destinationAirportID);
+    //Get the selected flight ID
+    for (int i = 0; i < flights.size(); i++)
+    {
+        if (flights[i]->getDestination() == dest && flights[i]->getDeparture() == dep)
+        {
+            flightID = flights[i]->getID();
+        }
+        if(flights[i]->getDestination() == airports[parentAirportID]->getName() && flights[i]->getDeparture() == dep)
+        {
+           connectingFLightID = flights[i]->getID();
+        }
+    }
+
+    if (flights[flightID]->getDistance() > 15000)
+    {
+        QString connectingAirportName = airports[parentAirportID]->getName();
+
+        ui->connectingFlightLabel->setText(connectingAirportName);
+        ui->durationLabel->setText(QString::number(flights[flightID]->getDuration()) + " hours");
+        ui->spacesAvailableLabel->setText(QString::number(flights[flightID]->getCapacity()));
+        ui->priceLabel->setText("£" + QString::number(flights[flightID]->getPrice()));
+
+    }
+    else
+    {
+        ui->connectingFlightLabel->setText("Not needed");
+        ui->durationLabel->setText(QString::number(flights[flightID]->getDuration()) + " hours");
+        ui->spacesAvailableLabel->setText(QString::number(flights[flightID]->getCapacity()));
+        ui->priceLabel->setText("£" + QString::number(flights[flightID]->getPrice()));
+
     }
 }

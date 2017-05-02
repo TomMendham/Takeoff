@@ -709,7 +709,6 @@ int System::getParentFlight(int parent [V],int destinationAirportID)
             connectingFlight = parent [i];
         }
     }
-    std::cout << connectingFlight << std::endl;
     return connectingFlight;
 }
 

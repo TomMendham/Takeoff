@@ -921,12 +921,12 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>400</y>
+     <x>1056</x>
+     <y>409</y>
     </hint>
     <hint type="destinationlabel">
-     <x>602</x>
-     <y>337</y>
+     <x>1078</x>
+     <y>430</y>
     </hint>
    </hints>
   </connection>
