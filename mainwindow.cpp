@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 
 {
+    //UI Setup
     ui->setupUi(this);
     ui->pages->setCurrentIndex(0);
     ui->returnDateEdit->hide();
@@ -17,10 +18,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->LogoutButton->hide();
     ui->myFlightsButton->hide();ui->myFlightsLabel->hide();ui->myFlightsList->hide();ui->myFlightsBack->hide();
 
+    //Declare values
    std::vector<Airport*> Airports = readAirports();
    QStringList airportNames;
    QStringList airportCountries;
 
+   //Fill airport lists
    for (int i=0; i<Airports.size();i++){
        QString airportCountry = Airports[i]->getCountry();
        QString airportName = Airports[i]->getName();
@@ -28,11 +31,13 @@ MainWindow::MainWindow(QWidget *parent) :
        airportNames.append(airportName);
    }
 
+   //Add items to UI lists
    ui->fromAirportList->addItems(airportCountries);
    ui->toAirportList->addItems(airportCountries);
    ui->addFlightTo->addItems(airportNames);
    ui->addFlightFrom->addItems(airportNames);
 
+   //Signals wrote for connecting buttons
    connect(ui->loginButton_2,SIGNAL(clicked()),ui->menuButtons,SLOT(close()));
    connect(ui->loginButton_2,SIGNAL(clicked()),ui->popups,SLOT(show()));
 
@@ -42,13 +47,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-
     delete ui;
 }
 
 
 void MainWindow::on_returnCheckBox_stateChanged(int arg1)
 {
+    //Connect signals on returnCheckbox to change values depending on whats clicked
     if (arg1 == 2){
         connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnDateEdit,SLOT(show()));
         connect(ui->returnCheckBox,SIGNAL(clicked()),ui->returnFlightList,SLOT(show()));
@@ -65,21 +70,28 @@ void MainWindow::on_returnCheckBox_stateChanged(int arg1)
 
 void MainWindow::on_registerUserButton_clicked()
 {
+       //Get input from user
        QString email = ui->emailInput->text();
        QString firstName = ui->firstNameInput->text();
        QString lastName = ui->lastNameInput->text();
        QString password;
 
+       //Check passwords are both the same
        if (ui->passwordInput->text() == ui->passwordInput_2->text()){
-           User* user = new User(email,firstName,lastName,password,"1","");
+           //False user to use checkLogin
+           User* user = new User(email,firstName,lastName,password,"0","");
            password = ui->passwordInput->text();
            user = checkLogin(email, password);
+           //Check that user isn't already made return user
 
+           //Check user is null
            if (user == NULL){
+               //Check if boxes are filled
                if (email == NULL || firstName == NULL || lastName == NULL || password == NULL) {
                    QMessageBox::about(this, "ERROR", "Please fill out all fields.");
                } else {
-                   User* user = new User(email,firstName,lastName,password,"1","");
+                   //Create new user and write it
+                   User* user = new User(email,firstName,lastName,password,"0","");
                    writeUsers(user);
 
                    ui->popups->hide();
@@ -104,11 +116,13 @@ void MainWindow::on_registerUserButton_clicked()
 
 void MainWindow::on_searchFlightButton_2_clicked()
 {
+    //Get destination country from lists
     QString destinationCountry = ui->toAirportList->currentText();
     QString departureCountry = ui->fromAirportList->currentText();
     QString date = ui->flightDateEdit->text();
     QString returnDate = ui->returnDateEdit->text();
 
+    //Declare values and vectors
     QString dest, dep;
     std::vector<Airport*> airports = readAirports();
     std::vector<Flight*> flights = readFlights();
@@ -121,6 +135,7 @@ void MainWindow::on_searchFlightButton_2_clicked()
     int departureAirportID;
     int destinationAirportID;
 
+    //Loop over current airports getting destination and departure ID
     for (int i = 0; i < airports.size(); i++) {
         if (airports[i]->getCountry() == destinationCountry) {
             dest = airports[i]->getName();
@@ -205,17 +220,19 @@ void MainWindow::on_searchFlightButton_2_clicked()
     if(isConnecting)
     {
         for (int i = 0; i < correctFlights.size(); i++) {
+                //Calculate flight to add from input fields
                 flightToAdd = (QString::number(correctFlights[i]->getID()) + " | " + correctFlights[i]->getDate()) + "  |  " +
                                         correctFlights[i]->getDeparture() + " --> " + correctFlights[i]->getDestination();
-
-
+            //Add fligths
             ui->outboundFlightList->addItem(flightToAdd);
         }
 
+        //Check if needed to do for return
         if (ui->returnCheckBox->isChecked() && isConnectingReturn) {
             QString returnDate = ui->returnDateEdit->text();
             std::vector<Flight*> correctReturnFlights = searchForFlights(dep, dest, returnDate);
 
+            //Clear return flight list and fill with new return flights
             ui->returnFlightList->clear();
             for (int i = 0; i < correctReturnFlights.size(); i++) {
                 QString returnFlightToAdd = (QString::number(correctReturnFlights[i]->getID()) + " | " +
@@ -230,15 +247,18 @@ void MainWindow::on_searchFlightButton_2_clicked()
 
 void MainWindow::on_loginuserButton_2_clicked()
 {
+    //Get login and password
     QString loginName = ui->usernameField_2->text();
     QString loginPassword = ui->passwordField_2->text();
 
+    //Check not empty
     if (loginName!=NULL && loginPassword!=NULL) {
        // User* currentUser = checkLogin(loginName, loginPassword);
         currentUser = checkLogin(loginName, loginPassword);
         if(currentUser == NULL) {
             QMessageBox::about(this, "ERROR", "Incorrect Login Details.");
         } else {
+            //Set up home screen
             QMessageBox::about(this, "SUCCESS", ("Logged in as " + currentUser->getFirstName()));
             ui->popups->hide();
             ui->menuButtons->show();
@@ -295,13 +315,15 @@ void MainWindow::on_cancelAddFlightButton_clicked()
 
 void MainWindow::on_addFlightButton_clicked()
 {
+    //Read in airports and change UI
     std::vector<Airport*> Airports = readAirports();
+    std::vector<Flight*> Flights = readFlights();
     ui->popups->hide();
     ui->menuButtons->show();
-    std::vector<Flight*> Flights = readFlights();
 
+    //Find ID number
     int ID = Flights.size();
-
+    //Read in user input and declare variables
     QString date = ui->addFlightDate->date().toString("dd.MM.yyyy");
     int capacity = ui->capacityNumber->value();
     QString addFlightTo = ui->addFlightTo->currentText();
@@ -309,6 +331,7 @@ void MainWindow::on_addFlightButton_clicked()
     Airport* fromAirport;
     Airport* toAirport;
 
+    //Find toAirport object and fromAirport object
     for (int i = 0; i<Airports.size();i++){
         if (addFlightTo == Airports[i]->getName()){
             toAirport = Airports[i];
@@ -318,6 +341,7 @@ void MainWindow::on_addFlightButton_clicked()
         }
     }
 
+    //Write to flight object and use writeFlight to send to XML file
     Flight* f = new Flight(ID,date,capacity,toAirport,fromAirport);
     writeFlights(f);
 }
@@ -331,7 +355,7 @@ void MainWindow::on_loginButton_2_clicked()
 
 void MainWindow::on_bookFlightButton_clicked()
 {
-
+        //Check if user is null (if logged in it wouldnt be null)
         if (currentUser == NULL){
             QMessageBox::about(this, "NO ACCESS", ("You must login or register to do that!"));
             ui->popups->show();
@@ -340,6 +364,7 @@ void MainWindow::on_bookFlightButton_clicked()
         }
         else
         {
+            //Check there is an item selected in the list and if so show book flight tab
             if (ui->outboundFlightList->currentItem()!= NULL||ui->returnFlightList->currentItem() != NULL)
             {
             ui->popups->show();
@@ -362,31 +387,33 @@ void MainWindow::on_cancelPushButton_clicked()
 
  void MainWindow::on_bookPushButton_clicked()
 {
-
+     //If a return flight is needed do below
      if (ui->returnCheckBox->isChecked()) {
-
+            //Check item selected
             if (ui->outboundFlightList->currentItem() != NULL && ui->returnFlightList->currentItem() != NULL) {
 
+                //Get selected items from list for return and sending flight
                 std::string flight = ui->outboundFlightList->currentItem()->text().toStdString();
-
                 std::string returnFlight = ui->returnFlightList->currentItem()->text().toStdString();
 
+                //Declare vector of strings (flight details)
                 std::vector<std::string> strings;
 
                 strings.push_back(flight);
                 strings.push_back(returnFlight);
 
+                //Loop over vector
                 for (int i = 0; i < strings.size(); i++) {
+                    //Find ID from start of string
                     std::size_t found = strings[i].find("|");
-
                     std::string str = strings[i].substr(0, found - 1);
-
                     QString qstr = QString::fromStdString(str);
 
+                    //Get current user details
                     currentUser->addBookedFlight(qstr);
 
+                    //Edit current user
                     editUsers(currentUser->getEmail(), qstr);
-
                     editFlights(qstr);
                 }
 
@@ -398,24 +425,27 @@ void MainWindow::on_cancelPushButton_clicked()
             }
      } else {
 
+
+         //Get flight ID
          std::string flight = ui->outboundFlightList->currentItem()->text().toStdString();
-
          std::size_t found = flight.find("|");
-
          std::string str = flight.substr(0, found - 1);
 
+         //Change to QString
          QString qstr = QString::fromStdString(str);
 
+         //Add booked flight to current user
          currentUser->addBookedFlight(qstr);
-
          editUsers(currentUser->getEmail(), qstr);
 
+         //Edit flight list to change capacity
          editFlights(qstr);
      }
 }
 
 void MainWindow::on_LogoutButton_clicked()
 {
+    //Logout button changes UI and displays logout message
     QMessageBox::about(this, "SUCCESS", ("You are now logged out!"));
     this->setWindowTitle("Takeoff");
     ui->LogoutButton->hide();
@@ -426,6 +456,7 @@ void MainWindow::on_LogoutButton_clicked()
 
 void MainWindow::on_myFlightsButton_clicked()
 {
+    //Setup UI for my flights button
     ui->myFlightsList->clear();
     ui->flightDetailsBox->setEnabled(false);
     ui->myFlightsBack->show();
@@ -434,12 +465,13 @@ void MainWindow::on_myFlightsButton_clicked()
     ui->returnFlightList->hide();ui->returnFlightLabel->hide();
     ui->outboundFlightList->hide();ui->outboundFlightLabel->hide();
 
+    //Read in users booked flights
     std::string bookedFlights = currentUser->getBookedFlights().toStdString();
     std::vector<std::string> IDVector;
     std::stringstream ss(bookedFlights);
     std::string output;
 
-
+   //Split the ID Vector by commas to get individual ID of flights
    while(std::getline(ss,output,','))
    {
       if (output != "") {
@@ -447,12 +479,14 @@ void MainWindow::on_myFlightsButton_clicked()
       }
    }
 
+   //Read in the flights
    std::vector<Flight*> flights = readFlights();
    std::vector<Flight*> myFlights;
 
    //Find relevant flights to ID
    std::cout << flights.size();
 
+   //Loop over flight array finding relevent ID to add to myflights vector
    for (int i = 0; i< flights.size(); i++){
        for (int j = 0; j < IDVector.size(); j++){
            if (flights[i]->getID() == std::stoi(IDVector[j])) {
@@ -463,6 +497,7 @@ void MainWindow::on_myFlightsButton_clicked()
 
    QString flightToAdd;
 
+   //Add flights of user to the flight details page
    for (int i = 0; i < myFlights.size(); i++) {
            flightToAdd = (QString::number(myFlights[i]->getID()) + " | " + myFlights[i]->getDate()) + "  |  " +
                                    myFlights[i]->getDeparture() + " --> " + myFlights[i]->getDestination() + "  |  " +
@@ -475,6 +510,7 @@ void MainWindow::on_myFlightsButton_clicked()
 
 void MainWindow::on_myFlightsBack_clicked()
 {
+    //Sort out UI for button click
     ui->returnCheckBox->setChecked(0);
     ui->myFlightsBack->hide();
     ui->flightDetailsBox->setEnabled(true);
@@ -484,6 +520,7 @@ void MainWindow::on_myFlightsBack_clicked()
 
 void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
 {
+    //Change UI
     ui->bookFlightButton->setEnabled(true);
     ui->popups->setCurrentIndex(3);
     ui->popups->show();
@@ -495,25 +532,29 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
 
 void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
 {
+    //Change UI
     ui->popups->show();
     ui->popups->setCurrentIndex(3);
+
+    //Set up various variables needed
     std::string bookedFlights = currentUser->getBookedFlights().toStdString();
     std::vector<std::string> IDVector;
     std::stringstream ss(bookedFlights);
     std::string output;
-
     std::vector<Flight*> flights = readFlights();
 
-
+    //Split string by comma delimiter
    while(std::getline(ss,output,','))
    {
       IDVector.push_back(output);
    }
 
+   //Find ID from selected value of list
    std::string flight = ui->myFlightsList->currentItem()->text().toStdString();
    std::size_t found = flight.find("|");
    std::string str = flight.substr(0, found - 1);
 
+   //Loop over flights
    for (int i = 0; i < flights.size(); i++)
     {
        //Check if it is a connecting flight
@@ -532,8 +573,10 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
        }
        else
        {
+           //If vector matches add these details to screen
            if (IDVector[i] == str)
            {
+            //Change UI
             ui->connectingFlightLabel->setText("Not needed");
             ui->durationLabel->setText(QString::number(flights[std::stoi(str)]->getDuration()) + " hours");
             ui->spacesAvailableLabel->setText(QString::number(flights[std::stoi(str)]->getCapacity()));
@@ -545,6 +588,7 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
 
 void MainWindow::on_returnFlightList_clicked(const QModelIndex &index)
 {
+    //Change UI
     ui->bookFlightButton->setEnabled(true);
     ui->menuButtons->show();
     ui->popups->setCurrentIndex(3);
@@ -560,8 +604,10 @@ void MainWindow::showDetails(int returnFlight, QString departureAirportName, QSt
     int flightID;
     int connectingFLightID;
 
+    //QStrings for departure/destination countrys
     QString departureCountry;
     QString destinationCountry;
+
     if (returnFlight == 1 && departureAirportName == "" && destinationAirportName == "")
     {
         departureCountry = ui->toAirportList->currentText();
@@ -583,7 +629,7 @@ void MainWindow::showDetails(int returnFlight, QString departureAirportName, QSt
         flightID = std::stoi(flight.substr(0, found - 1));
     }
 
-
+    //Declare values
     QString dest,dep;
 
     std::vector<Airport*> airports = readAirports();
@@ -594,7 +640,7 @@ void MainWindow::showDetails(int returnFlight, QString departureAirportName, QSt
     int destinationAirportID;
 
 
-
+    //Loop over airports
     for (int i = 0; i < airports.size(); i++) {
         if (departureAirportName == "" && destinationAirportName == "")
         {
@@ -645,8 +691,8 @@ void MainWindow::showDetails(int returnFlight, QString departureAirportName, QSt
     //Check if the flight needs a connecting flight and if it does dispaly it
     if (flights[flightID]->getDistance() > 15000)
     {
+        //Set data for connecting flights
         QString connectingAirportName = airports[parentAirportID]->getName();
-
         ui->connectingFlightLabel->setText(connectingAirportName);
         ui->durationLabel->setText(QString::number(flights[flightID]->getDuration()) + " hours");
         ui->spacesAvailableLabel->setText(QString::number(flights[flightID]->getCapacity()));
@@ -655,6 +701,7 @@ void MainWindow::showDetails(int returnFlight, QString departureAirportName, QSt
     }
     else
     {
+        //Set date for none connecting flights
         ui->connectingFlightLabel->setText("Not needed");
         ui->durationLabel->setText(QString::number(flights[flightID]->getDuration()) + " hours");
         ui->spacesAvailableLabel->setText(QString::number(flights[flightID]->getCapacity()));
