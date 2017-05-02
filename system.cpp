@@ -432,12 +432,14 @@ void System::writeFlights(Flight* f) {
 
 }
 
-void System::writeUsers(User* u) {
+void System::writeUsers(User* u, bool newUser) {
 
 
     std::vector<User*> Users = readUsers();
 
-    Users.push_back(u);
+    if (newUser) {
+        Users.push_back(u);
+    }
 
     QDir dir;
     QFile file(dir.absolutePath()+"/Users.xml");

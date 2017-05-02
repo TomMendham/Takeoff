@@ -74,7 +74,7 @@ void MainWindow::on_registerUserButton_clicked()
                QMessageBox::about(this, "ERROR", "Please fill out all fields.");
            } else {
                User* user = new User(email,firstName,lastName,password,"1");
-               writeUsers(user);
+               writeUsers(user, true);
 
                ui->popups->hide();
                ui->menuButtons->show();
@@ -325,6 +325,9 @@ void MainWindow::on_bookPushButton_clicked()
 
     currentUser->addBookedFlight(str);
 
+    User* emptyUser;
+    writeUsers(emptyUser, false);
+
 
 
 }
@@ -387,7 +390,7 @@ void MainWindow::on_myFlightsButton_clicked()
 
 void MainWindow::on_myFlightsBack_clicked()
 {
-
+    ui->returnCheckBox->setChecked(0);
     ui->myFlightsBack->hide();
     ui->flightDetailsBox->setEnabled(true);
     ui->myFlightsLabel->hide();ui->myFlightsList->hide();ui->myFlightsButton->show();
