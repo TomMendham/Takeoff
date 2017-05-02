@@ -452,6 +452,7 @@ void MainWindow::on_outboundFlightList_clicked(const QModelIndex &index)
     ui->bookFlightButton->setEnabled(true);
     ui->popups->setCurrentIndex(3);
     ui->popups->show();
+    ui->menuButtons->show();
 
     bool returnFlight = true;
     showDetails(returnFlight);
@@ -484,7 +485,7 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
        {
            if (IDVector[i] == str)
            {
-            ui->connectingFlightLabel->setText(connectingAirportName);
+            //ui->connectingFlightLabel->setText(connectingAirportName);
             ui->durationLabel->setText(QString::number(flights[std::stoi(str)]->getDuration()) + " hours");
             ui->spacesAvailableLabel->setText(QString::number(flights[std::stoi(str)]->getCapacity()));
             ui->priceLabel->setText("£" + QString::number(flights[std::stoi(str)]->getPrice()));
@@ -494,7 +495,7 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
        {
            if (IDVector[i] == str)
            {
-            ui->connectingFlightLabel->setText(connectingAirportName);
+            //ui->connectingFlightLabel->setText(connectingAirportName);
             ui->durationLabel->setText(QString::number(flights[std::stoi(str)]->getDuration()) + " hours");
             ui->spacesAvailableLabel->setText(QString::number(flights[std::stoi(str)]->getCapacity()));
             ui->priceLabel->setText("£" + QString::number(flights[std::stoi(str)]->getPrice()));
@@ -506,6 +507,7 @@ void MainWindow::on_myFlightsList_clicked(const QModelIndex &index)
 void MainWindow::on_returnFlightList_clicked(const QModelIndex &index)
 {
     ui->bookFlightButton->setEnabled(true);
+    ui->menuButtons->show();
     ui->popups->setCurrentIndex(3);
     ui->popups->show();
 
